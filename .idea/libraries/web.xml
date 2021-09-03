@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="web">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/HBuilderX/plugins/templates/project/web/hello-vue.zip!/" />
+      <root url="jar://$PROJECT_DIR$/HBuilderX/plugins/templates/project/web/default.zip!/" />
+      <root url="jar://$PROJECT_DIR$/HBuilderX/plugins/templates/project/web/html_vue.zip!/" />
+      <root url="jar://$PROJECT_DIR$/HBuilderX/plugins/templates/project/web/simple.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

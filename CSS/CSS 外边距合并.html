@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        *{
+            padding: 0px;
+            margin: 0px;
+            border: 0px;
+        }
+
+        #div1{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        #div2{
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            background-color: blue;
+        }
+
+        #outter{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            margin-top:20px
+        }
+
+        #inner{
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        简单地说，外边距合并指的是，当两个垂直外边距相遇时，它们将形成一个外边距。合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者
+        当一个元素出现在另一个元素上面时，第一个元素的下外边距与第二个元素的上外边距会发生合并
+     -->
+    
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <p>请注意，两个 div 之间的外边距是 20px，而不是 30px（20px + 10px）。</p>
+
+
+    <!-- 当一个元素包含在另一个元素中时（假设没有内边距或边框把外边距分隔开），它们的上和/或下外边距也会发生合并 -->
+    <div id="outter">
+        <div id="inner"></div>
+    </div>
+    <p>注释：请注意，如果不设置 div 的内边距和边框，那么内部 div 的上外边距将与外部 div 的上外边距合并（叠加）。</p>
+    
+</body>
+</html>

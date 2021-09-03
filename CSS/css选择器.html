@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+    <style type="text/CSS">
+        /* 标签选择器 */
+        p{
+            text-align: center;
+            color: red;
+        }
+        /* id 选择器 id 名称不能以数字开头*/
+        #one{
+            text-align: left;
+            color: royalblue;
+        }
+        /* 类选择器 您还可以指定只有特定的 HTML 元素会受类的影响*/
+        .center{
+            text-align: center;
+            color: brown;
+        }
+        p.center{
+            text-align: right;
+            color: chartreuse;
+        }
+
+        /* 通用选择器 */
+        *{
+            text-align: center;
+            color: blue;
+        }
+
+        /* 分组选择器 */
+        h1 , h2 , .one{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <p>asdfghjk</p>
+    <p id="one">lkjhgfds</p>
+
+    <p class="center">okmijn</p>
+    <div class="center">uhbijn</div>
+
+    <!-- HTML 元素也可以引用多个类。 -->
+    <!-- HTML 元素也可以引用多个类。 -->
+    <p class="center large">这个段落引用两个类。</p>
+
+</body>
+</html>

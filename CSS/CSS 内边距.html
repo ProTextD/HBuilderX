@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        *{
+            border: 0px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #div1{
+            width: 300px;
+            height: 300px;
+            padding-left: 30px;
+            padding-top: 60px;
+            padding-bottom: 90px;
+            padding-right: 120px;
+            background-color: red;
+        }
+
+        #div2{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+
+        #div3{
+            width: 300px;
+            height: 300px;
+            padding: 25px;
+            background: green;
+            float: right;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        Padding - 单独的边
+            CSS 拥有用于为元素的每一侧指定内边距的属性：
+
+            padding-top
+            padding-right
+            padding-bottom
+            padding-left
+            所有内边距属性都可以设置以下值：
+
+            length - 以 px、pt、cm 等单位指定内边距
+            % - 指定以包含元素宽度的百分比计的内边距
+            inherit - 指定应从父元素继承内边距
+            提示：不允许负值。
+
+            padding属性也支持简写
+     -->
+     <div id="div1">
+         <div id="div2"></div>
+     </div>
+
+     <!-- 内边距和元素宽度 
+            CSS width 属性指定元素内容区域的宽度。内容区域是元素（盒模型）的内边距、边框和外边距内的部分。
+            因此，如果元素拥有指定的宽度，则添加到该元素的内边距会添加到元素的总宽度中。这通常是不希望的结果。
+    -->
+    <div id="div3"></div>
+    <!-- 在这里，<div> 元素的宽度为 300px。但是，<div> 元素的实际宽度将是 350px（300px + 左内边距 25px + 右内边距 25px） -->
+    <!-- 若要将宽度保持为 300px，无论填充量如何，那么您可以使用 box-sizing 属性。
+        这将导致元素保持其宽度。如果增加内边距，则可用的内容空间会减少。 -->
+</body>
+</html>

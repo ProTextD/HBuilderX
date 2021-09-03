@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+    /* 
+        CSS font-family 属性
+        在 CSS 中，我们使用 font-family 属性规定文本的字体。
+        font-family 属性应包含多个字体名称作为“后备”系统，以确保浏览器/操作系统之间的最大兼容性。请以您需要的字体开始，并以通用系列结束（如果没有其他可用字体，则让浏览器选择通用系列中的相似字体）。字体名称应以逗号分隔。
+        注释：如果字体名称不止一个单词，则必须用引号引起来，例如："Times New Roman"。
+    */
+    .p1 {
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    .p2 {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .p3 {
+        font-family: "Lucida Console", "Courier New", monospace;
+    }
+    </style>
+</head>
+<body>
+    <!-- 
+        在 CSS 中，有五个通用字体族：
+        衬线字体（Serif）- 在每个字母的边缘都有一个小的笔触。它们营造出一种形式感和优雅感。
+        无衬线字体（Sans-serif）- 字体线条简洁（没有小笔画）。它们营造出现代而简约的外观。
+        等宽字体（Monospace）- 这里所有字母都有相同的固定宽度。它们创造出机械式的外观。
+        草书字体（Cursive）- 模仿了人类的笔迹。
+        幻想字体（Fantasy）- 是装饰性/俏皮的字体。
+        所有不同的字体名称都属于这五个通用字体系列之一。
+     -->
+
+    <h1>CSS font-family</h1>
+
+    <p>这是一个段落，以 Times New Roman 字体显示：</p>
+    <p class="p1">This is a paragraph, shown in the Times New Roman font.</p>
+    <p>这是一个段落，以 Arial 字体显示：</p>
+    <p class="p2">This is a paragraph, shown in the Arial font.</p>
+    <p>这是一个段落，以 Lucida Console 字体显示：</p>
+    <p class="p3">This is a paragraph, shown in the Lucida Console font.</p>
+
+</body>
+</html>

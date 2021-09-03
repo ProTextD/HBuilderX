@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+    /* 
+    outline 属性是用于设置以下各个轮廓属性的简写属性：
+    outline-width
+    outline-style（必需）
+    outline-color */
+        p{
+            width: 200px;
+        }
+        
+        p.ex1{
+            outline: dashed;
+        }
+
+        p.ex2{
+            outline: red dashed;
+        }
+
+        p.ex3{
+            outline: 5px solid yellow;
+        }
+
+        p.ex4{
+            outline: pink thick ridge;
+        }
+    </style>
+</head>
+<body>
+    <p class="ex1">虚线轮廓。</p>
+    <p class="ex2">红色的虚线轮廓</p>
+    <p class="ex3">5 像素的黄色实线轮廓</p>
+    <p class="ex4">粗的粉色凸槽轮廓</p>
+</body>
+</html>

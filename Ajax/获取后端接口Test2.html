@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="content">
+			
+		</div>
+		<!-- <input type="button" onclick="crossDomainRequest()" value="更新数据" /> -->
+		<!-- <input type="button" onclick="$ajax()" value="更新数据2" /> -->
+		<!-- <div id="allBody"></div> -->
+		<script src="./jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			/* function crossDomainRequest(){ */
+				document.getElementById("content").innerHTML = "<font color='red'>loading</font>"
+				
+				var container = document.getElementById("content")
+				var xhr = new XMLHttpRequest();
+				
+				$.ajax({
+					url : "http://192.168.3.239:8008/login.html",
+					// url : "http://127.0.0.1:8848/Ajax/springboot/Login/src/main/resources/static/login.html",
+					type : "post",
+					dataType : "jsonp",
+					jsonpCallback : "show",
+					success : function(data){
+						console.log(data)
+						container.innerHTML = xhr.responseText
+					},
+					error : function(err){
+						console.log("获取失败")
+						container.innerHTML = "跨域失败"
+						console.log(err)
+					}
+				})
+			/* } */
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.User">
+        <result column="account" property="account" />
+        <result column="password" property="password" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        account, password
+    </sql>
+
+    <select id="queryUser" resultMap="BaseResultMap">
+        select * from user where account=#{account}
+    </select>
+    <select id="queryAccount" resultMap="BaseResultMap">
+        select password from user where account=#{account}
+    </select>
+
+    <insert id="insertUser" >
+        insert into user(account,password) values(#{account},#{password})
+    </insert>
+</mapper>

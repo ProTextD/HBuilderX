@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .myDiv{
+            transform: translate(200px , 100px);/*通过transform引入效果*/
+            -webkit-transform: translate(200px , 100px);/* safari chrome*/
+            -ms-transform: translate(200px , 100px);/*IE*/
+            -o-transform: translate(200px , 100px);/*opera*/
+            -moz-transform: translate(200px , 100px);/*firefox*/
+        }
+        .myDiv2{
+            /* transform: rotate(200deg);旋转200度显示 */
+            /* transform: scale(1 , 2);缩放 */
+            /* transform: skew(20deg,20deg);倾斜 */
+            /* 3D转换效果 */
+            transform: rotateX(120deg);
+        }
+    </style>
+</head>
+<body>
+    <div>原始效果</div>
+    <div class="myDiv">变化后效果</div>
+    <div class="myDiv2">第二次变化后效果</div>
+</body>
+</html>

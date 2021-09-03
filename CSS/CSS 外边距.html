@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        p {
+            margin-top: 100px;
+            margin-bottom: 100px;
+            margin-right: 150px;
+            margin-left: 80px;
+        }
+        /* Margin - 简写属性 */
+        p{
+            margin: 100px 150px 100px 80px;
+        }
+
+        /* auto 值
+            您可以将 margin 属性设置为 auto，以使元素在其容器中水平居中。
+            然后，该元素将占据指定的宽度，并且剩余空间将在左右边界之间平均分配。 */
+        div {
+            width: 300px;
+            margin: auto;
+            border: 1px solid red;
+        }
+
+        /* inherit 值
+        本例使 <p class="ex1"> 元素的左外边距继承自父元素（<div>）： */
+        
+        div {
+            border: 1px solid red;
+            margin-left: 100px;
+        }
+
+        p.ex1 {
+            margin-left: inherit;
+        }
+    </style>
+</head>
+<body>
+    <p>asdfasdf</p>
+    <div><p class="ex1">uhbijn</p></div>
+    <!-- 
+        CSS 外边距
+        CSS margin 属性用于在任何定义的边框之外，为元素周围创建空间。
+
+        通过 CSS，您可以完全控制外边距。有一些属性可用于设置元素每侧（上、右、下和左）的外边距。
+
+        Margin - 单独的边
+        CSS 拥有用于为元素的每一侧指定外边距的属性：
+
+        margin-top
+        margin-right
+        margin-bottom
+        margin-left
+        所有外边距属性都可以设置以下值：
+
+        auto - 浏览器来计算外边距
+        length - 以 px、pt、cm 等单位指定外边距
+        % - 指定以包含元素宽度的百分比计的外边距
+        inherit - 指定应从父元素继承外边距
+        提示：允许负值。
+     -->
+</body>
+</html>

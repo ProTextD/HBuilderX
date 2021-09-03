@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        /* 
+            CSS [attribute] 选择器
+            [attribute] 选择器用于选取带有指定属性的元素。
+            下例选择所有带有 target 属性的 <a> 元素；
+        */
+        a[targer]{
+
+        }
+
+        /* 
+            CSS [attribute="value"] 选择器
+            [attribute="value"] 选择器用于选取带有指定属性和值的元素。
+            下例选取所有带有 target="_blank" 属性的 <a> 元素：
+        */
+        a[target = "_blank"]{
+
+        }
+
+        /* 
+            CSS [attribute~="value"] 选择器
+            [attribute~="value"] 选择器选取属性值包含指定词的元素。
+            下例选取 title 属性包含 "flower" 单词的所有元素：
+        */
+        [title~="flower"]{
+
+        }
+
+        /* 
+            CSS [attribute|="value"] 选择器
+            [attribute|="value"] 选择器用于选取指定属性以指定值开头的元素。
+            下例选取 class 属性以 "top" 开头的所有元素：
+            注释：值必须是完整或单独的单词，比如 class="top" 或者后跟连字符的，比如 class="top-text"
+        */
+        [class|="top"]{
+
+        }
+
+        /* 
+            CSS [attribute^="value"] 选择器
+            [attribute^="value"] 选择器用于选取指定属性以指定值开头的元素。
+            下例选取 class 属性以 "top" 开头的所有元素：
+            提示：值不必是完整单词！
+        */
+        [class^="top"]{
+
+        }
+
+        /* 
+            CSS [attribute$="value"] 选择器
+            [attribute$="value"] 选择器用于选取指定属性以指定值结尾的元素。
+            下例选取 class 属性以 "test" 结尾的所有元素：
+            提示：值不必是完整单词！
+        */
+        [class$="test"]{
+
+        }
+
+        /* 
+            CSS [attribute*="value"] 选择器
+            [attribute*="value"] 选择器选取属性值包含指定词的元素。
+            下例选取 class 属性包含 "te" 的所有元素：
+            提示：值不必是完整单词！
+        */
+        [class*="te"]{
+            
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>

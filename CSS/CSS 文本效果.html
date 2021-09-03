@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        .test1{
+            white-space: nowrap;
+            width: 200px;
+            border: 1px solid blue;
+            text-overflow: clip;
+            overflow: hidden;
+        }
+        .test2{
+            white-space: nowrap;
+            width: 200px;
+            border: 1px solid blue;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .test2:hover{
+            overflow: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- CSS 文本溢出、整字换行、换行规则以及书写模式
+        在本章中，您将学习如下属性：
+
+        text-overflow
+        word-wrap
+        word-break
+        writing-mode -->
+    
+    <h1>text-overflow 属性</h1>
+    <p>以下两段包含不适合其框的长文本。</p>
+
+    <h2>text-overflow: clip:</h2>
+    <p class="test1">这里有一些无法容纳在框中的长文本</p>
+
+    <p>请把鼠标移动到下面的 div 上，来查看完整文本。</p>
+    <h2>text-overflow: ellipsis:</h2>
+    <p class="test2">这里有一些无法容纳在框中的长文本</p>
+</body>
+</html>

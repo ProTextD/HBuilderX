@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        /* border-color 属性用于设置四个边框的颜色。
+            可以通过以下方式设置颜色：
+            name - 指定颜色名，比如 "red"
+            HEX - 指定十六进制值，比如 "#ff0000"
+            RGB - 指定 RGB 值，比如 "rgb(255,0,0)"
+            HSL - 指定 HSL 值，比如 "hsl(0, 100%, 50%)"
+            transparent
+            注释：如果未设置 border-color，则它将继承元素的颜色。 */
+            p.one {
+                border-style: solid;
+                border-color: red;
+            }
+
+            p.two {
+                border-style: solid;
+                border-color: green;
+            }
+
+            p.three {
+                border-style: dotted;
+                border-color: blue;
+            }
+
+            /* 特定边框的颜色
+            border-color 属性可以设置一到四个值（用于上边框、右边框、下边框和左边框）。 */
+            p.one {
+                border-style: solid;
+                border-color: red green blue yellow; /* 上红、右绿、下蓝、左黄 */
+            }
+    </style>
+</head>
+<body>
+    <p class="one">红色实线边框</p>
+    <p class="two">绿色实线边框</p>
+    <p class="three">蓝色点状边框</p>
+</body>
+</html>

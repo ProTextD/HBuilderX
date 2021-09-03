@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+    /* 反转颜色
+    使用 outline-color: invert，执行了颜色反转。这样可以确保无论颜色背景如何，轮廓都是可见的 */
+        p{
+            outline-color: red;
+            /* outline-width: 5px */
+            outline-width: thick;
+        }
+        p.dotted {outline-style: dotted;}
+        p.dashed {outline-style: dashed;}
+        p.solid {outline-style: solid;}
+        p.double {outline-style: double;}
+        p.groove {outline-style: groove;}
+        p.ridge {outline-style: ridge;}
+        p.inset {outline-style: inset;}
+        p.outset {outline-style: outset;}
+    </style>
+</head>
+<body>
+    <!-- 
+        CSS 轮廓
+        轮廓是在元素周围绘制的一条线，在边框之外，以凸显元素。
+
+        CSS 拥有如下轮廓属性：
+
+        outline-style
+        outline-color
+        outline-width
+        outline-offset
+        outline
+     -->
+     <p class="dotted">点状轮廓</p>
+     <p class="dashed">虚线轮廓</p>
+     <p class="solid">实线轮廓</p>
+     <p class="double">双线轮廓</p>
+     <p class="groove">3D 凹槽轮廓。此效果取决于 outline-color 值。</p>
+     <p class="ridge">3D 凸槽轮廓。此效果取决于 outline-color 值</p>
+     <p class="inset">3D 凹边轮廓。此效果取决于 outline-color 值</p>
+     <p class="outset">3D 凸边轮廓。此效果取决于 outline-color 值</p>
+     <!-- 除非设置了 outline-style 属性，否则其他轮廓属性（在下一章中将详细介绍）都不会有任何作用！ -->
+</body>
+</html>

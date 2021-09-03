@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+    /* 
+        clear 属性指定哪些元素可以浮动于被清除元素的旁边以及哪一侧。
+        clear 属性可设置以下值之一：
+        none - 允许两侧都有浮动元素。默认值
+        left - 左侧不允许浮动元素
+        right- 右侧不允许浮动元素
+        both - 左侧或右侧均不允许浮动元素
+        inherit - 元素继承其父级的 clear 值
+    */
+        /* .div1{
+            width: 100px;
+            height: 50px;
+            float: left;
+            margin: 10px;
+            border: 3px solid green;
+        }
+        .div2{
+            border: 1px solid red;
+        }
+
+        .div3{
+            width: 100px;
+            height: 50px;
+            float: left;
+            margin: 10px;
+            border: 3px solid green;
+        }
+        .div4{
+            clear: left;
+            border: 1px solid red;
+        } */
+
+
+        .img1{
+            float: right;
+        }
+        .clearfix{
+            overflow: auto;
+        }
+        .img2{
+            float: right;
+        }
+        div{
+            border: 2px solid green;
+            padding: 5px;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- <h1>不使用 clear</h1>
+    <div class="div1">div1</div>
+    <div class="div2">div2 - 请注意，在 HTML 代码中 div2 在 div1 之后。不过，由于 div1 向左浮动，div2 中的文本会流动到 div1 周围。</div>
+    <br><br>
+
+    <h1>使用 clear</h1>
+    <div class="div3">div3</div>
+    <div class="div4">div4 - 在此处，clear: left; 把 div4 移动到浮动的 div3 下方。值 "left" 会清除向左浮动的元素。您也可以清除 "right" 和 "both"。</div> -->
+
+    <h1>Clearfix</h1>
+    <p>在本例中，图像高于包含它的元素，然而它被浮动了，所以它会在容器之外溢出：</p>
+    <div>
+    <img class="img1" src="./img/a.webp" alt="W3School" width="180" height="167">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum...
+    </div>
+    <p style="clear:right">请为包含元素添加一个带有 overflow: auto; 的 clearfix 类，以解决此问题：</p>
+    <div class="clearfix">
+    <img class="img2" src="./img/a.webp" alt="W3School" width="180" height="167">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum...
+    </div>
+</body>
+</html>

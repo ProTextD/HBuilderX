@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        a{
+            text-decoration: none;/*text-decoration 属性主要用于从链接中删除下划线：*/
+        }
+        a:link{
+            background-color: red;
+        }
+        a:visited{
+            color: yellow;
+        }
+        a:hover{
+            background-color: green;
+        }
+        a:active{
+            color: seashell;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        a:link - 正常的，未访问的链接
+        a:visited - 用户访问过的链接
+        a:hover - 用户将鼠标悬停在链接上时
+        a:active - 链接被点击时
+     -->
+     <h1>CSS 链接</h1>
+     <p><b><a href="#" target="_blank">这是一个链接</a></b></p>
+     <p><b>注释：</b>在 CSS 定义中，a:hover 必须位于 a:link 和 a:visited 之后才能生效。</p>
+     <p><b>注释：</b>在 CSS 定义中，a:active 必须位于 a:hover 之后才能生效。</p>
+</body>
+</html>

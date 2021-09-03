@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        *{
+            box-sizing: border-box;
+            /* 您可以轻松地并排创建三个浮动框。但是，当您添加一些内容来扩大每个框的宽度（例如，内边距或边框）时，这个框会损坏。 
+            box-sizing 属性允许我们在框的总宽度（和高度）中包括内边距和边框，确保内边距留在框内而不会破裂。 */
+        }
+        .box{
+            float: left;
+            width: 33.33%;
+            padding: 50px;
+        }
+        .clearfix::after{
+            clear: both;
+            content: "";
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    <h1>网格框</h1>
+
+    <p>并排浮动的框：</p>
+
+    <div class="clearfix">
+    <div class="box" style="background-color:#bbb">
+    <p>框中的一些文本。</p>
+    </div>
+    <div class="box" style="background-color:#ccc">
+    <p>框中的一些文本。</p>
+    </div>
+    <div class="box" style="background-color:#ddd">
+    <p>框中的一些文本。</p>
+    </div>
+    </div>
+
+    <p>请注意，我们还用了 clearfix hack 来处理布局流，并添加了 box-sizing 属性，以确保框不会由于额外的内边距（填充）而损坏。尝试删除此代码以查看效果。</p>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        /* 
+        带计数器的自动编号
+            CSS 计数器就像“变量”。变量值可以通过 CSS 规则递增（将跟踪它们的使用次数）。
+
+            如需使用 CSS 计数器，我们将使用以下属性：
+
+            counter-reset - 创建或重置计数器
+            counter-increment - 递增计数器值
+            content - 插入生成的内容
+            counter() 或 counters() 函数 - 将计数器的值添加到元素
+            如需使用 CSS 计数器，必须首先使用 counter-reset 创建它。
+         */
+        body{
+            counter-reset: section;
+        }
+
+        h1{
+            counter-reset: subsection;
+        }
+
+        h1::before{
+            counter-increment: section;
+            content: "Counter" counter(section) ".";
+        }
+
+        h2::before{
+            counter-increment: subsection;
+            content: counter(section) "." counter(subsection);
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML 教程：</h1>
+    <h2>HTML 教程</h2>
+    <h2>CSS 教程</h2>
+
+    <h1>Scripting 教程:</h1>
+    <h2>JavaScript</h2>
+    <h2>VBScript</h2>
+
+    <h1>XML 教程：</h1>
+    <h2>XML</h2>
+    <h2>XSL</h2>
+</body>
+</html>

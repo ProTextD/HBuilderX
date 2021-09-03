@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        /* ::first-line 伪元素用于向文本的首行添加特殊样式。 */
+        p::first-line{
+            color: blue;
+            font-variant: small-caps;
+        }
+
+        /* ::first-letter 伪元素用于向文本的首字母添加特殊样式。 */
+        p::first-letter{
+            color: red;
+            font-size: 30px;
+        }
+        /* 可以结合 ::first-letter 和 ::first-line 伪元素来为文本的首字母和首行添加特殊效果 */
+
+        /* ::before 伪元素可用于在元素内容之前插入一些内容。 */
+        h1::before{
+            content: url(./img/a.webp);
+        }
+
+        /* ::after 伪元素可用于在元素内容之后插入一些内容 */
+        h2::after{
+            content: url(./img/a.webp);
+        }
+
+        /* ::selection 伪元素匹配用户选取的元素部分 */
+        ::selection{
+            color: red;
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 
+        所有 CSS 伪元素
+        ::after	p::after	在每个 <p> 元素之后插入内容。
+        ::before	p::before	在每个 <p> 元素之前插入内容。
+        ::first-letter	p::first-letter	选择每个 <p> 元素的首字母。
+        ::first-line	p::first-line	选择每个 <p> 元素的首行。
+        ::selection	p::selection	选择用户选择的元素部分。
+     -->
+     <p>您可以使用 ::first-line 伪元素将特殊效果添加到文本的第一行。一些更多的文字。越来越多，越来越多，越来越多，越来越多，越来越多，越来越多，越来越多，越来越多，越来越多，越来越多。一些更多的文字。越来越多，越来越多，越来越多，越来越多，越来越多，越来越多，越来越多，越来越多，越来越多，越来越多。</p>
+
+    <h1>这是一个标题</h1>
+    <p>::before 伪元素在一个元素的内容之前插入内容。</p>
+    <h2>这是一个标题</h2>
+</body>
+</html>

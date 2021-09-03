@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS 边框宽度
+        border-width 属性指定四个边框的宽度。
+        可以将宽度设置为特定大小（以 px、pt、cm、em 计），也可以使用以下三个预定义值之一：thin、medium 或 thick： -->
+    <style type="text/CSS">
+        /* p.one {
+            border-style: solid;
+            border-width: 5px;
+        }
+
+        p.two {
+            border-style: solid;
+            border-width: medium;
+        }
+
+        p.three {
+            border-style: dotted;
+            border-width: 2px;
+        } 
+
+        p.four {
+            border-style: dotted;
+            border-width: thick;
+        } */
+
+        /* 特定边的宽度
+            border-width 属性可以设置一到四个值（用于上边框、右边框、下边框和左边框）： */
+            p.one {
+                border-style: solid;
+                border-width: 5px 20px; /* 上边框和下边框为 5px，其他边为 20px */
+            }
+
+            p.two {
+                border-style: solid;
+                border-width: 20px 5px; /* 上边框和下边框为 20px，其他边为 5px */
+            }
+
+            p.three {
+                border-style: solid;
+                border-width: 25px 10px 4px 35px; /* 上边框 25px，右边框 10px，下边框 4px，左边框 35px */
+            }
+    </style>
+</head>
+<body>
+    <p class="one">5px border-width</p>
+    <p class="two">medium border-width</p>
+    <p class="three">2px border-width</p>
+    <p class="four">thick border-width</p>
+</body>
+</html>

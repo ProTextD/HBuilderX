@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="default3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/HBuilderX/plugins/templates/project/quickapp/default.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

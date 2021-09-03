@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        table{
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        tr,td{
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid grey;
+        }
+
+        tr:hover{
+            background-color: grey;
+        }
+
+        /* <h1>条纹表格</h1>
+        <p>为了实现斑马纹表格效果，请使用 nth-child() 选择器，并为所有偶数（或奇数）表行添加背景色：</p> */
+        /* tr,td{
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even){
+            background-color: grey;
+        } */
+    </style>
+
+</head>
+<body>
+    <h1>可悬停表格</h1>
+<p>将鼠标移到表格行上可以查看效果。</p>
+
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td>Bill</td>
+    <td>Gates</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+    <td>Steve</td>
+    <td>Jobs</td>
+    <td>$150</td>
+  </tr>
+  <tr>
+    <td>Elon</td>
+    <td>Musk</td>
+    <td>$300</td>
+  </tr>
+  <tr>
+    <td>Mark</td>
+    <td>Zuckerberg</td>
+    <td>$250</td>
+  </tr>
+</table>
+</body>
+</html>

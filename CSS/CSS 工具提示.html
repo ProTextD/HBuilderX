@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        .tooltip{
+            position: relative;
+            display: inline-block;
+            margin-top: 100px;
+            margin-left: 200px;
+        }
+
+        .tooltipText{
+            visibility: hidden;
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 5px 0 ;
+            width: 120px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+        }
+        /* 在左边显示提示信息 */
+        /* .tooltipText{
+            top: -5px;
+            right: 105%;
+        } */
+        /* 在右边显示提示信息 */
+        /* .tooltipText{
+            top: -5px;
+            left: 105%;
+        } */
+        /* 在上方显示提示信息 */
+        .tooltipText{
+            width: 120px;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px;
+            /* 淡入工具提示 - 用 1 秒从完全不可见变为可见： */
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        /* 在底部显示提示信息 */
+        /* .tooltipText{
+            width: 120px;
+            top: 100%;
+            right: 50%;
+            margin-right: 60px;
+        } */
+
+        .tooltip:hover .tooltipText{
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="tooltip">
+        放在上面显示效果
+        <span class="tooltipText">提示信息</span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body>
+		<form id="userForm" method="post" >
+			<table>
+				<tr>
+					<th>用户名:</th>
+					<th><input type="text" name="username" id="username"><span id="usernameError"></th></span>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<th>密码:&nbsp;&nbsp;&nbsp;</th>
+					<th><input type="text" name="userpwd" id="userpwd"><span id="userpwdError"></th></span>
+				</tr>
+			</table>	
+			<table>
+				<tr>
+					<th><input type="button" value="登录" id = "submitBtn"></th>
+					<th><input type="reset" value="重置" id="reset"></th>
+				</tr>
+			</table>
+			<!-- 用户名:<input type="text" name="username" id="username"><span id="usernameError"></span><br>
+			密码:<input type="text" name="userpwd" id="userpwd"><span id="userpwdError"></span><br>
+			<input type="button" value="登录" id = "submitBtn">
+			<input type="reset" value="重置" id="reset"> -->
+		</form>
+		<script src="http://192.168.3.239:8080/login"></script>
+		<button onclick="method();">获取</button>
+		<script src="./jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				
+			});
+			function method(){
+				var val = $("#userId").val();
+				$.ajax({
+					type : "post",
+					url : "http://192.168.3.239:8008/login",
+					data : "id" ,
+					async : true,
+					cache : true,
+					dataType : "jsonp",
+					success : function(data){
+						$("#username").text(data.account)
+						$("#userpwd").text(data.password)
+					},
+					error : function(){
+						console.log("发生错误")
+						alert("发生错误")
+					},
+					complete : function(){
+						console.log("ajax请求完事，最终操作在这里完成")
+					}
+				});
+			}
+			
+		</script>
+	</body>
+</html>

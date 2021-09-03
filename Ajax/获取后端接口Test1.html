@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- <meta http-equiv="Access-Control-Allow-Origin" content="*"> -->
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="myDIv">
+		<!-- <form method="post"> -->
+			账号：<input id="username" type="text" name="account"><span id="usernameError"></span><br>
+			密码：<input id="password" type="password" name="password"><span id="passwordError"></span><br>
+			<input type="submit" value="登录" onclick="loginHome()">
+		<!-- </form> -->
+		</div>
+		<script src="./jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			var xmlHttprequest;//定义一个变量用于存放XMLHttpRequest对象
+			//定义一个用于创建XMLHttpRequest对象的函数
+			function createXMLHttpRequest(){
+				if(window.ActiveXObject){//IE浏览器的创建方式
+					xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				}else if(window.xmlHttpRequest){//Netscape浏览器中的创建方式
+					xmlHttpRequest = new XMLHttpRequest();
+				}
+			}
+			//响应HTTP请求状态变化的函数
+			function httpStateChange(){
+				if(xmlHttpRequest.readyState == 4){//判断异步调用是否成功,若成功开始局部更新数据
+					if(xmlHttpRequest.status == 200 || xmlHttpRequest == 0){
+						var node = document.getElementById("myDIv")//查找节点
+						node.firstChild.nodeValue = xmlHttpRequest.responseText;//更新数据
+					}else{//如果异步调用未成功,弹出警告框,并显示出错信息//异步调用服务器段数据
+						alert("error:HTTP状态码为:" + xmlHttpRequest.status + ",HTTP状态信息为:" + xmlHttpRequest.statusText);
+					}
+				}
+			}
+			//function loginHome(){
+			//异步调用服务器段数据
+			function getData(){
+				createXMLHttpRequest();//创建XMLHttpRequest对象
+				if(xmlHttpRequest != null){
+					xmlHttpRequest.open("post" , "http://192.168.3.239:8008/queryUser" , true);
+					
+					// xmlHttpRequest.open("post" , "http://127.0.0.1:8848/Ajax/spsringboot/Login/src/main/resources/static/login.html" ,true);
+					// xmlHttpRequest.open("post" , "http://192.168.3.239:8008" , true);
+					xmlHttpRequest.onreadystatechange = httpStateChange;//HTTP请求状态变化的函数
+					xmlHttpRequest.send(name , password);//发送请求
+				}
+			}
+			
+			// var url = "http://192.168.3.239:8008/queryUser?callback=jQuery36007433252042254155_1627613348574&_=1627613348575"
+			
+			function loginHome(){
+				var name = $("#username").val()
+				var password = $("#password").val()
+				if(name == ""){
+					document.getElementById("usernameError").innerText = "用户名不能为空"
+					return false
+				}
+				if(password == ""){
+					document.getElementById("passwordError").innerText = "密码不能为空"
+					return false
+				}
+				else{
+					$.ajax({
+						type : "post",
+						url : "http://192.168.3.239:8008/queryUser",
+						// url : "http://127.0.0.1:8848/Ajax/spsringboot/Login/src/main/resources/static/login.html",
+						// url : "http://192.168.3.239:8008",
+						// dataType : "json",
+						dataType : "json",
+						processData: false,
+						async : true,
+						data : {username : name , password : password},
+						success : function(data){
+							var pwd = data.password
+							if(password != pwd){
+								document.getElementById("passwordError").innerText = "密码错误，请重新输入"
+							}else{
+								location.href = "../Project/登录后页面.html"
+							}
+						},
+						error : function(){
+							console.log("发生错误")
+							alert("发生错误")
+						},
+						complete : function(){
+							console.log("ajax请求完成，最终操作在这里完成")
+						}
+					})
+				}
+			}
+			
+		</script>
+	</body>
+</html>

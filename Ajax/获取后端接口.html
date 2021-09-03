@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!-- <meta http-equiv="Access-Control-Allow-Origin" content="*"> -->
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<title></title>
+	</head>
+	<body>
+		<script src="./jquery-3.6.0.js"></script>
+		
+		<script type="text/javascript">
+			
+			// header('Content-Type: text/html;charset=utf-8');
+			// header('Access-Control-Allow-Origin:*'); // *代表允许任何网址请求
+			// header('Access-Control-Allow-Methods:POST,GET,OPTIONS,DELETE'); // 允许请求的类型
+			// header('Access-Control-Allow-Credentials: true'); // 设置是否允许发送 cookies
+			// header('Access-Control-Allow-Headers: Content-Type,Content-Length,Accept-Encoding,X-Requested-');
+			
+			var xmlHttpRequest;//定义一个变量用于存放XMLHttpRequest对象
+			//定义一个用于创建XMLHttpRequest对象的函数
+			function createXMLHttpRequest(){
+				if(window.ActiveXObject){//IE浏览器的创建方式
+					xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				}else if(window.XMLHttpRequest){//Netscape浏览器中的创建方式
+					xmlHttpRequest = new XMLHttpRequest();
+				}
+			}
+			//响应HTTP请求状态变化的函数
+			function httpStateChange(){
+				if(xmlHttpRequest.readyState == 4){//判断异步调用是否成功,若成功开始局部更新数据
+					if(xmlHttpRequest.status == 200 || xmlHttpRequest == 0){
+						var node = document.getElementById("myDIv")//查找节点
+						node.firstChild.nodeValue = xmlHttpRequest.responseText;//更新数据						
+					}else{//如果异步调用未成功,弹出警告框,并显示出错信息//异步调用服务器段数据
+						alert("error:HTTP状态码为:" + xmlHttpRequest.status + ",HTTP状态信息为:" + xmlHttpRequest.statusText);
+					}
+				}
+			}
+			//异步调用服务器段数据
+			function loginHome(name , value){
+				createXMLHttpRequest();//创建XMLHttpRequest对象
+				if(xmlHttpRequest != null ){
+					// xmlHttpRequest.open("get" , "ajax.text" , true);
+					// xmlHttpRequest.open("get" , "http://127.0.0.1:8848/Ajax/spsringboot/Login/src/main/resources/static/login.html" , true);//创建HTTP请求
+					// xmlHttpRequest.open("POST" , "http://192.168.3.239:8008/login" , true)
+					
+					xmlHttpRequest.open("POST" , "http://192.168.3.239:8008/queryUser" , true)
+					// xmlHttpRequest.open("POST" , "http://192.168.3.239:8008" , true)
+					// xmlHttpRequest.open("get" , "http://localhost:8008/login" , true)
+					xmlHttpRequest.onreadystatechange = httpStateChange;//HTTP请求状态变化的函数
+					xmlHttpRequest.send(null);//发送请求
+				}
+				// response.addHeader("Access-Control-Allow-Origin", "*");
+				
+				
+			}
+			
+			
+		</script>
+		<!-- <script src="http://192.168.3.239:8008/login"></script> -->
+		<div id="myDIv">
+		账号：<input id="username" type="text" name="account"><span id="usernameError"></span><br>
+		密码：<input id="password" type="password" name="password"><span id="passwordError"></span><br>
+		<input type="submit" value="登录" onclick="loginHome()">
+		</div>
+	</body>
+</html>

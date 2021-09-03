@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        img{
+            opacity: 0.5;
+        }
+        img:hover{
+            opacity: 1;
+        }
+
+        div.first{
+            background: rgba(76,175,80,0.1);
+        }
+        div.secound{
+            background: rgba(76,175,80,0.3);
+        }
+        div.third{
+            background: rgba(76,175,80,0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- opacity 属性的取值范围为 0.0-1.0。值越低，越透明 -->
+    <!-- opacity 属性通常与 :hover 选择器一同使用，这样就可以在鼠标悬停时更改不透明度 -->
+    <img src="./img/a.webp" alt="a">
+
+    <!-- 如果您不希望对子元素应用不透明度，请使用 RGBA 颜色值 -->
+    <h1>透明框</h1>
+    <p>使用 opacity：</p>
+    <div style="opacity:0.1;"><p>10% opacity</p></div>
+    <div style="opacity:0.3;"><p>30% opacity</p></div>
+    <div style="opacity:0.6;"><p>60% opacity</p></div>
+    <div><p>opacity 1</p></div>
+
+    <p>使用 RGBA 颜色值：</p>
+    <div class="first"><p>10% opacity</p></div>
+    <div class="second"><p>30% opacity</p></div>
+    <div class="third"><p>60% opacity</p></div>
+    <div><p>default</p></div>
+
+    <p>注意使用 opacity 属性时文本以及背景颜色如何变得透明。</p>
+</body>
+</html>

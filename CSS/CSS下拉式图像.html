@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        .dropdown-content{
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0px 8px 16px 0px rgba(0,0, 0, 0.2);
+        }
+
+        .dropdown{
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown:hover .dropdown-content{
+            display: block;
+        }
+
+        .desc{
+            padding: 10px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>下拉图片</h1>
+    <p>请把鼠标移动到图像上，以打开下拉内容</p>
+
+    <div class="dropdown">
+        <img src="./img/a.webp" alt="abc" width="100px">
+        <div class="dropdown-content">
+            <img src="./img/a.webp" alt="abc" width="300px" height="200px">
+            <div class="desc">图片描述</div>
+        </div>
+    </div>
+</body>
+</html>
