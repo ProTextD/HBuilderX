@@ -1,0 +1,16 @@
+{
+  "name": "plugin-manager",
+  "version": "1.0.1-2021051416",
+  "description": "HBuilderX\u63d2\u4ef6\u7ba1\u7406\u5668",
+  "__private": true,
+  "main": "out.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "HBuilderX",
+  "license": "ISC",
+  "dependencies": {
+    "vscode-jsonrpc": "^4.0.0"
+  },
+  "_dc_signatures": "85ca6c6738928d18d45239dfd9894f209c3529cae2fcdca0aa8a08d4b6a2993011e4afb69ab81bacc7c518299fd2907b"
+}

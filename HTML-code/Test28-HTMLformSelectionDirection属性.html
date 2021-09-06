@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        文本框的SelectionDirection属性：
+        这对input元素与extarea元素，在HTML5增加了SelectionDirection属性。
+
+        当用户在这两个元素中用鼠标选区部分文字时，可以使用该属性来获取选取方向。当用户正向选取文字时，
+        该属性值为forward当用户反向选取文字时，该属性值为backward,当用户没有选取任何文字时，该属性值为forward
+     -->
+     <form>
+         <input type="text" name="text">
+         <input type="button" value="click" onclick="click()">
+     </form>
+     <script>
+         function click(){
+             var control = document.forms[0]['text']
+             var direction = control.selectionDirection
+             alert(direction)
+         }
+     </script>
+</body>
+</html>

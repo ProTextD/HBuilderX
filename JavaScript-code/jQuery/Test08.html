@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="checkbox" id="cb" />
+		<input type="button" id="btn" />
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			/*
+				注意：
+					获取属性我们也可以使用prop()，他跟attr()是互补的，一般来说，我们都是使用attr()来获取标签属性，
+					但是有的时候也会有获取不到的情况，这个时候可以使用prop()的形式来获取，比如表单元素的checked属性。
+			*/
+			$(function(){
+				//具有 true 和 false 两个属性的属性，如 checked, selected 或者 disabled 使用prop()，其他的使用 attr()
+				/*
+				$("#btn").click(function(){
+					var result = $("#cb").attr("checked");
+					alert("result = " + result);
+				})
+				*/
+				$("#btn").click(function(){
+					var result = $("#cb").prop("checked");
+					alert("result = " + result);
+				})
+			})
+		</script>
+	</body>
+</html>

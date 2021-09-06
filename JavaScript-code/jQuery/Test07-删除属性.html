@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>删除属性</title>
+	</head>
+	<body>
+		<input type="button" id="btn" value="click" />
+		<input type="checkbox" id="cb" />
+		<input type="radio" />
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			$(function(){
+			 // 需求 : 点击按钮, 删除 checkbox 标签的 id 属性
+				$("#btn").click(function(){
+					$("#cb").removeAttr("id");
+				});
+			});
+		</script>
+	</body>
+</html>

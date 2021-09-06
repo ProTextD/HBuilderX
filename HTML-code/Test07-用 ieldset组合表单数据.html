@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        <fieldset> 元素组合表单中的相关数据
+        <legend> 元素为 <fieldset> 元素定义标题。
+        autocomplete 属性规定表单是否应打开自动完成功能。
+        启用自动完成功能后，浏览器会根据用户之前输入的值自动填写值。
+        novalidate 属性指示提交表单时不对输入进行验证
+    -->
+    <form action="action_page.php" autocomplete="on" novalidate>
+        <fieldset>
+        <legend>Personal information:</legend>
+        First name:<br>
+        <input type="text" name="firstname" value="Mickey">
+        <br>
+        Last name:<br>
+        <input type="text" name="lastname" value="Mouse">
+        <br><br>
+        <input type="submit" value="Submit"></fieldset>
+    </form> 
+</body>
+</html>

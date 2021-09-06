@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>控制标签内容</title>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			//JS代码
+			$(function(){
+				document.getElementById("box").innerHTML = "<h1>hello JS</h1>";
+			})
+			
+			//JQ代码
+			$(function(){
+				$("#box").html("<h1>hello,world</h1>");
+			})
+		</script>
+	</body>
+</html>

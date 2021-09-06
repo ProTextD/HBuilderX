@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>val()函数</title>
+	</head>
+	<body>
+		<input type="button" id="btn" />
+		<input type="text" value="请输入内容" id="text" />
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			/*
+			var text = document.getElementById("text");
+			var btn = document.getElementById("btn");
+			btn.onclick = function(){
+				var value = text.value;
+				alert("value = " + value);
+			}
+			*/
+			
+			$(function(){
+				/*
+				$("#text").focus(function(){
+					if($("#text").val() == "请输入内容"){
+						$("#text").val("");
+					}
+				});
+				
+				$("#text").blur(function(){
+					if($("#text").val() == ""){
+						$("#text").val("请输入内容")
+					}
+				});
+				*/
+				
+				$("#text").focus(function(){
+					if($("#text").val() == "请输入内容"){
+						$("#text").val("");
+					}
+				}).blur(function(){
+					if($("#text").val() == ""){
+						$("#text").val("请输入内容")
+					}
+				});
+				
+				$("#btn").click(function(){
+					/*
+						用attr属性不能输出内容
+					var value = $("#text").attr("value");
+					alert(value);
+					*/
+				   
+					/*
+					var value = $("#text").prop("value");
+					alert(value);
+					*/
+				   
+					var value = $("#text").val();
+					alert(value);
+					
+					
+				})
+			})
+		</script>
+	</body>
+</html>

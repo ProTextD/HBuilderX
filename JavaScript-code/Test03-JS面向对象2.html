@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function Person(name){
+        //     var _this = {}
+        //     _this._name = name
+        //     _this.sayHello = function(){
+        //         alert("Phello" + _this._name)
+        //     }
+        //     return _this
+        // }
+
+        (function(){
+            var n = "ime"
+            function Person(name){
+                var _this = {}
+                _this._name = name
+                _this.sayHello = function(){
+                    alert("Phello" + _this._name + n)
+                }
+                return _this
+            }
+            window.Person = Person;
+        }());
+
+        function Teacher(name){
+            var _this = Person(name);
+            var superSay = _this.sayHello
+            _this.sayHello = function(){
+                superSay.call(_this)
+                alert("Thello" + _this._name)
+            }
+            return _this
+        }
+        var t = Teacher("fgh");
+        t.sayHello()
+    </script>
+</body>
+</html>

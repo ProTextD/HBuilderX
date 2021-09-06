@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件</title>
+	</head>
+	<body>
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			//JS代码
+			$(function(){
+				var btn = document.getElementById("btn");
+				btn.onclick = function(){
+					alert("222");
+				}
+			})
+			/*
+			//JQ代码
+			jQuery(function(){
+				$('#btn').click(function(){
+					alert("222");
+				});
+			});
+			*/
+			//等同于
+			$(function(){
+				$("#btn").click(function(){
+					alert("222");
+				});
+			});
+		</script>
+		<input type="button" value="按钮" id="btn" />
+	</body>
+</html>

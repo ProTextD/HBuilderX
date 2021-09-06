@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="result"></div>
+    <input type="button" onclick="clickCounter()" value="计数">
+    <script type="text/javascript">
+        function clickCounter(){
+            if(typeof(Storage) !== "undefined"){
+                if(localStorage.clickCount){
+                    localStorage.clickCount = Number(localStorage.clickCount)+1
+                }else{
+                    localStorage.clickCount = 1
+                }
+                document.getElementById("result").innerHTML = "您已经点击这个按钮 " + localStorage.clickCount + " 次。";
+            }else{
+                document.getElementById("result").innerHTML = "抱歉，你的浏览器不支持Web Storage..."
+            }
+        }
+        
+    </script>
+</body>
+</html>

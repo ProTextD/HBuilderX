@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>入口函数</title>
+	</head>
+	<body>
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			
+			// JS 页面加载完成
+			window.onload = function(){
+				alert("test01");
+			}
+			window.onload = function(){
+				alert("test02");
+			}
+			// $ 符号就是 jquery 的简写方式.
+			// 复杂书写 : 
+			$(document).ready(function(){
+				alert("test03");
+			});
+			$(document).ready(function(){
+				alert("test04");
+			});
+			// 简化书写
+			$(function(){
+				alert("Test05");
+			});
+		</script>
+	</body>
+</html>

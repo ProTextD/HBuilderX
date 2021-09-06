@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--
+			Jq对象.addClass()			添加类
+			Jq对象.removeClass()		删除类
+			Jq对象.hasClass()			判断是否有类
+			Jq对象.toggleClass()		切换类
+		-->
+		<meta charset="utf-8">
+		<title>控制class</title>
+		<style>
+			.box{
+				width: 200px;
+				height: 200px;
+				background: pink;
+			}
+			.bgcolor{
+				background: skyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+		<input type="button" value="新增class" />
+		<input type="button" value="移除class" />
+		<input type="button" value="切换class" />
+		<input type="button" value="判断是否有class" />
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			$(function(){
+				var inputs = $("input");
+				
+				inputs.eq(0).click(function(){
+					$(".box").addClass("bgcolor");
+				});
+				
+				inputs.eq(1).click(function(){
+					$(".box").removeClass("bgcolor");
+				});
+				
+				inputs.eq(2).click(function(){
+					$(".box").toggleClass("bgcolor");
+				})
+				
+				inputs.eq(3).click(function(){
+					var result = $(".box").hasClass("bgcolor");
+					alert("result = " + result);
+				})
+			})
+		</script>
+	</body>
+</html>

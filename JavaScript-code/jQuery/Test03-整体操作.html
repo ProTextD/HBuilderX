@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>整体操作</title>
+	</head>
+	<body>
+		<input type="button" value="111"/>
+		<input type="button" value="222" />
+		<script src="./jquery-3.6.0.js"></script>
+		<!--
+			//JS代码
+		<script>
+			var inputs = document.getElementsByTagName("input");
+			inputs[0].onclick = function(){
+				alert("11111");
+			}
+			inputs[1].onclick = function(){
+				alert("22222"); 
+			}
+			
+		</script>
+		-->
+		<script>
+			/*
+			全部注入点击事件
+			$(function(){
+				$("input").click(function(){
+					alert("333");
+				})
+			})
+			*/
+			
+			//分别注入点击事件
+		   $(function(){
+			   $("input").eq(0).click(function(){
+				   alert("555");
+			   })
+		   });
+			
+			$(function(){
+				$("input").eq(1).click(function(){
+					alert("666");
+				})
+			});
+			
+		</script>
+	</body>
+</html>

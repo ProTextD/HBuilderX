@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--规定元素的 id、宽度和高度：-->
+    <!-- <canvas id="myCanvas" width="200px" height="200px"></canvas> -->
+    <!-- <canvas id="myCanvas1" width="200px" height="200px" style="border: 1px solid#c3c3c3;"></canvas> -->
+    <!-- <canvas id="myCanvas2" width="200px" height="200px" style="border: 1px solid tomato;"></canvas> -->
+    <!-- <canvas id="myCanvas3" width="200px" height="200px" style="border: 1px solid#c3c3c3;"></canvas> -->
+    <canvas id="myCanvas4" width="500px" height="500px" style="border: 1px solid#c3c3c3;"></canvas>
+    <img src="./img/bd_logo1.png" id="img" disabled="disabled" >
+    <script type="text/javascript">
+        
+        // var c = document.getElementById("myCanvas")
+        //创建context对象
+        // var cxt = c.getContext("2d")
+        //fillStyle 方法将其染成红色，fillRect 方法规定了形状、位置和尺寸。
+        // cxt.fillStyle = "#c3c3c3"
+        // cxt.fillRect(0,0,150,75);
+
+        //通过定位画线条
+        // var c = document.getElementById("myCanvas1")
+        // var cxt = c.getContext("2d")
+        // cxt.moveTo(10,10)
+        // cxt.lineTo(150,50)
+        // cxt.lineTo(10,50)
+        // cxt.stroke()
+
+        //绘制圆形
+        // var c = document.getElementById("myCanvas2")
+        // var cxt = c.getContext("2d")
+        // cxt.fillStyle = "#FF0000"
+        // cxt.beginPath();
+        // cxt.arc(100,90,25,0,Math.PI*2,true)
+        // cxt.closePath()
+        // cxt.fill()
+
+        //绘制渐变背景
+        // var c = document.getElementById("myCanvas3")
+        // var cxt = c.getContext("2d")
+        // var grd = cxt.createLinearGradient(0,0,175,50)
+        // grd.addColorStop(0,"#FF0000")
+        // grd.addColorStop(1,"#00FF00")
+        // cxt.fillStyle= grd;
+        // cxt.fillRect(0,0,150,75)
+
+        //将图片放进画布
+        window.onload = function(){
+            var c = document.getElementById("mtCanvas4")
+            var cxt = c.getContext("2d")
+            var img = document.getElementById("img")
+            cxt.drawImage(img,10,10)
+        }
+        
+    </script>
+</body>
+</html>

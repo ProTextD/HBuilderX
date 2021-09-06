@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- sessionStorage 对象
+        sessionStorage 对象等同 localStorage 对象，不同之处在于只对一个 session 存储数据。
+        如果用户关闭具体的浏览器标签页，数据也会被删除。 -->
+    <div id="result"></div>
+    <input type="button" value="计数" onclick="clickCounter()">
+    <script type="text/javascript">
+        function clickCounter(){
+            if(typeof(Storage) !== "undefined"){
+                if(sessionStorage.clickCount){
+                    sessionStorage.clickCount = Number(sessionStorage.clickCount)+1
+                }else{
+                    sessionStorage.clickCount = 1
+                }
+                document.getElementById("result").innerHTML = "当前读数:" + sessionStorage.clickCount + "次";
+            }else{
+                document.getElementById("result").innerHTML = "抱歉，你的浏览器不支持"
+            }
+        }
+    </script>
+</body>
+</html>

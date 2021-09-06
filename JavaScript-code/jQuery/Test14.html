@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" id="btn" value="111"/>
+		<input type="text" id="text" value="请输入文字" />
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			
+			$(function(){
+				
+				var value = $("#text").val();
+				$("#btn").click(function(){
+					alert(value);
+				});
+				
+				$("#text").focus(function(){
+					if($("#text").val() == "请输入文字"){
+						$("#text").val("");
+					}
+				});
+				
+				$("#text").blur(function(){
+					if($("#text").val() == ""){
+						$("#text").val("请输入文字")
+					}
+				});
+				
+				//$("#btn").on("click",function(){alert("111")});
+				
+			})
+			
+			/*
+			$.ajax({async : true,
+				contentType:"application/json" ,
+				data:{name:"lisi" , age:20},
+					dataType:"json",
+					error:function(){
+						//请求出现错误时，执行的函数
+						
+					},
+					success:function(data){
+						//data就是responseText,是jquery处理好的数据
+					},
+					url:"bmiAjax",
+					type:"get"
+			});
+			*/
+		</script>
+	</body>
+</html>

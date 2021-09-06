@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- window.localStorage - 存储没有截止日期的数据 -->
+    <div id="result"></div>
+    <div id="result2"></div>
+    <script>
+        // 在使用本地存储时，检测 localStorage 和 sessionStorage 的浏览器支持
+        if(typeof(Storage) != "undefined"){
+            // 针对 localStorage/sessionStorage 的代码
+            localStorage.setItem("lastName" , "Gates")
+            document.getElementById("result").innerHTML = localStorage.getItem("lastName")
+        }else{
+            // 抱歉！不支持 Web Storage ..
+            document.getElementById("result").innerHTML = "抱歉，你的浏览器不支持Web Storage..."
+        }
+
+        // 创建 localStorage 名称/值对，其中：name="lastname"，value="Gates"
+        // 取回 "lastname" 的值，并把它插到 id="result" 的元素中
+        /*
+            上例也可这样写：
+                存储
+                localStorage.lastname = "Gates";
+                取回
+                document.getElementById("result").innerHTML = localStorage.lastname;
+        */
+
+        // 删除 "lastname" localStorage 项目的语法如下：
+        localStorage.removeItem("lastname");
+        document.getElementById("result2").innerHTML = localStorage.getItem("lastName")
+    </script>
+</body>
+</html>

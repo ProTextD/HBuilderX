@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function People(name){//模拟Java中的类
+        //     this.name = name
+        // }
+        // People.prototype.say = function(){
+        //     alert("peo-hello" + this.name)
+        // }
+
+        (function(){
+            //闭包 封装
+            var n = "ime"
+            function People(name){
+                this.name = name
+            }
+            People.prototype.say = function(){
+                alert("peo-hello" + this.name)
+            }
+            window.People = People//将包公开出去给其他函数使用
+        }());
+
+        (function(){
+            function Student(name){//创建学生类
+                this.name = name
+            }
+            Student.prototype = new People() //继承People类
+            var superSay = Student.prototype.say //调用父类方法
+            Student.prototype.say = function(){//重写父类方法
+                superSay.call(this)
+                alert("stu-hello" + this.name + n)
+            }
+            window.Student = Student
+        }());
+
+        // function Student(name){//创建学生类
+        //     this.name = name
+        // }
+        // Student.prototype = new People() //继承People类
+        // var superSay = Student.prototype.say //调用父类方法
+        // Student.prototype.say = function(){//重写父类方法
+        //     superSay.call(this)
+        //     alert("stu-hello" + this.name)
+        // }
+
+        var s = new Student("zwf")
+        s.say()
+    </script>
+</body>
+</html>

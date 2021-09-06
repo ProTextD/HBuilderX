@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--
+			按钮的本身是disabled禁用的状态
+			当复选框被勾选上的时候，按钮变成启用的状态，其次样式产生了变化
+			按钮样式的变化都已经通过特定的class名字书写好样式了，只要对按钮的class名字进行修改即可
+		-->
+		<meta charset="utf-8">
+		<title>案例</title>
+		<style type="text/css">
+			input.submit{
+				background: #7FFFD4;
+				display: inline-block;
+				height: 52px;
+				width: 306px;
+				text-align: center;
+				cursor: pointer;
+				font: 22px/52px "微软雅黑";
+				color: bisque;
+				border-radius: 3px;
+				border-style: solid;
+				border-width: 1px;
+				border-color: transparent;
+			}
+			
+			input.disabled{
+				background: #7FFFD4;
+				color: #888;
+				cursor: default;
+				border-color: blueviolet;
+				cursor: default;
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="https://www.baidu.com">
+			<input id="kuang" type="checkbox" />
+			<label for="kuang">同意"服务条款"和"用户须知"、"隐私权相关政策"</label>
+			<br />
+			<br />
+			<input type="submit" disabled="disabled" class="submit disabled" id="btn" />
+		</form>
+		<script src="./jquery-3.6.0.js"></script>
+		<script>
+			
+			$("#kuang").click(function(){
+				var checked = $("#kuang").prop("checked");
+				//alert("checked = " + checked);
+				if(checked == true){
+					$("#btn").attr({
+						disabled : false,
+						class : "submit"
+					})
+				}else{
+					$("#btn").attr({
+						disabled : true,
+						class : "submit disabled"
+					})
+				}
+				
+			})
+			
+		</script>
+	</body>
+</html>
