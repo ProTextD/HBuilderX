@@ -46,6 +46,7 @@ export default new Router({
     //   path : '/special',
     //   component : Special
     // }
-  ]
+  ],
+  mode:'history'
 })
 
