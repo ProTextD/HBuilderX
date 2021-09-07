@@ -35,6 +35,11 @@ const store = new Vuex.Store({
     // }
     [types.UPDATE_INFO] (state , payload){
       state.info = {...state.info , 'height' : payload.height}
+
+      //当进行异步操作时，无法追踪到state中的info数据改变
+      // setTimeout(()=>{
+      //   state.info = {...state.info , 'height' : payload.height}
+      // },5000)
     },
     // increment(state , payload){
     //   state.count += payload.cCount
