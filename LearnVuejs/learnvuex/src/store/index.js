@@ -45,6 +45,7 @@ const store = new Vuex.Store({
     //   state.count += payload.cCount
     // }
   },
+  //Action类似于Mutation, 但是是用来代替Mutation进行异步操作的.
   actions:{
     // increment(context){
     //   context.commit('increment')
