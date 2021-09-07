@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计数器案例</title>
+	</head>
+	<body>
+		<div id="app">
+			<h2>当前计数:{{counter}}</h2>
+			<!--指令：@click，用于监听某个元素的点击事件，并且需要指定点击发生时执行的方法（方法通常是methods中定义的方法）-->
+			<!--注释中的写法为最原始的写法，使用中的是语法糖的写法-->
+			<!--    <button v-on:click="add">+</button>-->
+			<!--    <button v-on:click="sub" >-</button>-->
+			<button @click="add">+</button>
+			<button @click="sub">-</button>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			const app = new Vue({
+				el:"#app",
+				data:{
+					counter: 0
+				},
+				//属性：methods，用于在Vue对象中定义方法
+				methods:{
+					add:function(){
+						console.log("add执行");
+						this.counter ++;
+					},
+					sub:function(){
+						console.log("sub执行");
+						this.counter --;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 文本 -->
+    <div id="app">
+        <span>Message:{{message}}</span><br>
+        <span v-once>这个将不会改变: {{message}}</span>
+    </div>
+    <!-- 原始 HTML -->
+    <div id="app2">
+        <p><span>Using mustaches:{{rawHtml}}</span></p>
+        <p><span v-html="rawHtml">Using v-html directive:</span></p>
+    </div>
+    <!-- Attribute -->
+    <div id="qpp3">
+        <div v-bind:id=dynamicId></div>
+        <!-- 对于布尔 attribute (它们只要存在就意味着值为 true)，v-bind 工作起来略有不同，在这个例子中： -->
+        <button v-bind:disabled="isButtonDisabled">button</button>
+        <!-- 如果 isButtonDisabled 的值是 null、undefined 或 false，则 disabled attribute 甚至不会被包含在渲染出来的 <button> 元素中。 -->
+    </div>
+    <!-- 使用 JavaScript 表达式 -->
+    <div id="app4" >{{number + 1}}</div>
+    <!-- <div id="app5">
+        {{ msg.split('').reverse().join('') }}
+    </div> -->
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el : "#app",
+            data : {
+                message : "abc"
+            }
+        })
+
+        var app2 = new Vue({
+            el : "#app2",
+            data : {
+                rawHtml : "<span style='color : red'>This should be red</span>"
+            }
+        })
+
+        // var app3 = new Vue({
+        //     el:"#app3",
+        //     data: {
+        //         isButtonDisabled = true
+        //     }
+        // })
+
+        var app4 = new Vue({
+            el: "#app4",
+            data : {
+                number : 1
+            }
+        })
+
+        // var app5 = new Vue({
+        //     el : "#app5",
+        //     msg : "hello Vue.js"
+        // })
+    </script>
+</body>
+</html>

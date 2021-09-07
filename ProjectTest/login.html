@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登录页面，可用</title>
+		<style type="text/css">
+			
+		span {
+			color: red;
+			font-size: 12px;
+		}
+		
+		#myform{
+			margin-top: 300px;
+			margin-left: 700px;
+			font-size: larger;
+			position: absolute;
+		}
+		</style>
+	</head>
+	<body>
+		账号：<input id="username" type="text" name="account"><span id="usernameError"></span><br>
+		密码：<input id="password" type="password" name="password"><span id="passwordError"></span><br>
+		<input type="submit" value="登录" id="submit">
+		<input type="button" value="注册" onclick="zhuce()"/>
+		
+		<script src="./jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			function loginHome(){
+				var name = $("#username").val()
+				var password = $("#password").val()
+				var userInfo={
+					"account":$("#username").val(),
+					"password":$("#password").val()
+				}
+				if(name == ""){
+					document.getElementById("usernameError").innerText = "用户名不能为空"
+					return false
+				}else {
+					if(name.length < 6 || name.length > 14){
+						document.getElementById("usernameError").innerText = "用户名长度必须在[6-14]之间"
+						return false
+					}else{
+							//用户名长度合法
+							//继续判断是否含有特殊符号
+							var regExp = /^[A-Za-z0-9]+$/;
+							var ok = regExp.test(name);
+							if(ok){
+								//用户名最终合法
+							}else{
+								//用户名中含有特殊符号
+								document.getElementById("usernameError").innerText = "用户名只能由数字和字母组成";
+								return false
+							}
+					}
+				}
+				if(password == ""){
+					document.getElementById("passwordError").innerText = "密码不能为空"
+					return false
+				}
+				else{
+					$.ajax({
+						url:"http://192.168.3.239:8008/queryUser",
+						type:"POST",
+						// data:{"userInfo":userInfo},
+						data:JSON.stringify(userInfo),
+						dataType:'json',//json 返回值类型
+						contentType:"application/json;charset=UTF-8",
+						success: function(result){
+						alert(result.msg);
+						//登录成功后跳转页面(后改)
+						location.href = "LoginSucceeded.html"
+					  },
+						error:function(result){
+						alert(result.msg);
+					  }
+					  })
+					  // alert("111")
+				}
+				
+			}
+			
+			function zhuce(){
+				location.href = "register.html"
+			}
+			
+			window.onload = function(){
+				//获取username的span标签
+				var submitElt = document.getElementById("submit")
+				var usernameErrorSpan = document.getElementById("usernameError");
+				var usernameElt = document.getElementById("username");
+				var usernameValue = usernameElt.value;
+				
+				//给username文本框绑定focus事件
+				usernameElt.onfocus = function(){
+					// alert(usernameValue)
+					//清空非法的value
+					if(usernameErrorSpan.innerText != "" ){
+						usernameElt.value = "";
+					}
+					//清空span
+					usernameErrorSpan.innerText = "";
+					if(usernameValue == "请输入用户名..."){
+						usernameElt.value = "";
+					}
+				}
+				
+				//获取userpwd的span标签
+				var userpwdErrorSpan = document.getElementById("passwordError")
+				var userpwdElt = document.getElementById("password")
+				var userpwdValue = userpwdElt.value
+				//给userpwd文本框绑定focus事件
+				userpwdElt.onfocus = function(){
+					if(userpwdErrorSpan.innerText != "" ){
+						userpwdElt.value = "";
+					}
+					//清空span
+					userpwdErrorSpan.innerText = "";
+					
+					if(userpwdValue == "请输入密码"){
+						userpwdElt.value = "";
+					}
+				}
+				
+				submitElt.onclick = function(){
+					loginHome()
+				}
+			}
+		</script>
+	</body>
+</html>

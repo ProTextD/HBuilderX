@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>.Promise的链式调用的两种简写</title>
+	</head>
+	<body>
+		<script>
+			//第一种简写
+			/*
+			new Promise((resolve,reject)=>{
+				setTimeout(function(){
+					resolve("hello world")
+				},1000)
+			}).then(data=>{
+				console.log(data)//=>Hello World
+				return Promise.resolve(data + "111")
+			}).then(data=>{
+				console.log(data)//=>Hello World111
+				return Promise.resolve(data + "222")
+			}).then(data=>{
+				console.log(data)//=>Hello World222
+				return Promise.reject(data + "error")
+			}).then(data=>{
+				console.log(data)// 这里没有输出,这部分代码不会执行
+				return Promise.resolve(data + "333")
+			}).catch(data=>{
+				console.log(data)// =→>Hello world111222error
+				return Promise.resolve(data + "444")
+			}).then(data=>{
+				console.log(data)// =→>Hello world111222error444
+			})
+			*/
+			//第二种简写
+			new Promise((resolve,reject)=>{
+				setTimeout(function(){
+					resolve("hello Vuejs")
+				},1000)
+			}).then(data =>{
+				console.log(data);//=>hello Vuejs
+				return data + '111'
+			}).then(data =>{
+				console.log(data);//=>hello Vuejs111
+				return data + '222'
+			}).then(data =>{
+				console.log(data);//=>hello Vuejs111222
+				return data + 'error'
+			}).catch(data =>{
+				console.log(data);// 这里没有输出,这部分代码不会执行
+				throw data + '333'
+			}).then(data =>{
+				console.log(data);//=>hello Vuejs111222error
+				return data + '444'
+			}).then(data =>{
+				console.log(data);//=>hello Vuejs111222error333444
+			})
+		</script>
+	</body>
+</html>

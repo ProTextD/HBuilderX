@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <blog-post title="My journey with Vue"></blog-post>
+        <blog-post 
+            v-for="post in posts"
+            v-bind:title="post.title + ' by ' + post.authorname "
+            v-bind:key="post.id"    
+        ></blog-post>
+
+        <!-- 传入一个数字 -->
+        <!-- 即便 `42` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+        <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+        <blog-post
+            v-for="post in posts"
+            v-bind:title='post.title'
+            v-bind:likes="33"
+        ></blog-post>
+        <!-- 用一个变量进行动态赋值。-->
+        <blog-post
+            v-for="post in posts"
+            v-bind:title='post.title'
+            v-bind:likes="post.likes"
+        ></blog-post>
+
+        <!-- 传入一个布尔值 -->
+        <!-- 包含该 prop 没有值的情况在内，都意味着 `true`。-->
+        <blog-post is-published></blog-post>
+        <!-- 即便 `false` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+        <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+        <blog-post v-bind:is-published='false'></blog-post>
+        <!-- 用一个变量进行动态赋值。-->
+        <blog-post 
+            v-for="post in posts"
+            v-bind:is-published='post.isPublished'
+        ></blog-post>
+
+        <!-- 传入一个数组 -->
+        <!-- 即便数组是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+        <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+        <blog-post v-bind:comment-ids="[123 , 456 , 789]" ></blog-post>
+        <!-- 用一个变量进行动态赋值。-->
+        <blog-post
+            v-for="post in posts"
+            v-bind:comment-ids="post.commentIds"
+            v-bind:title="post.title"
+        ></blog-post>
+
+        <!-- 传入一个对象 -->
+        <!-- 即便对象是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+        <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+        <blog-post v-bind:author="{
+            name: 'Veronica',
+            company: 'Veridian Dynamics'
+            }"
+        ></blog-post>
+        <!-- 用一个变量进行动态赋值。-->
+        <blog-post
+            v-for="post in posts"
+            v-bind:author="post.author"
+            v-bind:title="post.title"
+        ></blog-post>
+
+        <!-- 传入一个对象的所有 property -->
+        <blog-post v-for="post in posts" v-bind="post"></blog-post>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('blog-post' , {
+            props:['title'],
+            template:`
+                <h3>{{title}}</h3>
+            `
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+                posts:[
+                    {id : 1 , title:"My journey with Vue" , authorname : "aaa" , likes : '11' , isPublished : 'true' , commentIds : '123' , author:"{ name: 'Veronica',company: 'Veridian Dynamics'}"},
+                    {id : 2 , title:"Blogging with Vue", authorname : "bbb" , likes : '22' , isPublished : 'true' , commentIds : '234' , author:"{ name: 'Veronica2',company: 'Veridian Dynamics2'}"},
+                    {id : 3 , title:"Why Vue is so fun", authorname : "ccc" , likes : '33' , isPublished : 'true' , commentIds : '345' , author:"{ name: 'Veronica3',company: 'Veridian Dynamics3'}"}
+                ]
+            }   
+        })
+    </script>
+</body>
+</html>

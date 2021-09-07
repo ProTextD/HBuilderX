@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 对于单选按钮，复选框及选择框的选项，v-model 绑定的值通常是静态字符串 (对于复选框也可以是布尔值) -->
+    <div id="app">
+        <!-- 当选中时，`picked` 为字符串 "a" -->
+        <input type="radio" v-model="picked" value="a">
+        <span>Picked : {{picked}}</span><br>
+        <!-- `toggle` 为 true 或 false -->
+        <input type="checkbox" v-model="toggle">
+        <span>Checked : {{toggle}}</span><br>
+        <!-- 当选中第一个选项时，`selected` 为字符串 "abc" -->
+        <select v-model="selected">
+            <option value="abc">ABC</option>
+        </select>
+        <span>Selected : {{selected}}</span><br>
+        <!-- 复选框 -->
+        <input type="checkbox" v-model="checked" true-value="yes" false-value="no">
+        <span>Checked : {{checked}}</span><br>
+        <!-- 单选按钮 -->
+        <!-- <input type="radio" v-model="pick"  v-bind:value="a"> -->
+    </div>
+    <div id="app2">
+        <!-- 选择框的选项 -->
+        <select v-model="selected2">
+            <option v-bind:value="{number : 123}">123</option>
+        </select>
+        <span>{{selected2.number}}</span>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data:{
+                picked : " ",
+                toggle : false,
+                selected : " ",
+                checked : "no",
+            }
+        })
+
+        var app2 = new Vue({
+            el : "#app2",
+            data:{
+                selected2 : true
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div id="app">
+        <transition>
+            <button v-if="isEditing" key="save" @click="isEditing = !isEditing">save</button>
+            <button v-else key="edit" @click="isEditing = !isEditing">edit</button>
+        </transition>
+    </div> -->
+    <!-- 可以重写为 -->
+    <!-- <transition>
+            <button v-bind:key="isEditing">
+                {{ isEditing ? 'Save' : 'Edit' }}
+            </button>
+        </transition> -->
+
+    <div id="app2">
+        <!-- <transiton>
+            <button v-if="docState === saved" key="saved">edit</button>
+            <button v-if="docState === edited" key="edited">saved</button>
+            <button v-if="docState === editing" key="editing">cancel</button>
+        </transiton> -->
+        <!-- 可以重写为 -->
+        <transition>
+            <button v-bind:key="docState">
+              {{ buttonMessage }}
+            </button>
+        </transition>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // var app = new Vue({
+        //     el : "#app",
+        //     data:{
+        //         isEditing : true
+        //     }
+        // })
+
+        var app2 = new Vue({
+            el : "#app2",
+            data:{
+                docState:'saved'
+            },
+            computed:{
+                buttonMessage : function(){
+                    switch(this.docState){
+                        case 'saved' : return 'edit'
+                        case 'edited' : return 'save'
+                        case 'editing' : return 'cancel'
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

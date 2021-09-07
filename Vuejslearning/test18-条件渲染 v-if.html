@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 truthy 值的时候被渲染 -->
+    <div id="app">
+        <h1 v-if="awesome">Vue is awesome</h1>
+        <h1 v-else>Oh no</h1>
+        <button @click=getOther>切换</button>
+
+        <template v-if="ok">
+            <h1>title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+    </div>
+
+    
+
+    <script src="./vue.js"></script>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data:{
+                awesome : true,
+                ok : true
+            },
+            methods:{
+                getOther(){
+                   this.awesome = !this.awesome
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

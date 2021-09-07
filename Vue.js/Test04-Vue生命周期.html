@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue生命周期</title>
+	</head>
+	<body>
+		<div id="app">
+			{{message}}
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				beforeCreate ：数据还没有监听，没有绑定到vue对象实例，同时也没有挂载对象
+				created ：数据已经绑定到了对象实例，但是还没有挂载对象
+				beforeMount: 模板已经编译好了，根据数据和模板已经生成了对应的元素对象，将数据对象关联到了对象的el属性，
+					el属性是一个HTMLElement对象，也就是这个阶段，vue实例通过原生的createElement等方法来创建这个html片段，
+					准备注入到我们vue实例指明的el属性所对应的挂载点
+				mounted:将el的内容挂载到了el，相当于我们在jquery执行了(el).html(el),生成页面上真正的dom，
+					上面我们就会发现dom的元素和我们el的元素是一致的。在此之后，我们能够用方法来获取到el元素下的dom对象，并进行各种操作
+					
+				当我们的data发生改变时，会调用beforeUpdate和updated方法
+				beforeUpdate ：数据更新到dom之前，我们可以看到$el对象已经修改，但是我们页面上dom的数据还没有发生改变
+				updated: dom结构会通过虚拟dom的原则，找到需要更新页面dom结构的最小路径，将改变更新到dom上面，完成更新
+				beforeDestroy,destroed :实例的销毁，vue实例还是存在的，只是解绑了事件的监听还有watcher对象数据 与view的绑定，即数据驱动
+				
+			*/
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					message:"hello world"
+				},
+				beforeCreate:function(){
+					console.log(this);
+					showData('创建vue实例前' , this);
+				},
+				created:function(){
+					showData('创建vue实例后' , this);
+				},
+				beforeMount:function(){
+					showData('挂载到dom前' , this);
+				},
+				mounted:function(){
+					showData('挂载到dom后' , this);
+				},
+				beforeUpdate:function(){
+					showData('数据变化更新前' , this);
+				},
+				updated:function(){
+					showData('数据变化更新后' , this);
+				},
+				beforeDestroy:function(){
+					vm.test = "333";
+					showData('vue实例销毁前' , this);
+				},
+				destroyed:function(){
+					showData('vue实例销毁后' , this);
+				}
+			});
+			function realDom(){
+				console.log("真实的DOM结构:" + document.getElementById("app").innerHTML);
+			}
+			
+			function showData(process,obj){
+				console.log(process);
+				console.log("data数据:" + obj.message);
+				console.log("挂载的对象:")
+				console.log(obj.$el);
+				realDom();
+				console.log("------------------");
+				console.log("------------------");
+				vm.message = "good...";
+				vm.$destroy();
+			}
+		</script>
+	</body>
+</html>

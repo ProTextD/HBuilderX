@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<title>修改密码,可用</title>
+		<!-- <link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/login.css" rel="stylesheet"> -->
+		<style type="text/css">
+			span {
+				color: red;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="col-md-12">
+		    
+		    <div class="form-group">
+		        <label class="col-sm-3 control-label" >修改密码：</label>
+		        <div class="col-sm-9">
+		            <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码"><span id="passwordError"></span>
+		        </div>
+		    </div>
+		    <div class="form-group">
+		        <label class="col-sm-3 control-label">确认密码：</label>
+		        <div class="col-sm-9">
+		            <input type="password" class="form-control" name="password" id="password2" placeholder="请再次输入密码"><span id="password2Error"></span>
+		        </div>
+		    </div>
+			<div>
+				<input type="submit" value="修改密码" id="submit" onclick="modify()">
+			</div>
+		</div>
+		<script src="./jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			function modify(){
+				var password = $("#password").val()
+				var password2 = $("#password2").val()
+				var userInfo={
+					"password":$("#password").val()
+				}
+				
+				if(password == ""){
+					document.getElementById("passwordError").innerText = "密码不能为空!"
+					return false
+				}
+				
+				if(password2 != password){
+					document.getElementById("password2Error").innerText = "密码不一致"
+					return false
+				}
+				
+				if(document.getElementById("passwordError").innerText == "" && document.getElementById("password2Error").innerText == "" ){
+					// alert("111")
+					$.ajax({
+						url:"http://192.168.3.239:8008/queryUser",
+						type:"POST",
+						// data:{"userInfo":userInfo},
+						data:JSON.stringify(userInfo),
+						dataType:'json',//json 返回值类型
+						contentType:"application/json;charset=UTF-8",
+						success: function(result){
+						alert(result.msg);
+						//修改密码成功后跳转页面(后改)
+						location.href = "LoginSucceeded.html"
+					  },
+						error:function(result){
+						alert(result.msg);
+					  }
+					  })
+				}
+			}
+			
+			window.onload = function(){
+				var passwordErrorSpan = document.getElementById("passwordError")
+				var passwordElt = document.getElementById("password")
+				var password2Elt = document.getElementById("password2")
+				passwordElt.onfocus = function(){
+					if(document.getElementById("passwordError").innerText != ""){
+						passwordErrorSpan.innerText = "";
+					}
+				}
+				
+				password2Elt.onfocus = function(){
+					if(document.getElementById("password2Error").innerText != ""){
+						password2Elt.value = ""
+						document.getElementById("password2Error").innerText = ""
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-model的原理</title>
+	</head>
+	<body>
+		<div id="app">
+			<!--v-model-->
+			<input type="text" v-model="message" /><br />
+			{{message}}<br />
+			<!--v-model的原理-->
+			<input type="text" :value="message1" v-on:input="message1=$event.target.value" /><br />
+			<!--
+				利用v-bind动态绑定value属性，让其的值随message1改变而改变
+				利用v-on绑定input事件，通过事件对象来给message1赋值来改变message1的值
+			-->
+			{{message1}}
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				v-model其实是一个语法糖，它背后本质是包含两个操作
+				v-bind绑定一个value属性
+				v-on指令给当前元素绑定input事件
+			*/
+			const app = new Vue({
+				el : "#app",
+				data:{
+					message : "hello Vuejs",
+					message1 : "hello"
+				}
+			})
+		</script>
+	</body>
+</html>

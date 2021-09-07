@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>监视属性的简写</title>
+	</head>
+	<body>
+		<div id="app">
+			<h1>今天天气很{{info}}</h1>
+			<button @click="changeWeather">切换天气</button>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				watch对比computed
+				computed和watch之间的区别:
+				computed能完成的功能,watch都可以完成。
+				watch能完成的功能，computed不一定能完成，例如: watch可以进行异步操作。
+				
+				
+				两个重要的小原则:
+				所有被Vue管理的函数，最好写成普通函数，这样this的指向才是vm或组件实例对象.
+				所有不被Vue所管理的函数（定时器的回调函数、ajax的回调函数等，最好写成箭头函数，这样this的指向才是vm或组件实例对象。
+			*/
+			Vue.config.productionTip = false;
+			const vm = new Vue({
+				el:"#app",
+				data:{
+					ishot : false
+				},
+				computed:{
+					info(){
+						return this.ishot ? "炎热" : "凉爽";
+					}
+				},
+				methods:{
+					changeWeather(){
+						this.ishot = !this.ishot;
+					}
+				},
+				
+				//监视属性第一种写法
+				/*
+					当不需要immediate和deep属性时，可以类似计算属性那样简写，注意:不能写成箭头函数的形式，
+					否则会改变this的指向
+				*/
+				watch:{
+					info(oldvalue , newvalue){
+						console.log("info内容改变:" , oldvalue , newvalue);
+					}
+				}
+				
+			})
+			//监视属性第二种写法
+			/*
+			vm.$watch('ishot',function(oldvalue , newvalue){
+				console.log("ishot内容改变:" , oldvalue , newvalue);
+			})
+			*/
+		</script>
+	</body>
+</html>

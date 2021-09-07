@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 另一个定义模板的方式是在一个 <script> 元素中，并为其带上 text/x-template 的类型，然后通过一个 id 将模板引用过去 -->
+    <!-- x-template 需要定义在 Vue 所属的 DOM 元素外。 -->
+    <!-- 这些可以用于模板特别大的 demo 或极小型的应用，但是其它情况下请避免使用，因为这会将模板和该组件的其它定义分离开 -->
+    <div id="app">
+        <hello-world>helloWorld</hello-world>
+    </div>
+    <script type="text/x-template" id="hello-world-template">
+        <p>hello hello hello</p>
+    </script>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('hello-world' , {
+            template:'#hello-world-template'
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+                
+            }
+        })
+    </script>
+</body>
+</html>

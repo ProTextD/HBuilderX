@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		span {
+			color: red;
+			font-size: 12px;
+		}
+	</style>
+
+    <title> - 登录</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">h</h1>
+
+            </div>
+            <h3>欢迎使用 hAdmin</h3>
+
+            <!-- <form class="m-t" role="form"> -->
+                <div class="form-group">
+                    <input type="type" class="form-control" placeholder="账号" required="" id="username" name="account"><span id="usernameError"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" required="" id="password" name="password"><span id="passwordError"></span>
+                </div>
+
+                <div class="wrapper">
+                    <div class="inputBox">
+                        <input class="form-control" type="text" id="vfCode" placeholder="请输入验证码" /><span id="vfCodeError"></span>
+                        <span></span>
+                    </div>
+                    <!-- <p class="error"></p> -->
+                    <div class="canvasBox">
+                        <div class="imgBox">
+                            <canvas id="myCanvas" width="300" height="80"></canvas>
+                            <input type="button" name="" class="refresh" value="看不清，换一张">
+                        </div>
+                    </div>			
+                </div>
+
+                <button type="submit" class="btn btn-primary block full-width m-b" id="submit">登 录</button>
+				<!-- <input type="button" class="btn btn-primary block full-width m-b" value="注册" onclick="zhuce()"/> -->
+
+                <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+                </p>
+
+            <!-- </form> -->
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+		
+		function loginHome(){
+			var name = $("#username").val()
+			var password = $("#password").val()
+			var userInfo={
+				"account":$("#username").val(),
+				"password":$("#password").val()
+			}
+			
+			//把用户名保存到修改密码页面
+			var showCode = name
+			sessionStorage.setItem("login" , showCode)
+			var showCode2 = name
+			sessionStorage.setItem("login2" , showCode2)
+			
+			if(name == ""){
+				document.getElementById("usernameError").innerText = "用户名不能为空"
+				return false
+			}else {
+				if(name.length < 6 || name.length > 14){
+					document.getElementById("usernameError").innerText = "用户名长度必须在[6-14]之间"
+					return false
+				}else{
+						//用户名长度合法
+						//继续判断是否含有特殊符号
+						var regExp = /^[A-Za-z0-9]+$/;
+						var ok = regExp.test(name);
+						if(ok){
+							//用户名最终合法
+						}else{
+							//用户名中含有特殊符号
+							document.getElementById("usernameError").innerText = "用户名只能由数字和字母组成";
+							return false
+						}
+				}
+			}
+			if(password == ""){
+				document.getElementById("passwordError").innerText = "密码不能为空"
+				return false
+			}
+			else{
+				$.ajax({
+					url:"http://192.168.3.239:8008/loginUser",
+					type:"POST",
+					// data:{"userInfo":userInfo},
+					data:JSON.stringify(userInfo),
+					dataType:'json',//json 返回值类型
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+					alert(result.msg);
+					//登录成功后跳转页面(后改)
+					if(result.msg == "登录成功"){
+						location.href = "LoginSucceeded.html"
+					}else{
+						return false
+					}
+				  },
+					error:function(result){
+					alert(result.msg);
+				  }
+				  })
+				  // alert("111")
+				  // location.href="LoginSucceeded.html"
+			}
+			
+		}
+		
+		function zhuce(){
+			location.href = "register.html"
+		}
+		
+		window.onload = function(){
+			//获取username的span标签
+			var submitElt = document.getElementById("submit")
+			var usernameErrorSpan = document.getElementById("usernameError");
+			var usernameElt = document.getElementById("username");
+			var usernameValue = usernameElt.value;
+			
+			//给username文本框绑定focus事件
+			usernameElt.onfocus = function(){
+				// alert(usernameValue)
+				//清空非法的value
+				if(usernameErrorSpan.innerText != "" ){
+					usernameElt.value = "";
+				}
+				//清空span
+				usernameErrorSpan.innerText = "";
+				if(usernameValue == "请输入用户名..."){
+					usernameElt.value = "";
+				}
+			}
+			
+			//获取userpwd的span标签
+			var userpwdErrorSpan = document.getElementById("passwordError")
+			var userpwdElt = document.getElementById("password")
+			var userpwdValue = userpwdElt.value
+			//给userpwd文本框绑定focus事件
+			userpwdElt.onfocus = function(){
+				if(userpwdErrorSpan.innerText != "" ){
+					userpwdElt.value = "";
+				}
+				//清空span
+				userpwdErrorSpan.innerText = "";
+				
+				if(userpwdValue == "请输入密码"){
+					userpwdElt.value = "";
+				}
+			}
+			
+			submitElt.onclick = function(){
+                showResult();
+                if($('#vfCodeError').css('display','block').html() != ""){
+                    return false
+                }else{
+                    loginHome()
+                }
+			}
+		}
+
+        //验证码验证
+        var arr = [0,1,2,3,4,5,6,7,8,9];
+
+        for(var i = 65; i < 123; i ++) {
+            if(i > 90 && i < 97) {
+                continue;
+            }
+            arr.push(String.fromCharCode(i));
+        }
+
+        var Invalue;
+
+        function createCanvas() {
+
+            var canvasStr = '';
+            Invalue = '';
+            for(var i = 0; i < 6; i ++) {
+                var str = arr[Math.floor(Math.random() * arr.length)];
+                canvasStr += str + ' ';
+                Invalue += str;
+            }
+
+            //根据id获取canvas
+            //创建画笔
+            var myCanvas = document.getElementById('myCanvas');
+            var ctx = myCanvas.getContext('2d');
+            
+            //new 一个图片实例将画布的背景图片引入进来
+            var oImg = new Image();
+            //引入图片文件路径
+            oImg.src = './img/123.jpg';
+            oImg.onload = function() {
+                //声明画布变量，填充画布
+                var pattern = ctx.createPattern(oImg,'repeat');
+                ctx.fillStyle = pattern;
+                //将背景图片渲染进canvas
+                ctx.fillRect(0,0,myCanvas.width,myCanvas.height);
+                //画笔写入的起始位置要水平居中
+                ctx.textAlign = 'center';
+                //字体样式及颜色
+                ctx.fillStyle = 'green';
+                ctx.font = '45px Roboto Slab';
+                //给字体设置一个倾斜角度
+                ctx.setTransform(1,-0.12,0.3,1,0,12);
+                //将生成的验证码串渲染进画布
+                ctx.fillText(canvasStr,myCanvas.width/2,60);
+            }
+        }
+        createCanvas();
+
+        //验证码框验证
+        var vfCodeElt = document.getElementById("vfCode")
+        vfCodeElt.onfocus = function(){
+            console.log($("#vfCodeError").html())
+            console.log("Invalue=" + Invalue)
+            console.log("$('#vfCode').val()=" + $('#vfCode').val())
+            if($('#vfCodeError').html() != ""){
+                // $('#vfCodeError').css('display','none');
+                $('#vfCodeError').html("")
+            }
+        }
+
+        $('.refresh').on('click',function() {
+            createCanvas();
+        });
+
+        function showResult() {
+            var inputValue = $('#vfCode').val();
+            if(inputValue == Invalue) {
+                $('.inputBox span').css({
+                    background: 'url(./img/true.jpg)',
+                    backgroundSize: '100%',
+                    display: 'inline-block'
+                });
+                // $('#vfCodeError').css('display','none')
+                $('#vfCodeError').html("")
+            }else{
+                $('.inputBox span').css({
+                    background: 'url(./img/true.jpg)',
+                    backgroundSize: '100%',
+                    display: 'inline-block'
+                });
+                $('#vfCodeError').css('display','block').html('验证码错误，请重新输入!');
+            }
+        }
+	</script>
+    
+    
+
+</body>
+
+</html>

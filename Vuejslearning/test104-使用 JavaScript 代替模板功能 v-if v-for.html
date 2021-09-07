@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <anchored-heading :items="items"></anchored-heading>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('anchored-heading' , {
+            props:['items'],
+            render : function(createElement){
+                if(this.items.length){
+                    return createElement('ul' , this.items.map(function(item){
+                        return createElement('li' , item.name)
+                    }))
+                }else{
+                    return createElement('p' , 'No items found.')
+                }
+            }
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+                items:[
+                    {name : 'aaa'},
+                    {name : 'bbb'},
+                    {name : 'ccc'},
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-on参数问题</title>
+	</head>
+	<body>
+		<div id="app">
+			<!--    无参数时，后面带不带小括号都可以-->
+			<button @click="btn1Click">按钮1</button>
+			<button @click="btn1Click()">按钮1</button>
+			<!--    带参数时，正常传入参数除了数字不带引号，其他需要带引号，否则会被当作变量，
+			若data中没有定义，则会报错，若不带括号，则会传入当前的event对象-->
+			<!--带参数，不带括号传入原生event对象，传入参数需要带引号-->
+			<button @click="btn2Click('abc')">按钮2</button>
+			<button @click="btn2Click(abc)">按钮2</button>
+			<button @click="btn2Click">按钮2</button>
+			<!--    又要参数，又要当前的事件对象,对象前需要加$符号，否则会被认为是对象-->
+			<!--参数和原生对象都要，原生对象用$event传入-->
+			<button @click="btn3Click(123 , $event)">按钮3</button>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				当通过methods中定义方法，以供@click使用时，需要注意参数问题：
+				情况一：如果该方法不需要额外参数，那么方法后面的（）可以不添加
+						（但是注意：如果方法本身中有一个参数，而没有加（）的话，那么会将原生事件event参数传递进去）
+				情况二：如果要同时传入某个参数，同时需要event时，可以通过$event传入事件
+			*/
+			new Vue({
+				el:"#app",
+				data:{
+					message:"hello Vuejs"
+				},
+				methods:{
+					btn1Click(){
+						console.log()
+					},
+					btn2Click(){
+						console.log(event)
+					},
+					btn3Click(){
+						console.log(abc,event)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

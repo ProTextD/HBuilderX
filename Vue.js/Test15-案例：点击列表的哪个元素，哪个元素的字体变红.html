@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>案例：点击列表的哪个元素，哪个元素的字体变红</title>
+		<style type="text/css">
+			.active{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="(m , index) in movies " @click="toggle(index)" :class="getClass(index)">{{m}}</li>
+				<!--
+					v-for遍历数组movies，m代表具体的值，index代表对应的下标值
+					
+				-->
+			</ul>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			new Vue({
+				el:"#app",
+				data:{
+					message : "hello Vuejs",
+					movies : ['111' , '222' , '333'],
+					currentIndex : 0,
+					//利用一个数来代表当前变红的坐标，默认为第一个，坐标为零
+				},
+				methods:{
+					toggle : function(index){
+						//点击相应的内容，并将当前变红的坐标值改为点击的坐标值
+						this.currentIndex = index;
+					},
+					getClass : function(index){
+						/*
+							利用两个值是否相等返回一个结果来决定class属性是否存在，true为存在，样式变红
+							为点击的内容，其他未点击的结果为false，样式不变红
+						*/
+						return {active : this.currentIndex === index};
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

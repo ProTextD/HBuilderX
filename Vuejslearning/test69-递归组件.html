@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <unique-name-of-my-component>hahah</unique-name-of-my-component>
+    </div>
+    <!-- <div id="app2">
+        <child-component :count="1"></child-component>
+    </div> -->
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('unique-name-of-my-component' , {
+            // 稍有不慎，递归组件就可能导致无限循环
+            // name: 'stack-overflow',
+            // template:`
+            //     <div><stack-overflow>loading...</stack-overflow></div>
+            // `
+            props:{
+                count:{
+                    default :1
+                }
+            },
+            name:'stack-overflow',
+            template:`
+                <div><stack-overflow :count="count + 1" v-if="count < 5">loading...</stack-overflow></div>
+            `
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+
+            }
+        })
+        // 类似上述的组件将会导致“max stack size exceeded”错误，
+        // 所以请确保递归调用是条件性的 (例如使用一个最终会得到 false 的 v-if)。
+
+        // Vue.component('child-component' , {
+        //     name:'child-component',
+        //     props:{
+        //         count:{
+        //             type:Number,
+        //             default : 1
+        //         }
+        //     },
+        //     template:`
+        //     <div class="child">
+        //             <child-component :count="count + 1" v-if="count < 3" >hahah</child-component>
+        //     </div>
+        //     `
+        // })
+
+        // var app2 = new Vue({
+        //     el : "#app2",
+        //     data:{
+
+        //     }
+        // })
+    </script>
+</body>
+</html>

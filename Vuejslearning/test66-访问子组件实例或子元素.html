@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <base-input ref="usernameInput">
+            <button @click="test">按钮</button>
+            <button @click="focus">focu按钮</button>
+            <input ref="input">
+        </base-input>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('base-input' , {
+            methods:{
+                hander : function(){
+                    console.log("子组件方法")
+                }
+            },
+            template:`
+                <div>
+                    <slot></slot>
+                </div>
+            `
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+
+            },
+            methods:{
+                test:function(){
+                    this.$refs.usernameInput;
+                },
+                focus:function(){
+                    this.$refs.input.focus()
+                }
+            }
+        })
+    </script>
+</body>
+</html>

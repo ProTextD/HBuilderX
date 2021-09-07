@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 对象语法 -->
+    <div id="app">
+        <div class="static" v-bind:class="{active : isActive , 'text-danger' : hasError}"></div>
+
+        <!-- 绑定的数据对象不必内联定义在模板里 -->
+        <div v-bind:class="classObject"></div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el : "#app",
+            data:{
+                isActive : true,
+                hasError : false,
+
+                // isActive : true,
+                // error : null
+
+                classObject:{
+                    active : true,
+                    'text-danger':true
+                }
+            },
+            // computed:{
+            //     classObject: function(){
+            //         return{
+            //             active = this.isActive && !this.error,
+            //             'text-danger': this.error && this.error.type === 'fatal'
+            //         }
+            //     }
+            // }
+        })
+    </script>
+</body>
+</html>

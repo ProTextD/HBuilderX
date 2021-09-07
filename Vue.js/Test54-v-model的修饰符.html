@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-model的修饰符</title>
+	</head>
+	<body>
+		<div id="app">
+			<!--  lazy修饰符-->
+			<input type="text" v-model.lazy="message" /><br />
+			{{message}}<br />
+			<!--  number修饰符-->
+			<input type="number" name="1" v-model="age" /><br />
+			<h2>{{age}}--{{typeof age}}</h2><br />
+			<input type="number" name="2" v-model.number="age1" /><br />
+			<h2>{{age1}}--{{typeof age1}}</h2><br />
+			<!-- trim修饰符-->
+			<input type="text" name="1" v-model="name" /><br />
+			<input type="text" name="2" v-model.trim="name1" /><br />
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				lazy修饰符
+				默认情况下，v-model默认是在input事件中同步输入框的数据的
+				一旦有数据改变，对应的data中的数据也会发生改变
+				lazy修饰符可以让数据在失去焦点或回车时才更新
+				lazy的作用，光标未离开，内容不会变
+				number修饰符
+				默认情况下，在输入框中无论我们输入的是字母还是数字，都会被当作字符串来处理
+				number修饰符可以让在输入框中输入的内容自动转为数字类型
+				number的作用，未加number的时候是string，加了number的时候是number
+				trim修饰符
+				如果输入的内容首尾有很多的空格，通常我们希望将其去除
+				trim修饰符可以过滤内容左右两边的空格
+			*/
+			const app = new Vue({
+				el :"#app",
+				data:{
+					age : 0,
+					age1 : 2,
+					name : "",
+					name1 : ""
+				}
+			})
+		</script>
+	</body>
+</html>

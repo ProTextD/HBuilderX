@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>test3</title>
+    <style type="text/CSS">
+        #app {
+            position: relative;
+        }
+
+        .win {
+            background-color: rgba(0, 0, 0, .5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrapper {
+            display: table-cell;
+            width: 400px;
+            height: 300px;
+            background-color: #fff;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .win-content {
+            margin: 10px;
+        }
+
+        .win-content input {
+            width: 200px;
+            height: 35px;
+        }
+
+        .win-footer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-align: right;
+        }
+    </style>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="./node_modules/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="login" v-if="!showTodoList">
+        <div>
+          <input type="text" placeholder="用户名" v-model="username">
+          <input type="text" placeholder="密码" v-model="password">
+        </div>
+        <div>
+          <button @click="login">登录</button>
+          <button @click="regisiter">注册</button>
+        </div>
+      </div>
+
+      <!-- TodoList -->
+      <div v-else>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">姓名</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Username" v-model="username">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">密码</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="password">
+          </div>
+        </form>
+        <button type="button" class="btn btn-primary" @click="userList.push({username , password})">添加</button>
+        <button type="button" class="btn btn-danger" @click="username='' , password=''">重置</button>
+      </div>
+
+      <!-- 表格部分 -->
+      <div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>姓名</th>
+              <th>密码</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item,index) in userList">
+              <td>{{index + 1}}</td>
+              <td>{{item.username}}</td>
+              <td>{{item.password}}</td>
+              <td>
+                <button type="button" class="btn btn-primary" @click="detail(index)">详情</button>
+                <button type="button" class="btn btn-btn-info" @click="update(index)">编辑</button>
+                <button type="button" class="btn btn-danger" @click="removeItem(index)">删除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 弹窗 -->
+      <div class="win" v-show="isUpdate">
+        <div class="wrapper">
+          <div class="win-title">
+            <h3>标题</h3>
+          </div>
+          <div class="win-content">
+            姓名:<input type="text" class="from-control" v-model="UpdateUsername"><br>
+            密码:<input type="text" class="from-control" v-model="UpdatePassword">
+          </div>
+          <div class="win-footer">
+            <button type="button" class="btn btn-success" @click="save()">保存</button>
+            <button type="button" class="btn btn-danger">取消</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script>
+      let vue = new Vue({
+        el : '#app',
+        data :{
+          username : '',
+          password : '',
+          userList : [
+            {
+              username : 'abc',
+              password : 123
+            },
+            {
+              username : 'def',
+              password : 456
+            }
+          ],
+          showTodoList : false,
+          UpdateUsername : '',
+          UpdatePassword : '',
+          isUpdate : false,
+          itemIndex : -1 
+        },
+        methods:{
+          regisiter(){
+            let{username , password} = this
+            this.userList.push({username , password})
+            console.log(this.userList)
+            alert('注册成功')
+          },
+          login(){
+            let{
+              username,
+              password
+            } = this;
+            for(let i = 0 ; i < this.userList.length ; i++){
+              if(this.userList[i].username === username){
+                if(this.userList[i].password === password){
+                  this.showTodoList = true;
+                }
+              }
+            }
+            if(this.showTodoList){
+              alert('登录成功')
+            }else{
+              alert('登录失败')
+            }
+            this.username = '' ; 
+            this.password = '' ;
+          },
+          detail(index){
+            alert(`username: ${this.userList[index].username}
+                  password: ${this.userList[index].password}`)
+          },
+          removeItem(index){
+            this.userList.splice(index , 1)
+          },
+          update(index){
+            this.isUpdate = true
+
+            this.UpdateUsername = this.userList[index].username
+            this.UpdatePassword = this.userList[index].password
+
+            this.itemIndex = index
+          },
+          save(){
+            let newUserList = this.userList
+            newUserList[this.itemIndex].username = this.UpdateUsername
+            newUserList[this.itemIndex].password = this.UpdatePassword
+            this.userList = newUserList
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

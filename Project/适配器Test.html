@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<ul id="Info">
+				<li>555</li>
+				<li>555</li>
+				<li>555</li>
+				<li>555</li>
+			</ul>
+		</div>
+		<input type="button" id="btn" value="按钮">
+		<div>
+			<input type="text" id="addInfo" />
+			<input type="button" id="addBtn" value="添加"/>
+		</div>
+		<script src="./vue.js"></script>
+		<script src="./jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			var addInfoElt = document.getElementById("addInfo")
+			var addBtnElt = document.getElementById("addBtn")
+			
+			addBtnElt.onclick = function(){
+				// alert(addInfoElt.value)
+				var html = ""
+				html += "<ul>"
+				html += "<li>" +addInfoElt.value+ "</li>"
+				html += "</ul>"
+				$("#Info").append(html)
+			
+				var arrary_li = document.querySelectorAll("li")
+				var num = html;
+				$('button').on('click',function(){
+					$("li").last().addClass('active')
+					for(var i = 0 ; i < arrary_li.length ; i++){
+						if(arrary_li[i].className === 'acitve'){
+							num = i;
+						}
+					}
+					localStorage.setItem('num', num)
+					location.reload()
+				})
+				var getNum = parseInt(localStorage.getItem('num'));
+				$('li').eq(getNum).addClass('active');
+			}
+		</script>
+	</body>
+</html>

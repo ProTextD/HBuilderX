@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>自定义指令</title>
+	</head>
+	<body>
+		<!--
+			前面所学习的各种以 v- 开头的指令都属于Vue的内置指令，当然我们也可以自定义相应的指令来完成一些功能。
+			1.定义语法:
+			局部指令:
+			new Vue({directives{指令名:配置对象}})或者 new Vue({directives{指令名:回调函数}})
+			全局指令:
+			Vue.directive(指令名,配置对象）或 Vue.directive(指令名,回调函数)
+			2.配置对象中常用的3个回调（类似于生命周期函数）
+			bind:指令与元素成功绑定时调用。
+			inserted:指令所在元素被插入页面时调用。
+			update:指令所在模板结构被重新解析时调用。
+			3.备注
+			指令定义时不加v-,但使用时要加v-;
+			指令名如果是多个单词，要使用kebab-case（分隔符）命名方式，不要用camelCase（驼峰）命名，在指定时需要加上引号。
+		-->
+		<div id="app">
+			   <!-- 
+			        需求1:定义一个v-big指令，和v-text功能类似，但会把绑定的数值放大10倍.一个v-big-number指令，放大
+			                100倍
+			        需求2:定义一个v-fbind指令，和v-bind功能类似，但可以让其所绑定的input元素默认获取焦点。
+			 -->
+			 <h2>现在的数是:<span v-text="n"></span></h2>
+			 <h2>10倍的数是:<span v-big="n"></span></h2>
+			 <h2>100倍的数是:<span v-big-number="n"></span></h2>
+			 <input type="text" v-fbind:value="n" /><br><br>
+			 <button @click="n++">+1</button>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				自定义指令有两种写法:
+					全局与局部，局部通过directives属性添加，全局通过Vue.directives
+			*/
+			//全局写法:
+			// Vue.directive('big',(element,binding) =>{
+			// 	console.log("对象式:" + this);
+			// 	element.value = binding.value;
+			// 	element.innerText = binding.value * 10;
+			// })
+			// Vue.directive('big-number',(element,binding) =>{
+			// 	element.innerText = binding.value * 100;
+			// })
+			new Vue({
+				el :"#app",
+				data:{
+					n : 1
+				},
+				directives:{
+					//函数式指令
+					//函数什么时候执行：1、指令与元素成功绑定时 2、指令所在模板被重新解析时
+					big(element,binding){
+					// console.log("函数式" + this);
+					// console.log(element);
+					// console.log(binding);
+					element.innerText = binding.value * 10;
+					},
+					'big-number'(element,binding){
+						element.innerText = binding.value * 100;
+					},
+					fbind:{
+						/*
+							这里根据需求，要使input默认获得焦点，一定要等到元素挂载在页面上才能调用focus(),而函数式无法办到。
+						*/
+						// 一绑定就调用
+						bind(element,binding){
+							element.value = binding.value
+						},
+						//当元素插入到页面上时调用
+						inserted(element,binding){
+							element.focus
+						},
+						//指令所在模板被重新解析时
+						update(element,binding){
+							element.value = binding.value
+							element.focus;
+						}
+					}
+				}
+			})
+			/*
+				自定义指令分为函数式和对象式，函数式的函数在指令与页面绑定时和指令所在模板
+				重新解析时都会被调用，而对象式则分为三个函数，一个是bind函数，在指令与元素
+				绑定时调用，update在所在模板被重新解析时调用。函数式与指令式的区别是，函数式函数
+				没有inserted这个回调。并且，函数式和指令式都能接收两个参数，一个是element，
+				代表其绑定的元素(真实DOM中的)，一个是binding，代表绑定的相关数据，其传入
+				的值n在value上，另外，无论是函数式还是对象式，其this指向都是window
+			*/
+		</script>
+	</body>
+</html>

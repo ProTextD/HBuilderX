@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <current-user>
+            <template v-slot:default="slotProps">
+                {{slotProps.user.firstname}}
+            </template>
+        </current-user>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('current-user' , {
+            data : function(){
+                return{
+                    user:[
+                        {user : 1 , firstname : "aaa" , lastname : "bbb"},
+                        {user : 2 , firstname : "ccc" , lastname : "ddd"},
+                        {user : 3 , firstname : "eee" , lastname : "fff"}
+                    ]
+                }
+            },
+            template:`
+                <span v-bind:user="user">
+                    <slot>{{user.lastname}}</slot>    
+                </span>
+            `
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+                
+            }
+        })
+    </script>
+</body>
+</html>

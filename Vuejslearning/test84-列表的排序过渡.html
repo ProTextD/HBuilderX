@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/CSS">
+        .flip-list-move {
+            transition: transform 1s;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        <transition-group> 组件还有一个特殊之处。不仅可以进入和离开动画，还可以改变定位。要使用这个新功能只需了解新增的 v-move class，
+            它会在元素的改变定位的过程中应用。像之前的类名一样，可以通过 name attribute 来自定义前缀，也可以通过 move-class attribute 手动设置。
+     -->
+    <div id="flip-list-demo" class="demo">
+        <button @click="shuffle">Shuffle</button>
+        <transition-group name="flip-list" tag="ul">
+            <li v-for="item in items" v-bind:key="item">
+                {{item}}
+            </li>
+        </transition-group>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#flip-list-demo",
+            data:{
+                items:[1,2,3,4,5,6,7,8,9]
+            },
+            methods:{
+                shuffle : function(){
+                    this.items = _.shuffle(this.items)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

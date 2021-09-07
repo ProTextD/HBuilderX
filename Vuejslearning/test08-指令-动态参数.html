@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a id="app" v-bind:[attributeName]="url">点一下</a>
+    <!-- 这里的 attributeName 会被作为一个 JavaScript 表达式进行动态求值，求得的值将会作为最终的参数来使用。
+        例如，如果你的 Vue 实例有一个 data property attributeName，其值为 "href"，那么这个绑定将等价于 v-bind:href。 -->
+    
+    <a v-on:[eventName]="doSomething"> ... </a>
+    <!-- 在这个示例中，当 eventName 的值为 "focus" 时，v-on:[eventName] 将等价于 v-on:focus -->
+
+    <form id="app2" v-on:submit.prevent="onSubmit"><input type="submit" value="提交"></form>
+    <!-- .prevent 修饰符告诉 v-on 指令对于触发的事件调用  event.preventDefault()(阻止事件冒泡) -->
+    <script src="./vue.js"></script>
+    <script>
+        // var app = new Vue({
+        //     el : "#app",
+        //     data:{
+        //         attributeName : href,
+        //         url : "http://www.baidu.com"
+        //     }
+        // })
+        
+        var app2 = new Vue({
+            el : "#app2",
+            data:{
+                message : "hello Vuejs"
+            },
+            methods:{
+                onSubmit(){
+                    alert("提交")
+                }
+            }
+        })
+    </script>
+</body>
+</html>

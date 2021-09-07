@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登录页面</title>
+		<style type="text/css">
+			span {
+				color: red;
+				font-size: 12px;
+			}
+			
+			#myform{
+				margin-top: 300px;
+				margin-left: 700px;
+				font-size: larger;
+				position: absolute;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="myform">
+		<div id="app">系统账号登录</div>
+		<form id="userForm" method="post" >
+			<input type="text" name="username" id="username" value="请输入用户名..."><span id="usernameError"></span><br>
+			<input type="text" name="userpwd" id="userpwd" value="请输入密码"><span id="userpwdError"></span><br>
+			<input type="button" value="登录" id = "submitBtn">
+			<input type="reset" value="重置" id="reset">
+		</form>
+		</div>
+		<script src="./jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				//获取username的span标签
+				var usernameErrorSpan = document.getElementById("usernameError");
+				var usernameElt = document.getElementById("username")
+				var usernameValue = usernameElt.value;
+				//给username文本框绑定blur事件
+				usernameElt.onblur = function(){
+					//获取username
+					var username = usernameElt.value;
+					//去除前后空白
+					username = username.trim();
+					//判断username是否为空
+					if(username === ""){
+						//username为空
+						usernameErrorSpan.innerText = "请输入用户名";
+					}else{
+						//用户名不为空
+						//继续判断长度[6-14]
+						if(username.length < 6 || username.length > 14){
+							//用户名长度非法
+							usernameErrorSpan.innerText = "用户名长度必须在[6-14]之间";
+						}else{
+							//用户名长度合法
+							//继续判断是否含有特殊符号
+							var regExp = /^[A-Za-z0-9]+$/;
+							var ok = regExp.test(username);
+							if(ok){
+								//用户名最终合法
+							}else{
+								//用户名中含有特殊符号
+								usernameErrorSpan.innerText = "用户名只能由数字和字母组成";
+							}
+						}
+					}
+				}
+				
+				//给username文本框绑定focus事件
+				usernameElt.onfocus = function(){
+					// alert(usernameValue)
+					//清空非法的value
+					if(usernameErrorSpan.innerText != "" ){
+						usernameElt.value = "";
+					}
+					//清空span
+					usernameErrorSpan.innerText = "";
+					if(usernameValue == "请输入用户名..."){
+						usernameElt.value = "";
+					}
+				}
+				
+				//获取userpwd的span标签
+				var userpwdErrorSpan = document.getElementById("userpwdError")
+				var userpwdElt = document.getElementById("userpwd")
+				var userpwdValue = userpwdElt.value
+				//给userpwd文本框绑定blur事件
+				userpwdElt.onblur = function(){
+					//获取userpwd
+					var userpwd = userpwdElt.value
+					//去除前后空白
+					userpwd = userpwd.trim();
+					//判断userpwd是否为空
+					if(userpwd === ""){
+						//userpwd为空
+						userpwdErrorSpan.innerText = "请输入密码";
+					}
+				}
+				//给userpwd文本框绑定focus事件
+				userpwdElt.onfocus = function(){
+					if(userpwdErrorSpan.innerText != "" ){
+						userpwdElt.value = "";
+					}
+					//清空span
+					userpwdErrorSpan.innerText = "";
+					
+					if(userpwdValue == "请输入密码"){
+						userpwdElt.value = "";
+					}
+				}
+				
+				//给reset绑定click事件
+				var resetElt = document.getElementById("reset");
+				resetElt.onclick = function(){
+					usernameErrorSpan.innerText = "";
+					userpwdErrorSpan.innerText = "";
+				}
+				
+				//给登录按钮绑定鼠标click事件
+				var submitBtnElt = document.getElementById("submitBtn");
+				submitBtnElt.onclick = function(){
+					usernameElt.blur();
+					// usernameElt.focus();
+					
+					userpwdElt.blur();
+					// userpwdElt.focus();
+					
+					console.log(usernameErrorSpan.innerText)
+					console.log(userpwdErrorSpan.innerText)
+					console.log(usernameElt.value)
+					console.log(userpwdElt.value)
+					
+					if(usernameErrorSpan.innerText == "" && userpwdErrorSpan.innerText == "" && usernameElt.value != "请输入用户名..." && userpwdElt.value != "请输入密码" ){
+						alert("正在进行验证..")
+					}else{
+						alert("有误!请重新输入..")
+					}
+					
+				}
+				
+				//键盘enter按下事件
+				/* userpwdElt.onkeydown = function(event){
+					if(event.keyCode === 13){
+
+						if(usernameErrorSpan.innerText != "" || userpwdErrorSpan.innerText != "" ||usernameValue == "请输入用户名..." ||userpwdValue == "请输入密码"){
+							alert("有误!请重新输入")
+						}else{
+							alert("正在进行验证...");
+						}
+					}
+				}
+				usernameElt.onkeydown = function(event){
+					if(event.keyCode === 13){
+
+						if(usernameErrorSpan.innerText != "" || userpwdErrorSpan.innerText != "" ||usernameValue == "请输入用户名..." ||userpwdValue == "请输入密码"){
+							alert("有误!请重新输入")
+						}else{
+							alert("正在进行验证...");
+						}
+					}
+				} */
+				
+				
+				$(document).ready(function(){
+					
+				});
+				
+				var val = $("#userId").val();
+				$.ajax({
+					type : "post",
+					url : "http://192.168.3.239:8008/login",
+					data : "id" ,
+					async : true,
+					cache : true,
+					dataType : "jsonp",
+					success : function(data){
+						$("#username").text(data.account)
+						$("#userpwd").text(data.password)
+					},
+					error : function(){
+						console.log("发生错误")
+						alert("发生错误")
+					},
+					complete : function(){
+						console.log("ajax请求完成，最终操作在这里完成")
+					}
+				});
+				
+				
+				
+			}
+		</script>
+	</body>
+</html>

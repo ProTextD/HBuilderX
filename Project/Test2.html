@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		  <div>
+					<div>
+						<input type="button" value="批量删除" onclick="dels()"/>
+						<input type="button" value="反选" onclick="invert()"/>
+						<input type="button" value="增加" onclick="show()"/>
+					</div>
+					<div>
+						<table border="1px soild black" id="tab">
+							<tr>
+								<th><input type="checkbox" onclick="selectchecked(this)" id="chk">全选</th>
+							 	<th>序号</th>
+							 	<th>姓名</th>
+							 	<th>年龄</th>
+							 	<th>性别</th>
+							 	<th>电话</th>
+							 	<th>年级</th>
+							 	<th>邮箱</th>
+							 	<th>删除</th>
+							</tr>
+						    <tr>
+						    	<td><input type="checkbox" name="checkbox" onclick="cancel()"></td>
+						    	<td>1</td>
+						    	<td>张三</td>
+						    	<td>18</td>
+						    	<td>男</td>
+						    	<td>10086</td>
+						    	<td>一年级</td>
+						    	<td>10086@qq.com</td>
+						    	<td><input type="button" value="删除" onclick="del(this)"></td>
+						    </tr>
+						    <tr>
+						    	<td><input type="checkbox" name="checkbox" onclick="cancel()"></td>
+						    	<td>2</td>
+						    	<td>李四</td>
+						    	<td>22</td>
+						    	<td>女</td>
+						    	<td>10011</td>
+						    	<td>一年级</td>
+						    	<td>10011@qq.com</td>
+						    	<td><input type="button" value="删除" onclick="del(this)"></td>
+						    </tr>
+						</table>
+					</div>
+				    <div id="bod">
+				    	<form id="myform">
+				    		姓名:
+				    		<label><input type="text" id="username">
+				    		<span>姓名不可以为空</span>
+				    		<label class="lab" onclick="hide()">X</label>
+				    		</label><br />
+				    	        年龄:
+				    	    <label><input type="text" id="age"><span>年龄不可以为空</span></label><br/>
+				    	        性别:
+				    	        <label>
+				    	        	<input type="radio" name="sex" value="男"/>男
+				    	        	<input type="radio" name="sex" value="女"/>女
+				    	        	<span>性别不可以为空</span>
+				    	        </label><br/>
+				    	        电话:
+				    	        <label>
+				    	        	<input type="text" id="phone"/>
+				    	        	<span>电话不可以为空</span>
+				    	        </label><br/>
+				    	        年级:
+				    	        <label>
+				    	        	<select id="selt">
+				    	        		<option value="0">请选择</option>
+				    	        		<option value="一年级">一年级</option>
+				    	        		<option value="二年级">二年级</option>
+				    	        		<option value="三年级">三年级</option>
+				    	        	</select>
+				    	        	<span>年级还未选择</span>
+				    	        </label><br/>
+				    	        邮箱:
+				    	        <label>
+				    	        	<input type="text" id="email"/>
+				    	        	<span>邮箱不可以为空</span>
+				    	        </label><br/>
+				    	        <input type="button" value="提交" onclick="subitt()"/>
+				    	</form>
+				    </div>
+				</div>
+	</head>
+	<body>
+		<script src="./jquery-3.6.0.js"></script>
+		<script src="./vue.js"></script>
+		<script type="text/javascript">
+			//全选
+			function selectchecked(chk){
+				$(":checkbox[type=checkbox]").prop("checked",chk.checked)
+			}
+			
+			//取消全选
+			function cancel(){
+					var qwe=document.getElementById("chk")
+			       var list=document.getElementsByName("checkbox");
+			       flag=true;
+			       for(var i=0;i<list.length;i++){
+			       	if(!list[i].checked){
+			       		flag=false;
+			       	}  
+			       	qwe.checked=flag;
+			       }	
+			}
+			
+			//删除
+			function del(ck){
+				$(ck).parent().parent().remove();
+				sort();
+			}
+			
+			//批量删除
+			function dels(){
+			  if(flagr()){
+			    if(confirm("确定要删除吗?")){
+			     $(":checkbox[name=checkbox]:checked").parent().parent().remove();
+				 sort();
+			}
+			  }
+			}
+			
+			function flagr(){
+			  if($(":checkbox[name=checkbox]:checked").length==0){
+					console.log("至少选中一项");
+					return false;
+				}else{
+				   return true;
+				}
+			}
+			
+			//反选
+			function invert(){
+				 var list=document.getElementsByTagName("input");
+				 for(var i=0;i<list.length;i++){
+				 	list[i].checked=!list[i].checked;
+				 }
+			}
+			
+			//排序
+			function sort(){
+				var list=$("#tab tr");
+				list.each(function(index,tr){
+					if(index>0){
+						$(tr).children()[1].innerHTML=index;
+					}
+				})
+			
+			}
+			
+			//显示
+			function show(){
+				$("#bod").fadeIn(600);
+			}
+			
+			//隐藏
+			function hide(){
+				$("#bod").fadeOut(600);
+			}
+			
+			function subitt(){
+				if(verify()){
+					insert();    //添加数据
+			        hide();      //隐藏数据
+			        $("#myform")[0].reset();   //清空数据
+				}
+			}
+			
+			//验证
+			function verify(){
+				if($("#username").val()==""){
+					$("#username").next("span").show();
+					return false;
+				}else{
+					$("#username").next("span").hide();
+				}
+				if($("#age").val()==""){
+					$("#age").next("span").show();
+					return false;
+				}else{
+					$("#age").next("span").hide();
+				}
+				
+				if($(":radio[name=sex]:checked").length== 0){
+					$(":radio[name=sex]:eq(1)").next("span").show();
+					return false;
+				}else{
+					$(":radio[type=radio]").next("span").hide();
+				}
+				
+				if($("#phone").val()==""){
+					$("#phone").next("span").show();
+					return false;
+				}else{
+					$("#phone").next("span").hide();
+				}
+				
+				if($("#selt").val()=="0"){
+					$("select").next("span").show();
+					return false;
+				}else{
+					$("select").next("span").hide();
+				}
+				
+				if($("#email").val()==""){
+					$("#email").next("span").show();
+					return false;
+				}else{
+					$("#email").next("span").hide();
+				}
+				return true;
+			}
+			
+			//添加
+			function insert(){
+				var html="<tr>"
+				html+='<td><input type="checkbox" name="checkbox" οnclick="cancel()"></td>';
+				html+='<td>'+$("#tab tr").length+'</td>';
+				html+='<td>'+$("#username").val()+'</td>'
+				html+='<td>'+$("#age").val()+'</td>'
+				html+='<td>'+$(":radio[name=sex]:checked").val()+'</td>'
+				html+='<td>'+$("#phone").val()+'</td>'
+				html+='<td>'+$("select").val()+'</td>'
+				html+='<td>'+$("#email").val()+'</td>'
+				html+='<td><input type="button" value="删除" οnclick="del(this)"></td>'
+				
+				$("#tab").append(html);
+			}
+
+		</script>
+	</body>
+</html>

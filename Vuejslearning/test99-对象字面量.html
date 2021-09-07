@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" v-demo="{color : 'white' , text : 'hello'}">
+        <!-- 如果指令需要多个值，可以传入一个 JavaScript 对象字面量。记住，指令函数能够接受所有合法的 JavaScript 表达式。 -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.directive('demo' , function(el , binding){
+            console.log(binding.value.color) // => "white"
+            console.log(binding.value.text) // => "hello"
+        })
+        var app = new Vue({
+            el : "#app",
+            data :{
+
+            }
+        })
+    </script>
+</body>
+</html>

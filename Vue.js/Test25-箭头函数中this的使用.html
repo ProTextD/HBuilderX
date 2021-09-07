@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>箭头函数中this的使用</title>
+	</head>
+	<body>
+		<script>
+			//什么时候使用箭头函数，一般是作为其他函数的参数时使用
+			setTimeout(function(){
+				console.log(this);//这时打印的是window
+			},1000);
+			
+			setTimeout(() => {
+				console.log(this);//这时打印的是window
+			},1000);
+			
+			//问题：箭头函数的this是如何查找的？
+			//答案：向外层作用域中，一层一层查找this，直到有this的定义
+			const obj ={
+				aaa(){
+					setTimeout(function(){
+						console.log(this)//这时打印的是window
+						setTimeout(function(){
+							console.log(this)//这时打印的是window
+						},1000)
+						setTimeout(() =>{
+							console.log(this)//这时打印的是window，查找到最外层的setTimeout时发现有this的定义，指向的是window
+						},1000)
+					},1000)
+					setTimeout(()=>{
+						console.log(this)//这时打印的是Obj对象，查找到aaa时发现有this的定义
+					},1000)
+				}
+			}
+		</script>
+	</body>
+</html>

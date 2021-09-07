@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>响应式数组的方法</title>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="item in letters">{{item}}</li>
+			</ul>
+			<button @click="toggle">按钮</button>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			new Vue({
+				el:"#app",
+				data:{
+					message : "hello Vuejs",
+					letters : ["a" , "b" , "c" , "d"]
+				},
+				methods:{
+					toggle(){
+						//响应式方法
+						//1.push从后面开始加入
+						//this.letters.push('e');
+						
+						//2.pop从后面开始删除
+						//this.letters.pop();
+						
+						//3.shift从前面开始删除
+						//this.letters.shift();
+						
+						//4.unshift从前面开始加入
+						//this.letters.unshift('aaa','bbb')
+						
+						//5.splice 删除/插入/替换
+						//删除：第二个参数传入删除几个元素（不传的话则在开始后面的元素全部删除）
+						//替换：第二个参数传入删除几个元素，后面传入对应的元素用以替换
+						//插入：第二个参数为零，后面输入需要插入的元素（在开始元素后面插入）
+						//this.letters.splice(2);
+						
+						//6.sort 排序
+						//this.letters.sort();
+						//reverse 反转
+						//this.letters.reverse();
+						
+						//vue内部实现的方式
+						//Vue.set(this.letters,0,'bbb')
+						
+						//不是响应式的方法
+						this.letters[0] = 'aaa'
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

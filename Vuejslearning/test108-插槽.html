@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <anchored-heading></anchored-heading>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // 你可以通过 this.$slots 访问静态插槽的内容，每个插槽都是一个 VNode 数组：
+        Vue.component('anchored-heading',{
+            render:function(createElement){
+                // `<div><slot></slot></div>`
+                return createElement('div' , this.$slot.default)
+            }
+        })
+
+        // 也可以通过 this.$scopedSlots 访问作用域插槽，每个作用域插槽都是一个返回若干 VNode 的函数：
+        Vue.component('anchored-heading' , {
+            props:['message'],
+            render : function(createElement){
+                // `<div><slot :text="message"></slot></div>`
+                return createElement('div' , [
+                    this.$scopedSlots({
+                        text : this.message
+                    })
+                ])
+            }
+        })
+
+        // 如果要用渲染函数向子组件中传递作用域插槽，可以利用 VNode 数据对象中的 scopedSlots 字段:
+        Vue.component('anchored-heading' ,{
+            render : function(createElement){
+                // `<div><child v-slot="props"><span>{{ props.text }}</span></child></div>`
+                return createElement('div' , [
+                    createElement('child' ,{
+                        // 在数据对象中传递 `scopedSlots`
+                        // 格式为 { name: props => VNode | Array<VNode> }
+                        scopedSlots:{
+                            default:function(props){
+                                return createElement('span' , props.text)
+                            }
+                        }
+                    })
+                ])
+            }
+        })
+
+    </script>
+</body>
+</html>

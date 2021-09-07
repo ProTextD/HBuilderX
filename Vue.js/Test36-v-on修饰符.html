@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-on修饰符</title>
+	</head>
+	<body>
+		<div id="app">
+			<!--    stop的使用，防止冒泡，即事件传播-->
+			<div @click="divClick">
+				aaaaa
+				<button @click.stop ="btnClick">按钮1</button>
+			</div>
+			<!--    prevent,阻止默认事件的执行-->
+			<form action="baidu">
+				<input type="submit" @click.prevent = "submitClick" value="提交" />
+			</form>
+			<!--    键盘的监听,只有当事件是从特定键触发时才触发回调-->
+			<input type="text" @keyup.enter="keyup">
+			<!--    once的使用，只监听一次-->
+			<button @click.once="onceClick">按钮</button>
+		</div>	
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				在某些情况下，我们拿到event的目的可能是进行一些事件处理
+				Vue提供了一些修饰符帮助我们方便处理一些事件
+				.stop 调用event.stopPropagation()
+				.prevent 调用event.preventDefault()
+				.(keyCode | keyAilas) 只有当事件是从特定键触发时才触发回调
+				.native 监听组件根元素的原生事件
+				.once 只触发一次回调
+			*/
+			new Vue({
+				el:"#app",
+				data:{
+					message : "helloVuejs"
+				},
+				methods:{
+					divClick(){
+						console.log("divClick");
+					},
+					btnClick(){
+						console.log("btnClick");
+					},
+					submitClick(){
+						console.log("submitClick");
+					},
+					keyup(){
+						console.log("keyup");
+					},
+					onceClick(){
+						console.log("onceClick");
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

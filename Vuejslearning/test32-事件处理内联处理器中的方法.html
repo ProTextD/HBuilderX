@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="say('Hi')">say Hi</button>
+        <button v-on:click="say('bye')">say Bye</button>
+        <!-- 有时也需要在内联语句处理器中访问原始的 DOM 事件。可以用特殊变量 $event 把它传入方法 -->
+        <button v-on:click="warn('Form cannot be submitted yet.' , $event)">Submit</button>
+    </div>
+    
+    <script src="./vue.js"></script>
+    <script>
+        var app = new Vue({
+            el :"#app",
+            data :{
+                message:"hello Vuejs"
+            },
+            methods:{
+                say(message){
+                    alert(message)
+                },
+                warn : function(message , event){
+                    // 现在我们可以访问原生事件对象
+                    if(event){
+                        event.preventDefault()
+                    }
+                    alert(message)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

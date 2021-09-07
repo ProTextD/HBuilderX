@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        变更方法，顾名思义，会变更调用了这些方法的原始数组。相比之下，也有非变更方法，例如 filter()、concat() 和 slice()。
+        它们不会变更原始数组，而总是返回一个新数组。当使用非变更方法时，可以用新数组替换旧数组
+    -->
+    <div id="app">
+        <div v-for="item in items">
+            {{item.message}}
+        </div>
+        <button @click="updateData">更改</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data : {
+                items:[
+                    {message : "aaa"},
+                    {message : "bbb"},
+                    {message : "Foo"}
+                ]
+            },
+            methods:{
+                updateData : function(){
+                    app.items = app.items.filter(function (item) {
+                        return item.message.match(/Foo/)
+                    })
+                }
+            }
+            // methods:{
+            //     updateData(){
+            //         // app.items = app.items.filter(function(item){
+            //         //     return item.message.match(/Foo/)
+            //         // })
+            //         console.log(app.items[0])
+            //         var arr = app.items.concat({message : "Foo"})
+            //         console.log(arr)
+            //         // push()和concat()方法都可以将传的参数添加到数组的后面，只不过push()是在原数组上操作（改变的是原数组），
+            //         //concat()不会改变原数组，创建原数组的副本，并且把传的参数添加到新数组后面。
+            //     }
+            // }
+        })
+    </script>
+</body>
+</html>

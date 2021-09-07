@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算属性的缓存</title>
+	</head>
+	<body>
+		<div id="app">
+			<!--    多次使用，内容不变，只调用一次，性能优于method-->
+			<h2>{{fullName}}</h2>
+			<h2>{{fullName}}</h2>
+			<h2>{{fullName}}</h2>
+			<!--    多次使用，使用多少次，调用多少次-->
+			<h2>{{getfullName()}}</h2>
+			<h2>{{getfullName()}}</h2>
+			<h2>{{getfullName()}}</h2>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				methods和computed都可以实现我们想要的功能
+				为什么还要多一个计算属性这个东西呢？
+				原因：计算属性会进行缓存，如果多次使用时，计算属性只会调用一次
+			*/
+			new Vue({
+				el: "#app",
+				data:{
+					firstname : "zhang",
+					lastname : "san"
+				},
+				methods:{
+					getfullName : function(){
+						return this.firstname + "" + this.lastname;
+					}
+				},
+				computed:{
+					fullName : function(){
+						return this.firstname + "" + this.lastname;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

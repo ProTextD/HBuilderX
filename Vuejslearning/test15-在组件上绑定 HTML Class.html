@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 当在一个自定义组件上使用 class property 时，这些 class 将被添加到该组件的根元素上面。这个元素上已经存在的 class 不会被覆盖 -->
+        <my-component class="baz boo"></my-component>
+
+        <!-- 对于带数据绑定 class 也同样适用 -->
+        <my-component v-bind:class="{active : isActive}"></my-component>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('my-component',{
+            template : '<p class="foo bar">Hi</p>'
+        })
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello Vuejs",
+                isActive : true
+            }
+        })
+    </script>
+</body>
+</html>

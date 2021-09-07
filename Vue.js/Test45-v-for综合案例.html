@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-for综合案例</title>
+		<style type="text/css">
+			table{
+			    border: 1px solid gray;
+			    border-collapse: collapse;
+			    border-spacing: 0;
+			}
+			th,td{
+			    padding: 8px 16px;
+			    border: 1px solid gray;
+			    text-align: left;
+			}
+			th{
+			    background-color: green;
+			    color: aliceblue;
+			    font-weight: 600;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			需求：要求在表格中显示书本的资料，书本的数量可以增加减少，也可以移除该书，这时总价格会随之变动，当书本都被移除，显示购物车中为空
+		-->
+		<div id="app">
+			<div v-if="books.length">
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>书籍名称</th>
+							<th>出版日期</th>
+							<th>书籍价格</th>
+							<th>购买数量</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item , index) in books">
+							<td>{{item.id}}</td>
+							<td>{{item.name}}</td>
+							<td>{{item.date}}</td>
+							<td>{{item.price | showPrice}}</td>
+							<td>
+								<button :disabled="item.count < 1" @click="decrement(index)">-</button>
+								{{item.count}}
+								<button @click="increment(index)">+</button>
+							</td>
+							<td><button @click="removeBook(index)">移除</button></td>
+						</tr>
+					</tbody>
+				</table>
+				<h2>总价格：{{totalPrice | showPrice}}</h2>
+			</div>
+			<div v-else >购物车已空</div>
+		</div>
+		<script src="./vue.js"></script>
+		<script src="main.js"></script>
+		<script>
+			const app = new Vue({
+				el : "#app",
+				data:{
+					books:[
+						{
+							id : 1,
+							name : "java",
+							date : "2008-06",
+							price : 100,
+							count : 1
+						},
+						{
+							id : 2,
+							name : "数据库",
+							date : "2002-02",
+							price : 200,
+							count : 1
+						},
+						{
+							id : 3,
+							name : "计算机网络",
+							date : "2001-01",
+							price : 300,
+							count : 1
+						},
+						{
+							id : 4,
+							name : "计算机原理",
+							date : "2002-02",
+							price : 400,
+							count : 1
+						}
+					],
+				},
+				methods:{
+					// getPrice(price){
+					// 	return '$' + price.toFixed(2);
+					// }
+					increment(index){
+						this.books[index].count++;
+					},
+					decrement(index){
+						this.books[index].count--;
+					},
+					removeBook(index){
+						this.books.splice(index,1);
+					}
+				},
+				filters:{
+					showPrice(price){
+						return '$' + price.toFixed(2)
+					}
+				},
+				computed:{
+					totalPrice(){
+						// let total = 0;
+						//普通for
+						// for(let i = 0 ;i < this.books.length ; i++){
+						// 	total += this.books.price * this.books.count;
+						// }
+						// // //增强for
+						// for (let i in this.books){
+						//   total+=this.books[i].price * this.books[i].count
+						// }
+						// for (let i of this.books){
+						//   total+=i.price * i.count
+						// }
+						//return total
+						//高阶函数的使用
+						return this.books.reduce(function(pre , book){
+							return pre + book.price * book.count;
+						},0)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 组件进行任意次数的复用 -->
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        
+        // 定义一个名为 button-counter 的新组件
+        Vue.component('button-counter' , {
+            // data 必须是一个函数
+            data:function(){
+                return{
+                    counter : 0
+                }
+            },
+            template:'<button @click="counter++">clicked {{counter}} times</button>'
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+                message : "helloVuejs"
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <todo-list v-bind:todos="todos">
+            <template v-slot:todo="{todo}">
+                <span v-if="todo.isComplate">yes</span>
+                {{todo.text}}
+            </template>
+        </todo-list>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('todo-list' , {
+            data:function(){
+                return{
+                    filteredTodos:[
+                        {id : 1 , text:'aaa' , isComplate : true},
+                        {id : 2 , text:'bbb' , isComplate : true},
+                        {id : 3 , text:'ccc' , isComplate : false}
+                    ]
+                }
+            },
+            template:`
+            <ul>
+                <li
+                    v-for="todo in filteredTodos"
+                    v-bind:key="todo.id"
+                >
+                    <slot name="todo" v-bind:todo="todo">
+                    {{ todo.text }}
+                    </slot>
+                </li>
+            </ul>
+            `
+        })
+        var app = new Vue({
+            el :"#app",
+            data:{
+                
+            }
+        })
+    </script>
+</body>
+</html>

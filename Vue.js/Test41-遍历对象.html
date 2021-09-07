@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>遍历对象</title>
+	</head>
+	<body>
+		<div id="app">
+			<!--    获取value值-->
+			<ul>
+				<li v-for="item in info" key="item">{{item}}</li>
+			</ul>
+			<!--获取value 和 key的值，格式：（value，key）-->
+			<ul>
+				<li v-for="(value,key) in info">{{value}}-{{key}}</li>
+			</ul>
+			<!--获取value，key，index值-->
+			<ul>
+				<li v-for="(value,key,index) in info">{{value}}-{{key}}-{{index}}</li>
+			</ul>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+		//为了DOM更高效的渲染，建议绑定一个:key来用以区分，如果不绑定key，则在插入内容时会一个一个地位移，性能不佳，
+		//绑定key后，会尽量先保证key的内容与标签的内容一致，这样插入数据是直接创建新的插入，性能较高
+			new Vue({
+				el:"#app",
+				data:{
+					message : "hello Vuejs",
+					info:{
+						name : "zhangsan",
+						age : 15,
+						height : 188,
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

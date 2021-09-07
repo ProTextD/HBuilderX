@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//创建Cookie
+			// document.cookie = "username=zhangsan;username=wangwu"
+			document.cookie = "username=zhangsan" + escape(';') + "username=wangwu"
+			var return1 =  unescape(document.cookie)
+			// 读取 Cookie
+			var strCookie = document.cookie;
+			var arrCookie = return1.split(";")
+			// var arrCookie = strCookie.split(";")
+			
+			var username = [];
+			for(var i = 0 ; i < arrCookie.length ; i++){
+				
+				var arr = arrCookie[i].split("=")
+				
+				/* if("username" == arr[0]){
+					username == arr[1]
+					continue
+				}
+				if("username" == arr[2]){
+					username == arr[3]
+					continue
+				} */
+				
+			}
+			console.log(arrCookie[0])
+			console.log(arrCookie[1]) 
+			console.log(arrCookie)
+			console.log(arr)
+		</script>
+	</body>
+</html>

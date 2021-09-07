@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div id="app">
+        <template v-if="loginType">
+            <label>Username</label>
+            <input type="text" placeholder="Enter your username">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input type="text" placeholder="Enter your email">
+        </template>
+        <button @click=toggle>toggleLoginType</button>
+    </div> -->
+    <div id="app">
+        <template v-if="loginType">
+            <label>Username</label>
+            <input type="text" placeholder="Enter your username" key="username-input"><br>
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input type="text" placeholder="Enter your email" key="email-input"><br>
+        </template>
+        <button @click=toggle>toggleLoginType</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data :{
+                message : "hello Vuejs",
+                loginType : true
+            },
+            methods:{
+                toggle(){
+                    this.loginType = !this.loginType
+                }
+            }
+        })
+        // 那么在上面的代码中切换 loginType 将不会清除用户已经输入的内容。
+        // 因为两个模板使用了相同的元素，<input> 不会被替换掉——仅仅是替换了它的 placeholder
+
+
+    </script>
+</body>
+</html>

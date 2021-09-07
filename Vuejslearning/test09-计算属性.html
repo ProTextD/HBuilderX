@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="example">
+        <p>Original message : "{{message}}"</p>
+        <p>Computer reversed message : "{{reversedMessage}}"</p>
+        <p>now : "{{now}}"</p>
+        <button v-on:click = "getMessage">演示按钮</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el : "#example",
+            data : {
+                message : "Hello Vue.js"
+            },
+            computed:{
+                //计算属性的getter
+                reversedMessage : function(){
+                    // `this` 指向 vm 实例
+                    return this.message.split('').reverse().join('')
+                },
+                now : function(){//计算属性缓存
+                    return Date.now()
+                }
+            },
+            methods:{
+                getMessage(){
+                    console.log(vm.reversedMessage) // => 'sj.euV olleH'
+                    vm.message = 'Goodbye'
+                    console.log(vm.reversedMessage) // => 'eybdooG'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

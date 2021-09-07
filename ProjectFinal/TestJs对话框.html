@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		
+		<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css?v=4.1.0" rel="stylesheet">
+		<script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+		<style type="text/css">
+			span {
+				color: red;
+				font-size: 12px;
+			}
+			
+			.login_box {
+			  margin-top: 200px;
+			}
+			
+			.login_box a {
+			  cursor: pointer;
+			}
+			
+			#mask {
+			  width: 100%;
+			  height: 100%;
+			  opacity: 0.4;
+			  background-color: black;
+			  position: fixed;
+			  top: 0;
+			  left: 0;
+			  display: none;
+			}
+			
+			#show {
+			  width: 350px;
+			  height: 350px;
+			  background-color: #fff;
+			  position: fixed;
+			  left: 50%;
+			  top: 50%;
+			  margin: -150px 0 0 -150px;
+			  display: none;
+			}
+			#maskk {
+			  width: 100%;
+			  height: 100%;
+			  opacity: 0.4;
+			  background-color: black;
+			  position: fixed;
+			  top: 0;
+			  left: 0;
+			  display: none;
+			}
+			
+			#showw {
+			  width: 350px;
+			  height: 350px;
+			  background-color: #fff;
+			  position: fixed;
+			  left: 50%;
+			  top: 50%;
+			  margin: -150px 0 0 -150px;
+			  display: none;
+			}
+		</style>
+	</head>
+	<body>
+			<div class="login_box">
+				<h1>点击弹出登录框</h1>
+				<a href="javascript:;" id="register">注册</a>
+				<a href="javascript:;" id="login">登录</a>
+				<!--添加人员-->
+				<div id="mask">
+					
+				</div>
+				<div id="show">
+					<div class="middle-box text-center loginscreen  animated fadeInDown">
+					    <div>
+					        <h5>添加人员</h5>
+					            <div class="form-group">
+					                <input type="type" class="form-control" placeholder="account" required="" id="account" name="account"><span id="accountError"></span>
+									<input type="password" class="form-control" placeholder="password" id="password"  /><span id="passwordError"></span>
+									<input type="text" class="form-control" placeholder="name" id="name"/><span id="nameError"></span>
+									<input type="text" class="form-control" placeholder="age" id="age" /><span id="ageError"></span>
+									<input type="text" class="form-control" placeholder="sex" id="sex" /><span id="sexError"></span>
+									<input type="text" class="form-control" placeholder="email" id="email" /><span id="emailError"></span>
+					            </div>
+					            <button type="submit" class="btn btn-primary block full-width m-b" id="submitt">添加</button>					
+								<a class="close-link">
+									<i class="fa fa-times" id="x"></i>
+								</a>
+					            </p>
+					    </div>
+					</div>
+				</div>
+				<!--修改人员-->
+				<div id="maskk">
+					
+				</div>
+				<div id="showw">
+					<div class="middle-box text-center loginscreen  animated fadeInDown">
+					    <div>
+					        <h5>修改人员</h5>
+					            <div class="form-group">
+									<input type="text" class="form-control" placeholder="user_id" id="idUpdate" /><span id="idUpdateError"></span>
+									<input type="text" class="form-control" placeholder="name" id="nameUpdate" /><span id="nameUpdateError"></span>
+									<input type="text" class="form-control" placeholder="age" id="ageUpdate" /><span id="ageUpdateError"></span>
+									<input type="text" class="form-control" placeholder="sex" id="sexUpdate" /><span id="sexUpdateError"></span>
+									<input type="text" class="form-control" placeholder="email" id="emailUpdate" /><span id="emailUpdateError"></span>
+					            </div>
+					            <button type="submit" class="btn btn-primary block full-width m-b" onclick="update()">修改</button>					
+								<a class="close-link">
+									<i class="fa fa-times" id="cancel"></i>
+								</a>
+					            </p>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<script src="jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			var login = document.getElementById("login");
+			var mask = document.getElementById("mask");
+			var show = document.getElementById("show");
+			login.onclick = function (event) {
+			  mask.style.display = "block";
+			  show.style.display = "block";
+			  
+			  document.getElementById("account").value = ""
+			  document.getElementById("password").value = ""
+			  document.getElementById("name").value = ""
+			  document.getElementById("age").value = ""
+			  document.getElementById("sex").value = ""
+			  document.getElementById("email").value = ""
+			  //   阻止事件冒泡，才能正常显示，需要传入一个事件
+			  var event = event || window.event;
+			  if (event.stopPropagation) {
+			    event.stopPropagation();
+			  } else {
+			    event.cancelBubble = true;
+			  }
+			};
+			// 点击文档其他位置后可消失
+			document.getElementById("x").onclick = function (event) {
+			  var event = event || window.event;
+			  var target = event.target;
+			  // 获取事件目标，若事件是show再让其消失
+			  if (target.id !== "show") {
+			    mask.style.display = "none";
+			    show.style.display = "none";
+			  }
+			};
+			
+			var register = document.getElementById("register")
+			var maskk = document.getElementById("maskk");
+			var showw = document.getElementById("showw");
+			register.onclick = function(event){
+				maskk.style.display = "block";
+				showw.style.display = "block";
+				
+				document.getElementById("idUpdate").value = ""
+				document.getElementById("nameUpdate").value = ""
+				document.getElementById("ageUpdate").value = ""
+				document.getElementById("sexUpdate").value = ""
+				document.getElementById("emailUpdate").value = ""
+				
+				//   阻止事件冒泡，才能正常显示，需要传入一个事件
+				  var event = event || window.event;
+				  if (event.stopPropagation) {
+				    event.stopPropagation();
+				  } else {
+				    event.cancelBubble = true;
+				  }
+				};
+				// 点击文档其他位置后可消失
+				document.getElementById("cancel").onclick = function (event) {
+				  var event = event || window.event;
+				  var target = event.target;
+				  // 获取事件目标，若事件是show再让其消失
+				  if (target.id !== "show") {
+				    maskk.style.display = "none";
+				    showw.style.display = "none";
+				  }
+			}
+				
+			
+			
+			
+			//验证添加人员信息的数据
+			//account的验证
+			var accountElt = document.getElementById("account")
+			var accountErrorSpan = document.getElementById("accountError")
+			accountElt.onblur = function(){
+				var account = accountElt.value
+				if(account == ""){
+					//account为空
+					accountErrorSpan.innerText = "account不能为空"
+				}
+			}
+			accountElt.onfocus = function(){
+				if(accountErrorSpan.innerText != ""){
+					accountErrorSpan.innerText = ""
+				}
+			}
+			
+			//password的验证
+			var passwordElt = document.getElementById("password")
+			var passwordErrorSpan = document.getElementById("passwordError")
+			passwordElt.onblur = function(){
+				var password = passwordElt.value
+				if(password == ""){
+					passwordErrorSpan.innerText = "password不能为空"
+				}
+			}
+			passwordElt.onfocus = function(){
+				if(passwordErrorSpan.innerText != ""){
+					passwordErrorSpan.innerText = ""
+				}
+			}
+			
+			//name的验证	
+			var nameElt = document.getElementById("name")
+			var nameErrorSpan = document.getElementById("nameError")
+			nameElt.onblur = function(){
+				var name = nameElt.value
+				if(name == ""){
+					//name为空
+					nameErrorSpan.innerText = "name不能为空"
+				}
+			}
+			nameElt.onfocus = function(){
+				if(nameErrorSpan.innerText != ""){
+					nameErrorSpan.innerText = ""
+				}
+			}
+			
+			//age的验证
+			var ageElt = document.getElementById("age")
+			var ageErrorSpan = document.getElementById("ageError")
+			ageElt.onblur = function(){
+				var age = ageElt.value
+				if(age == ""){
+					ageErrorSpan.innerText = "age不能为空"
+				}else if(age < 0 || age > 100){
+					ageErrorSpan.innerText = "age不合理,请重新输入"
+				}
+			}
+			ageElt.onfocus = function(){
+				if(ageErrorSpan.innerText != ""){
+					ageElt.value = ""
+					ageErrorSpan.innerText = ""
+				}
+			}
+			
+			//sex的验证	
+			var sexElt = document.getElementById("sex")
+			var sexErrorSpan = document.getElementById("sexError")
+			sexElt.onblur = function(){
+				var sex = sexElt.value
+				if(sex == ""){
+					//sex为空
+					sexErrorSpan.innerText = "sex不能为空"
+				}
+			}
+			sexElt.onfocus = function(){
+				if(sexErrorSpan.innerText != ""){
+					sexElt.value = ""
+					sexErrorSpan.innerText = ""
+				}
+			}
+			
+			//email的验证	
+			//获取email的span
+			var emailSpan = document.getElementById("emailError");
+			//给email绑定blur事件
+			var emailElt = document.getElementById("email");
+			emailElt.onblur = function(){
+				//获取email
+				var email = emailElt.value;
+				//编写email的正则
+				var emailRegExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+				var ok = emailRegExp.test(email);
+				if(ok){
+					//合法
+				}else{
+					//不合法
+					emailSpan.innerText = "邮箱地址不合法";
+				}
+			}
+			//给emailElt绑定focus
+			emailElt.onfocus = function(){
+				if(emailSpan.innerText != ""){
+					emailElt.value = "";
+				}
+				emailSpan.innerText = "";
+			}
+			
+			//添加人员接口ok
+			$('#submitt').click(function(){
+				var accountElt = document.getElementById("account")
+				var passwordElt = document.getElementById("password")
+				var nameElt = document.getElementById("name")
+				var ageElt = document.getElementById("age")
+				var sexElt = document.getElementById("sex")
+				var emailElt = document.getElementById("email");
+				
+				var accountErrorSpan = document.getElementById("accountError")
+				var passwordErrorSpan = document.getElementById("passwordError")
+				var nameErrorSpan = document.getElementById("nameError")
+				var ageErrorSpan = document.getElementById("ageError")
+				var sexErrorSpan = document.getElementById("sexError")
+				var emailSpan = document.getElementById("emailError");
+				accountElt.focus()
+				accountElt.blur()
+				passwordElt.focus()
+				passwordElt.blur()
+				nameElt.focus()
+				nameElt.blur()
+				ageElt.focus()
+				ageElt.blur()
+				sexElt.focus()
+				sexElt.blur()
+				emailElt.focus()
+				emailElt.blur()
+					
+				if(accountErrorSpan.innerText == "" && passwordErrorSpan.innerText == "" && nameErrorSpan.innerText == "" && ageErrorSpan.innerText == "" && sexErrorSpan.innerText == "" && emailSpan.innerText == ""){
+					var account = $("#account").val()
+					var password = $("#password").val()
+					var name = $("#name").val()
+					var age = $("#age").val()
+					var sex = $("#sex").val()
+					var email = $("#email").val()
+					var userInfo={
+						"account":$("#account").val(),
+						"password":$("#password").val(),
+						"name":$("#name").val(),
+						"age":$("#age").val(),
+						"sex":$("#sex").val(),
+						"email":$("#email").val()
+					}
+					$.ajax({
+						url:"http://192.168.3.239:8008/addUser",
+						type:"POST",
+						data:JSON.stringify(userInfo),
+						dataType:'json',
+						contentType:"application/json;charset=UTF-8",
+						success: function(result){
+							alert(result.msg);
+							//页面刷新
+							location.href = "PersonnelManage.html"
+						},
+						error: function(result){
+							alert(result.msg)
+						}
+						
+					})
+					
+					var html = ""
+					html += "<tr>"
+					html += '<td name="td0">'+ +'</td>'
+					html += '<td name="td1">'+nameElt.value+'</td>'
+					html += '<td name="td2">'+sexElt.value+'</td>'
+					html += '<td name="td3">'+ageElt.value+'</td>'
+					html += '<td name="td4">'+emailElt.value+'</td>'
+					html += '<td name="td5">'+ +'</td>'
+					html += '<td>'+'<input type="checkbox" name="item"/>'+'</td>'
+					html += "</tr>"
+					$("#tab").append(html);
+					$('#addInfo').fadeOut(600)
+					// alert(html)
+					sortTable(this)
+				}else{
+					alert("输入格式不正确，请重新输入!")
+				}
+				
+			})
+		</script>
+	</body>
+</html>

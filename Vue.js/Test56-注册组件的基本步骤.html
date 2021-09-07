@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>注册组件的基本步骤</title>
+	</head>
+	<body>
+		<!-- 3.使用组件-->
+		<div id="app">
+		<mycpn></mycpn>
+		<mycpn></mycpn>
+		<mycpn></mycpn>
+		</div>
+		<!--组件的使用需要在Vue实例范围内使用，否则无效-->
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				组件的使用分成三个步骤
+					创建组件构造器 (调用Vue.extend()方法)
+					注册组件（调用Vue.component()方法）
+					使用组件（在Vue实例的作用范围内使用组件）
+			*/
+			//1.创建组件构造器对象
+			//ES6语法补充，当使用 '' 或 "" 时，换行需要用 + 来连接，在ES6中使用 `` 来连接换行不需要，结构更清晰
+			const cpnC = Vue.extend({
+			//先创建组件构造器
+				template:`
+				<div>
+					<h2>这是标题</h2>
+					<p>这是内容</p>
+				</div>`
+			})
+			//2.注册组件
+			Vue.component('mycpn',cpnC)//将其注册成为组件，直接调用名字就可以使用内容
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message : "hello Vuejs"
+				}
+			})
+		</script>
+	</body>
+</html>

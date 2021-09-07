@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        现在，你已经知道了 $emit 的用法，它可以被 v-on 侦听，但是 Vue 实例同时在其事件接口中提供了其它的方法。我们可以：
+
+        通过 $on(eventName, eventHandler) 侦听一个事件
+        通过 $once(eventName, eventHandler) 一次性侦听一个事件
+        通过 $off(eventName, eventHandler) 停止侦听一个事件
+     -->
+     <script src="https://unpkg.com/pikaday@1.7.0"></script>
+     <div id="app">
+         <input type="date" ref="dateInput" v-model="date">
+     </div>
+     <script src="./vue.js"></script>
+     <script>
+         var app = new Vue({
+            el : "#app",
+            data:{
+                date : null
+            },
+            mounted : function(){
+                var picker = new Pikaday({
+                    field:this.$refs.dateInput,
+                    format:"YYYY-MM-DD"
+                });
+                this.$once("hook:beforeDestroy",function(){
+                    picker.destroy();
+                });
+            }
+         })
+     </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        当它们处于同一节点，v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中。
+        当你只想为部分项渲染节点时，这种优先级的机制会十分有用
+     -->
+    <!-- <div id="app">
+        <li v-for="todo in todos" v-if="!todo.isComplete">{{todo.message}}</li>
+    </div> -->
+    <!-- 如果你的目的是有条件地跳过循环的执行，那么可以将 v-if 置于外层元素 (或 <template>) 上 -->
+    <div id="app2">
+        <ul v-if="todos.length > 3">
+            <li v-for="todo in todos">{{todo}}</li>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // var app = new Vue({
+        //     el : "#app",
+        //     data :{
+        //         todos:[
+        //             {message : "aaa" , isComplete : true},
+        //             {message : "bbb" , isComplete : false},
+        //             {message : "ccc" , isComplete : false}
+        //         ]
+        //     }
+        // })
+
+        var app2 = new Vue({
+            el : "#app2",
+            data:{
+                todos:['aaa' , 'bbb' , 'ccc' , 'ddd' , 'eee']
+            }
+        })
+    </script>
+</body>
+</html>

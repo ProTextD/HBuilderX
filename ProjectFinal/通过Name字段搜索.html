@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			var name = $("#nameSerach").val()
+			var userInfo={
+				name:"xiaoh"
+			}
+			$.ajax({
+				url:"http://192.168.3.239:8008/SerachName",
+				type:"GET",
+				data:userInfo,
+				dataType:'json',
+				contentType:"application/json;charset=UTF-8",
+				success: function(result){
+					// alert(result.msg);
+					
+					if(result.msg == "成功"){
+						console.log(result.data)
+			
+					var html = ""
+					html += "<tr>"
+					html += '<td name="td0">'+result.data.id+'</td>'
+					html += '<td name="td1">'+result.data.name+'</td>'
+					html += '<td name="td2">'+result.data.sex+'</td>'
+					html += '<td name="td3">'+result.data.age+'</td>'
+					html += '<td name="td4">'+result.data.email+'</td>'
+					html += '<td name="td5">'+result.data.userId+'</td>'
+					html += '<td>'+'<input type="checkbox" name="item"/>'+'</td>'
+					html += "</tr>"
+					$("#tab").append(html);
+					// alert(html)
+					sortTable(this)
+					//页面刷新
+					/* location.href = "PersonnelManage.html" */
+					}else{
+						alert("账号不存在，查询失败")
+						location.href = "PersonnelManage.html"
+					}
+					
+				},
+				error: function(result){
+					alert(result.msg);
+				}
+			})
+		</script>
+	</body>
+</html>

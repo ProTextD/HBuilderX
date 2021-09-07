@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>子传父（通过自定义事件）</title>
+	</head>
+	<body>
+		<!--
+			什么时候需要自定义事件？
+				当子组件需要向父组件传递数据时，就要用到自定义事件了
+				v-on不仅仅可以用于监听DOM事件，也可以用于监听组件间的自定义事件
+			自定义事件的流程
+				在子组件中，通过$emit()来触发事件
+				在父组件中，通过v-on来监听子组件事件
+			解绑自定义事件
+				在子组件中，通过$off对自定义事件解绑
+				传入自定义事件名称，可以解绑当前自定义事件（单个）
+				传入自定义事件名称的数组，可以解绑数组中的自定义事件（多个）
+				不传入参数解绑所有自定义事件（多个）
+			若想让自定义事件只能触发一次，可以使用once修饰符，或 $once方法
+		-->
+		<div id="app">
+			<cpn @itemclick = "click"></cpn><!--4)发射后在父组件中由v-on事件监听-->
+		</div>
+		<template id="cpn">
+			<div>
+				<!--2)在子组件中遍历数据，并将其渲染成按钮，绑定相应的点击事件-->
+				<button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+			</div>
+		</template>
+		<script src="./vue.js"></script>
+		<script>
+			const cpn = { 
+				template : '#cpn',
+				data(){
+					//1)子组件中定义数据，需要传递到父组件中
+					return{
+						categories:[
+							{id:'aaa',name:'手机数码'},
+							{id:'bbb',name:'家用电器'},
+							{id:'ccc',name:'生活用品'},
+							{id:'ddd',name:'柴米油盐'}
+						]
+					}
+				},
+				methods : {
+					btnClick(item){
+						//发射
+						//3)通过点击事件传入的item获得当前点击的数据按钮，通过this.$emit()将item发射出去，
+						//其中itemclick是自定义事件，item是对应的数据对象
+						this.$emit('itemclick' , item)
+					}
+				}
+			}
+			const app = new Vue({
+				el :"#app",
+				data:{
+					message : "hello Vuejs"
+				},
+				components:{
+					cpn
+				},
+				methods:{
+					//5)在父组件中设置相应的事件方法，获得子组件传过来的item数据对象
+					click(item){
+						console.log("子传父数据:",item)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

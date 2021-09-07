@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>.Promise的all方法的使用</title>
+	</head>
+	<body>
+		<script>
+			//all方法可以等待在其内部的所有请求都返回结果后全部获取出来
+			Promise.all([
+				new Promise((resolve,reject)=>{
+					setTimeout(()=>{
+						resolve({name : "zhangsan" , age : "18"})
+					},3000)
+				}),
+				new Promise((resolve,reject)=>{
+						resolve({name : "lisi" , age : "19"})
+				},1000)
+			]).then(result =>{
+				console.log(result);
+			})	
+			
+		</script>
+	</body>
+</html>

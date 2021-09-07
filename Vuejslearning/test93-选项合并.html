@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 当组件和混入对象含有同名选项时，这些选项将以恰当的方式进行“合并”。
+    比如，数据对象在内部会进行递归合并，并在发生冲突时以组件数据优先。 -->
+    <script src="./vue.js"></script>
+    <script>
+        var mixin = {
+            data:function(){
+                return{
+                    message : 'hello',
+                    foo : 'abc'
+                }
+            }
+        }
+        new Vue({
+            mixins : [mixin],
+            data : function(){
+                return{
+                    message : "goodbye",
+                    bar:'def'
+                }
+            },
+            created : function(){
+                console.log(this.$data) // => { message: "goodbye", foo: "abc", bar: "def" }
+            }
+        })
+        
+        //同名钩子函数将合并为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用
+        var mixin2 = {
+            created : function(){
+                console.log('混入对象的钩子被调用')
+            }
+        }
+        new Vue({
+            mixins:[mixin2],
+            created : function(){
+                console.log('组件钩子被调用')
+            }
+        })
+        // => "混入对象的钩子被调用"
+        // => "组件钩子被调用"
+
+        // 值为对象的选项，例如 methods、components 和 directives，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+        var mixin3 = {
+            methods:{
+                foo: function () {
+                    console.log('foo')
+                },
+                conflicting: function () {
+                    console.log('from mixin')
+                }
+            }
+        }
+        var vm = new Vue({
+            mixins:[mixin3],
+            methods:{
+                bar : function(){
+                    console.log('baz')
+                },
+                conflicting:function(){
+                    console.log('from self')
+                }
+            }
+        })
+        vm.foo() // => "foo"
+        vm.bar() // => "bar"
+        vm.conflicting() // => "from self"
+
+        // 注意：Vue.extend() 也使用同样的策略进行合并。
+    </script>
+</body>
+</html>

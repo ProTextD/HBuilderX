@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>箭头函数参数和返回值</title>
+	</head>
+	<body>
+		<script >
+			//1.参数问题
+			//两个参数
+			const sum = (num1 , num2) => {
+				return num1 + num2;
+			}
+			
+			//一个参数(可以把括号省略)
+			const power = num => {
+				return num * num;
+			}
+			
+			//2.返回值
+			//函数代码块中有多行代码
+			const test =() => {
+				console,log("hello world");
+				console.log("hello Vuejs");
+			}
+			//函数代码块中只有一行代码
+			const mul =(num1,num2) => num1 * num2;//自动返回结果
+			//没有返回值，打印demo的结果时为undefined，调用demo时打印hello world
+			const demo =() => console.log("hello world");
+		</script>
+	</body>
+</html>

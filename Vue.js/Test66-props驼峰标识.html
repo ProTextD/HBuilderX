@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>props驼峰标识</title>
+	</head>
+	<body>
+		<div id="app">
+			<cpn :c-info="info"></cpn>
+			<!--在组件中如果采用了驼峰方式命名，那么在传入时，该值需要用短横线连接的方式代替，cInfo需要写成c-info，否则会报错-->
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<h2>{{cInfo}}</h2><!--模板中需要有一个根标签包裹着内容，否则会报错-->
+			</div>
+		</template>
+		
+		<script src="./vue.js"></script>
+		<script>
+			const cpn = {
+				template : '#cpn',
+				props:{
+					cInfo:{
+						type : Array,
+						defult(){
+							return {}
+						}
+					}
+				}
+			}
+			const app = new Vue({
+				el :"#app",
+				data:{
+					message : "hello Vuejs",
+					info:{
+						name : "张三",
+						age : 23,
+						height : 188
+					}
+				},
+				components:{
+					cpn
+				}
+			})
+			/*
+			注意: props是只读的，Vue底层会监测你对props的修改，
+			如果进行了修改，就会发出警告，若业务需求确实需要修改。那么请复制props的内容到data中一份，然后去修改data中的数据。
+			*/
+		</script>
+	</body>
+</html>

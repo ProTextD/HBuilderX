@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Vue 将被侦听的数组的变更方法进行了包裹，所以它们也将会触发视图更新。这些被包裹过的方法包括：
+        push() 向数组的末尾添加一个或多个元素，并返回新的长度
+        pop() 并返回数组的最后一个元素
+        shift() 把数组的第一个元素从其中删除，并返回第一个元素的值
+        unshift() 向数组的开头添加一个或更多元素，并返回新的长度
+        splice() 向数组中添加/删除项目，然后返回被删除的项目
+        sort() 用于对数组的元素进行排序
+        reverse() 用于颠倒数组中元素的顺序
+        你可以打开控制台，然后对前面例子的 items 数组尝试调用变更方法。比如 example1.items.push({ message: 'Baz' })
+     -->
+     <div id="app">
+         <div v-for="value in items">
+             {{value.message}}
+         </div>
+     </div>
+     <script src="./vue.js"></script>
+     <script>
+         var app = new Vue({
+             el :"#app",
+             data :{
+                 items:[
+                     {message : "aaa"},
+                     {message : "bbb"},
+                     {message : "ccc"}
+                 ]
+             }
+         })
+     </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全局组件和局部组件</title>
+	</head>
+	<body>
+		<!--
+			当我们通过调用Vue.component()注册组件时，组件的注册是全局的（这意味者该组件可以在任意的Vue示例下使用）
+			如果我们注册的组件是挂载在某一个实例中，那么就是一个局部组件
+		-->
+		<div id="app">
+			<my-cpn></my-cpn><!--my-cpn是全局组件名-->
+			<cpn></cpn><!--cpn是局部组件名-->
+		</div>
+		<div id="app2">
+			<my-cpn></my-cpn>
+			<cpn></cpn>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			//1.创建组件构造器对象
+			//ES6语法补充，当使用 '' 或 "" 时，换行需要用 + 来连接，在ES6中使用 `` 来连接换行不需要，结构更清晰
+			const cpnC = Vue.extend({
+				template:`
+					<div>
+						<h2>这是标题</h2>
+						<p>这是内容</p>
+					</div>`
+			})
+			
+			const cpnC1 = Vue.extend({
+				template:`
+					<div>
+						<h2>这是标题</h2>
+						<p>这是内容，局部组件测试</p>
+					</div>`
+			})
+			//2.注册组件（全局组件）
+			//这样注册的组件为全局组件，在其他的Vue实例中也能使用
+			Vue.component('my-cpn' , cpnC);
+			
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message:"hello Vuejs"
+				},
+				components:{
+			//这样注册的组件为局部组件，只能在对应的Vue实例中使用(对应的Vue实例为cpn)
+					cpn : cpnC1
+				}
+			})
+			
+			const app2 = new Vue({
+				el:"#app2"
+			})
+			
+			/*
+				组件的几个注意点
+				1)关于组件名:
+					1、一个单词组成:
+					第一种写法(首字母小写):school
+					第二种写法(首字母大写):School
+				2、多个单词组成:
+					第一种写法(kebab-case命名): my-school（需要加上引号修饰）
+					第二种写法(CamelCase命名):MySchool（需要Vue脚手架支持)
+					备注:
+					组件名尽可能回避HTML中已有的元素名称，例如:h2、H2都不行。
+					可以使用name(组件中的属性)配置项指定组件在开发者工具中呈现的名字。
+				2)关于组件标签;
+					第一种写法:<school></school>
+					第二种写法:<school/>
+					备注:不用使用脚手架时，<school/>会导致后续组件不能渲染。
+					一个简写方式:
+					const school = Vue.extend(options）可简写为: const school = options
+			*/
+		</script>
+	</body>
+</html>

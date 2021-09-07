@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text"  v-model="message">
+        <!-- <input type="text" v-bing:message="message | capitalize" v-model="message"> -->
+        <span>{{message | capitalize}}</span>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // 或者在创建 Vue 实例之前全局定义过滤器
+        Vue.filter('capitalize' , function(value){
+            if(!value) return ""
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.slice(1)
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+                message : ""
+            },
+            // 你可以在一个组件的选项中定义本地的过滤器：
+            // filters:{
+            //     capitalize:function(value){
+            //         if(!value) return ""
+            //         value = value.toString()
+            //         return value.charAt(0).toUpperCase() + value.slice(1)
+            //     }
+            // }
+        })
+
+    </script>
+</body>
+</html>

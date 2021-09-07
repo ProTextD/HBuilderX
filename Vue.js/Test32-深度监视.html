@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>深度监视</title>
+	</head>
+	<body>
+		<div id="app">
+			<h2>今天天气很{{info}}</h2>
+			<button @click="changeWeather">切换天气</button>
+			<h2>a的值{{number.a}}</h2>
+			<button @click="number.a++">+1</button>
+			<h2>b的值{{number.b}}</h2>
+			<button @click="number.b++">+1</button>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				vue中的watch默认不监测对象内部值的改变(一层)。
+				配置deep:true可以监测对象内部值改变(多层)。
+				注意:
+				Vue自身可以监测对象内部值的改变，但Vue提供的watch默认不可以!
+				使用watch时根据数据的具体结构,决定是否采用深度监视。
+			*/
+			Vue.config.productionTip = false;
+			const vm = new Vue({
+				el:"#app",
+				data:{
+					ishot : false,
+					number:{
+						a : 1,
+						b : 1
+					}
+				},
+				computed:{
+					info(){
+						return this.ishot ? "炎热" : "凉爽"
+					}
+				},
+				methods:{
+					changeWeather(){
+						this.ishot = !this.ishot;
+					}
+				},
+				//监视属性第一种写法
+				watch:{
+					info:{
+						//页面初次加载时就调用一次handler
+						immeadiate : true,
+						handler(oldvalue,newvalue){
+							console.log("info改变了:" , oldvalue , newvalue);
+						}
+					},
+					number:{
+						//开启深度监视，当number中的任意数据改变了，就会执行handler
+						deep : true,
+						handler(oldvalue,newvalue){
+							console.log("number改变了:" , oldvalue , newvalue);
+						}
+					},
+					'number.a':{
+						handler(oldvalue,newvalue){
+							console.log("number.a改变" , oldvalue , newvalue);
+						}
+					},
+					
+				}
+			})
+		</script>
+	</body>
+</html>

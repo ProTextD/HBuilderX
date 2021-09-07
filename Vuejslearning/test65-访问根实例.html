@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{foo}}
+        <button v-on:click='baz'>++</button>
+        <button v-on:click='lit'>令结果等于2</button>
+        <button v-on:click='git'>调用baz方法</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data:{
+                foo : 1
+            },
+            computed:{
+                bar:function(){
+                    console.log("111")
+                }
+            },
+            methods:{
+                baz:function(){
+                    this.foo += 1
+                    // 获取根组件的数据
+                    console.log(this.$root.foo)
+                    // 访问根组件的计算属性
+                    console.log(this.$root.bar)
+                    
+                },
+                lit:function(){
+                    // 写入根组件的数据
+                    this.$root.foo = 2
+                },
+                git:function(){
+                    // 调用根组件的方法
+                    this.$root.baz()
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

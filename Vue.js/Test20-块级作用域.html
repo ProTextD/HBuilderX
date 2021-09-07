@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>块级作用域</title>
+		<!--
+			var的设计可以看成JavaScript语言设计上的错误，但这样的错误多半不能修复和移除，因为需要向后兼容
+			可以将let看成更完美的var
+			块级作用域
+				JS中使用var来声明一个变量时，变量的作用域主要与函数的定义有关
+				针对其他块定义来说是没有作用域的，比如if/for等，这在开发中会引起一些问题
+		-->
+	</head>
+	<body>
+		<button>按钮0</button>
+		<button>按钮1</button>
+		<button>按钮2</button>
+		<script>
+			/*
+				使用var定义变量时，由于var对for来说是没有作用域的，i一旦被改变，在for中
+				的所有i都会变，所以，无论按哪个按钮都是按钮2被点击的，类似全局变量
+			*/
+			//ES5语法，没有块级作用域，只有函数的作用域，无论点击哪个按钮都是按钮2，因为i改变了，类似于全局变量
+			// var btns = document.getElementsByTagName("button");
+			// for(var i = 0 ; i < btns.length ; i++){
+			// 	btns[i].addEventListener("click" , function(){
+			// 		alert("第"+ i + "个按钮被点击");
+			// 	})
+			// }
+			
+			/*
+				采用闭包的方法可以解决没有块级作用域的问题，其原理就是利用了函数
+				是有作用域的结果
+			*/
+			//闭包，利用了ES5的函数作用域来解决没有块级作用域的问题
+			// var btns = document.getElementsByTagName("button");
+			// for(var i = 0 ; i < btns.length ; i++){
+			// 	(function(i){
+			// 		btns[i].addEventListener("click" , function(){
+			// 			console.log("第"+ i + "个按钮被点击");
+			// 		})
+			// 	})(i)
+			// }
+			
+			//ES6语法，使用let代替var，let有块级作用域
+			let btns = document.getElementsByTagName("button");
+			for(let i = 0 ; i < btns.length ; i++){
+				btns[i].addEventListener("click" , function(){
+					console.log("第"+ i + "个按钮被点击");
+				})
+			}
+		</script>
+	</body>
+</html>

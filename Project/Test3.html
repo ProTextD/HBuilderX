@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>三毛</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+	  *{
+	   margin:0;  /* *  通用样式，所有的！距离顶距离 可在浏览器f12界面分布观看*/
+	  }
+	  body{
+	   font: 14px/24px "微软雅黑","宋体"
+	  }
+	  .wp{
+	   width:960px;
+	   margin:0 auto; /*居中*/
+	   border:none;
+	  }
+	  .ww{
+	   margin-left:150px;
+	  }
+	  .z{
+	   float:left; /*左浮动*/
+	  }
+	  .y{
+	   float:right; /*有浮动*/
+	  }
+	  .cl{
+	   clear:both;
+	  }
+	  img{
+	   border:none;
+	  }
+	  
+	  .top{
+	   width:100%;
+	   height:24px;
+	   line-height:24px;
+	   background:#303030;
+	   color:#d8d8d8;
+	  }
+	  .top span{
+	   margin-right:15px;
+	  }
+	  .top span.mr0{
+	   margin:0;
+	  }
+	  .top a{
+	   color:#d8d8d8;
+	   text-decoration:none;
+	  }
+	  .top a:hover{
+	   color:#f60;
+	   
+	  }
+	  .logos {
+	   height:100px;
+	  }
+	  .sousuo{
+	   width:350px;
+	   height:41px;
+	   margin-top:40px;
+	  }
+	  .sousuo td{
+	   height:41px;
+	  }
+	  .dianhua{
+	   margin-top:-27px;
+	  }
+	  .s_z{
+	   width:6px;
+	   background:url("images/s_z.png") no-repeat;
+	   margin-top:2px;
+	   margin-right:-2px;
+	   
+	  }
+	  .s_c{
+	   width:240px;
+	   background:url("images/s_z.png") repeat-x;  /*repeat重复方式*/
+	   margin-top:2px;
+	   
+	  }
+	  .s_y{
+	   width:78px;
+	   background:url("images/sousuo.png") no-repeat;
+	   margin-top:2px;
+	  }
+	  .s_c input{
+	   height:34px;
+	   width:238px;
+	   line-height;34px;
+	   border:none;
+	   
+	   margin-top:2px;
+	   margin-bottom:2px;
+	  }
+	  .s_y button{
+	   width:78px;
+	   height:41px;
+	   
+	   background:none;
+	   border:0;
+	   cursor:pointer;   /*鼠标滑过变成小手*/
+	  }
+	  .dianhua span{
+	   font-size:26px;
+	   color:darkred;
+	  }
+	  .nav{
+	   height:39px;
+	   width:100%;
+	   background:url("images/bg_nav.png") repeat-x;
+	  }
+	  .nav li{
+	   list-style:none;
+	   float:left;
+	   line-height:39px;
+	   padding:0 28px;
+	  }
+	  .nav li:hover{
+	   background:url("images/li_hover.png") repeat-x;
+	   margin-top:-2px;
+	   border:none;
+	  }
+	  .nav a{
+	   color:#FFF;
+	   font-size:16px;
+	   text-decoration:none;
+	  }
+	  
+	  .tit{               /*创建下划线*/
+	   padding-bottom:5px;
+	   border-bottom:1px solid darkred;
+	   position:relative;
+	   margin-bottom:10px;
+	  }
+	  .tit span{
+	   position:absolute;
+	   right:0;
+	   bottom:0;
+	   
+	  }
+	  .tit a{
+	   color:darkred;
+	   text-decoration:none;
+	  }
+	  .jianjie{
+	   width:540px;
+	   height:350px;
+	   margin-right:20px;
+	  }
+	  .jj_c img{
+	   float:left;
+	   margin:0 10px 10px 0; /* 上 右 下  左*/
+	  }
+	  .jj_c p{
+	   color:rgb(140,140,140);
+	   text-indent:24px;
+	  }
+	  .xinwen{
+	   width:400px;
+	   height:350px;
+	   
+	  }
+	  .chanpin{
+	   width:100%;
+	   height:400px;
+	  }
+	  .ad{
+	   margin-bottom:10px;
+	  }
+	  .xw_c{
+	   
+	  }
+	  .xw_c h3{
+	   font-weight:normal;
+	   font-size:14px;
+	  }
+	  .xw_c li{
+	   list-style:none;
+	   height:24px;
+	   line-height:24px;
+	   position:relative;
+	   padding-left:15px; /*左边缩进15个像素*/
+	   background:url("images/list_bg.png") no-repeat center left;
+	   
+	  }
+	  .xw_c li:hover{
+	   background-color:red;
+	  }
+	  .xw_c li.a{
+	   background:none;
+	   padding:0;
+	   height:80px;
+	  }
+	  .xw_c li img{
+	   float:left;
+	   margin:0 10px 0 0;
+	  }
+	  .xw_c a{
+	   color:#616161;
+	   text-decoration:none;
+	  }
+	  
+	  .xw_c p{
+	   font-size:12px;
+	   color:#888;
+	   text-indent:24px;
+	  }
+	  .xw_c span{
+	   position:absolute;
+	   right:0;
+	   bottom:0;
+	   font-size:12px;
+	   color:#888888;
+	   
+	  }
+	  .cp_c{
+	   
+	  }
+	  .cp_c li{
+	   float:left;
+	   list-style:none;
+	   margin:0 20px 10px 0;
+	   width:200px;
+	   height:150px;
+	   overflow:hidden;
+	   position:relative;
+	   
+	  }
+	  .cp_c span{
+	   display:none; /*显示隐藏*/
+	   position:absolute;
+	   bottom:0;
+	   width:200px;
+	   left:0;
+	   font-size:14px;
+	   height:20px;
+	   padding:0 10px;
+	   color:#fff;
+	   background:darkred;
+	   overflow:hidden; /*溢出处理，溢出隐藏*/
+	   
+	   
+	  }
+	  .cp_c li:hover span{
+	   display:block;
+	  }
+	  .cp_c li img{
+	   float:left;
+	  }
+	  .footer{
+	   height:100px;
+	   width:100%;
+	   background:url("images/footer_bg.png") repeat-x;
+	  }
+	  .footer_top{
+	   height:80px;
+	   line-height:80px;
+	   color:#fff;
+	   
+	  }
+	  .footer_top a{
+	   color:#fff;
+	   text-decoration:none;
+	   
+	  }
+	  .footer_top .z{
+	   font-size:18px;
+	  }
+	  .footer_top .y{
+	   font-size:12px;
+	  }
+	  .footer_bottom{
+	  
+	  }
+	  .footer_bottom p{
+	   color:white;
+	   
+	  }
+	  .footer_bottom a{
+	   color:#888;
+	   margin-right:10px;
+	   text-decoration:none;
+	  }
+	  .footer_bottom a:hover{
+	   color:white;
+	   
+	  }
+  </style>
+ </head>
+ <body>
+ 
+ <div class="header">
+  <div class="top">
+   <div class="wp">
+    <div class="z">
+     <span>
+      <a href="">设为首页</a>
+     </span>
+     <span>
+      <a href="">收藏本站</a>
+     </span>
+    </div>
+    <div class="y">
+     <span>时间2016年3月1日</span>
+     <span class="mr0">天气晴朗</span>
+    </div>
+   </div>
+  </div>
+  <div class="logos">
+   <div class="wp">
+    <div class="logo z">
+     <h1><a href="index.html"><img src="images/logo.png" alt="HTML+CSS实战"></a></h1>
+    </div>
+    <div class="sousuo z">
+     <form action="index.html" method="get">
+      <table>
+       <tr>
+        <td class="s_z z"></td>  
+        <td class="s_c z">
+         <input type="text" name="text" id="s_c_text"></input>
+        </td>
+        <td class="s_y z">
+          <button type="submit" name="submit"></button>
+    
+        </td>
+       </tr>
+      </table>
+     </form>
+    </div>
+    <div class="dianhua y">
+     <span>客服热线：090909090909</span>
+    </div>
+   </div>
+  </div>
+  <div class="nav">
+   <div class="ww">
+    <ul class="z">
+     <li class="a">
+      <a href="index.html">网站首页</a>
+     </li>
+     <li>
+      <a href="index.html">公司简介</a>
+     </li>
+     <li>
+      <a href="index.html">业务描述</a>
+     </li>
+     <li>
+      <a href="index.html">服务范围</a>
+     </li>
+     <li>
+      <a href="index.html">产品中心</a>
+     </li>
+     <li>
+      <a href="index.html">人才管理</a>
+     </li>
+     <li>
+      <a href="index.html">在线留言</a>
+     </li>
+     <li>
+      <a href="index.html">联系我们</a>
+     </li>
+     
+    </ul>
+   </div>
+  </div>
+ </div>
+ 
+ <div class="center"></div>
+  <div class="ad wp">
+   <h1><a href="index.html"><img src="images/ad.png" alt="HTML+CSS实战"></a></h1>
+  </div>
+  
+  <div class="wp">
+  
+   <div class="jianjie z">
+    <div class="tit">
+     <img src="images/jianjie.png" alt="简介"/>
+     <span><a href="">More</a></span>
+    </div>
+    <div class="jj_c">
+     <img src="images/jianjie_c.png" alt="简介"/>
+     <p>
+     HTML+CSS是web前端开发基础课程，本章将由麦子学院资深web前端开发工程师为你全面讲解HTML和css的基本属性和用法，带你进入web前端开发的世界
+     </p>
+     <p>
+     HTML+CSS是web前端开发基础课程，本章将由麦子学院资深web前端开发工程师为你全面讲解HTML和css的基本属性和用法，带你进入web前端开发的世界
+     </p>
+     <p>
+     HTML+CSS是web前端开发基础课程，本章将由麦子学院资深web前端开发工程师为你全面讲解HTML和css的基本属性和用法，带你进入web前端开发的世界     
+     </p>
+    </div>
+   </div>
+  
+   <div class="xinwen z">
+    <div class="tit">
+     <img src="images/xinwen.png" alt="新闻"/>
+     <span><a href="">More</a></span>
+    </div>
+    <div class="xw_c">
+     <ul>
+      <li class="a">
+       <a href="http://www.baidu.com">    
+        <img src="images/xinwen_c.png" alt="新闻"/>
+        <h3>Web前端开发入门</h3>
+        <p>网页开发，麦子学院监制麦子学院监制麦子学院监制vv麦子学院监制vv......</p>
+       </a>
+      </li>
+      <li>
+       <a href="http://www.baidu.com">
+        <h3>Web前端开发入门</h3>
+        <span>2016-03-02</span>
+       </a>
+      </li>
+      <li>
+       <a href="http://www.baidu.com">
+        <h3>Web前端开发入门</h3>
+        <span>2016-03-02</span>
+       </a>
+      </li>
+      <li>
+       <a href="http://www.baidu.com">
+        <h3>Web前端开发入门</h3>
+        <span>2016-03-02</span>
+       </a>
+      </li>
+      <li>
+       <a href="http://www.baidu.com">
+        <h3>Web前端开发入门</h3>
+        <span>2016-03-02</span>
+       </a>
+      </li>
+      <li>
+       <a href="http://www.baidu.com">
+        <h3>Web前端开发入门</h3>
+        <span>2016-03-02</span>
+       </a>
+      </li>
+      <li>
+       <a href="http://www.baidu.com">
+        <h3>Web前端开发入门</h3>
+        <span>2016-03-02</span>
+       </a>
+      </li>
+      <li>
+       <a href="http://www.baidu.com">
+        <h3>Web前端开发入门</h3>
+        <span>2016-03-02</span>
+       </a>
+      </li>
+     </ul>
+     
+    </div>
+   </div>
+   <div class="chanpin z">
+    <div class="tit">
+     <img src="images/chanpin.png" alt="产品"/>
+     <span><a href="">More</a></span>
+    </div>
+    <div class="cp_c">
+     <ul>
+      <li><a href="http://www.baidu.com" target="_blank"><img src="images/chanpin_c.png" alt="产品"/><span>Web前端开发入门</span></a></li>
+      <li><a href="http://www.baidu.com" target="_blank"><img src="images/chanpin_c.png" alt="产品"/><span>Web前端开发入门</span></a></li>
+      <li><a href="http://www.baidu.com" target="_blank"><img src="images/chanpin_c.png" alt="产品"/><span>Web前端开发入门</span></a></li>
+      <li><a href="http://www.baidu.com" target="_blank"><img src="images/chanpin_c.png" alt="产品"/><span>Web前端开发入门</span></a></li>
+      <li><a href="http://www.baidu.com" target="_blank"><img src="images/chanpin_c.png" alt="产品"/><span>Web前端开发入门</span></a></li>
+      <li><a href="http://www.baidu.com" target="_blank"><img src="images/chanpin_c.png" alt="产品"/><span>Web前端开发入门</span></a></li>
+      <li><a href="http://www.baidu.com" target="_blank"><img src="images/chanpin_c.png" alt="产品"/><span>Web前端开发入门</span></a></li>
+      <li><a href="http://www.baidu.com" target="_blank"><img src="images/chanpin_c.png" alt="产品"/><span>Web前端开发入门</span></a></li>
+
+      
+     </ul>
+    </div>
+   </div>
+  </div>
+ <div class="cl"></div>
+ <div class="footer">
+   <div class="wp">
+    <div class="footer_top">
+     <span class="z">
+      <a href="">关于我们</a> | <a href="">联系我们</a> | <a href="">加入我们</a> | <a href="">留言我们</a></a>
+     </span>
+     <span class="y">
+      @2015麦子学院版权所有ICP正:蜀ICP备1300000000号-1
+     </span>
+    </div>
+   
+   
+    <div class="footer_bottom">
+     <p>
+      友情链接:  <a href="http://www.baidu.com" target="_blank">关于我们</a>    <a href="http://www.baidu.com" target="_blank">关于我们</a>       <a href="http://www.baidu.com" target="_blank">关于我们</a>
+     </p>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<!--
+
+CSS文件
+
+-->

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<style type="text/css">
+		span {
+			color: red;
+			font-size: 12px;
+		}
+	</style>
+
+    <title> 修改密码</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">H+</h1>
+
+            </div>
+            <h3>欢迎登录 H+</h3>
+            <p>重新修改密码</p>
+            <!-- <form class="m-t" role="form" action="login.html"> -->
+			
+				<!--把登录页面保存的用户名输出-->
+                <div class="form-group">
+                    <input type="text" class="form-control" required="" id="show" readonly="readonly">
+                </div>
+				
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请输入密码" required="" id="password" name="password"><span id="passwordError"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请再次输入密码" required="" id="password2" name="password2"><span id="password2Error"></span>
+                </div>
+                <!-- <div class="form-group text-left">
+                    <div class="checkbox i-checks">
+                        <label class="no-padding">
+                            <input type="checkbox"><i></i> 我同意注册协议</label>
+                    </div>
+                </div> -->
+                <button type="submit" class="btn btn-primary block full-width m-b" id="submit" onclick="modify()">修改密码</button>
+
+                <p class="text-muted text-center"><!-- <small>已经有账户了？</small> --><a href="login.html">点此登录</a>
+                </p>
+
+            <!-- </form> -->
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- iCheck -->
+    <!-- <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script> -->
+	
+	<script src="jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+		function modify(){
+			var name = $("#show").val()
+			var password = $("#password").val()
+			var password2 = $("#password2").val()
+			var userInfo={
+				"account":$("#show").val(),
+				"password":$("#password").val()
+			}
+			
+			// alert(name)
+			
+			if(password == ""){
+				document.getElementById("passwordError").innerText = "密码不能为空!"
+				return false
+			}
+			
+			if(password2 != password){
+				document.getElementById("password2Error").innerText = "密码不一致"
+				return false
+			}
+			
+			if(document.getElementById("passwordError").innerText == "" && document.getElementById("password2Error").innerText == "" ){
+				// alert("111")
+				$.ajax({
+					url:"http://192.168.3.239:8008/modifyUser",
+					type:"POST",
+					// data:{"userInfo":userInfo},
+					data:JSON.stringify(userInfo),
+					dataType:'json',//json 返回值类型
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+					alert(result.msg);
+					//修改密码成功后跳转页面(后改)
+					location.href = "LoginSucceeded.html"
+				  },
+					error:function(result){
+					alert(result.msg);
+				  }
+				  })
+			}
+		}
+		
+		window.onload = function(){
+			var passwordErrorSpan = document.getElementById("passwordError")
+			var passwordElt = document.getElementById("password")
+			var password2Elt = document.getElementById("password2")
+			passwordElt.onfocus = function(){
+				if(document.getElementById("passwordError").innerText != ""){
+					passwordErrorSpan.innerText = "";
+				}
+			}
+			
+			password2Elt.onfocus = function(){
+				if(document.getElementById("password2Error").innerText != ""){
+					password2Elt.value = ""
+					document.getElementById("password2Error").innerText = ""
+				}
+			}
+			
+			//<!--把登录页面保存的用户名输出-->
+			var usernameElt = document.getElementById("show")
+			var a = sessionStorage.getItem("login")
+			usernameElt.value = a
+		}
+	</script>
+    
+    
+
+</body>
+
+</html>

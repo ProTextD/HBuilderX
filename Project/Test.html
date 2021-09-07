@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		        #shade {
+		            position: fixed;
+		            top: 0;
+		            right: 0;
+		            bottom: 0;
+		            left: 0;
+		            background-color: gray;
+		            opacity: 0.8;
+		            text-align: center;
+		        }
+		
+		        #shade_table {
+		
+		            margin-top: 250px;
+		            color: red;
+		        }
+		
+		    </style>
+		    <script>
+		        window.onload = function () {
+		            //删除功能
+		            var aBtnDel = document.getElementsByClassName('btn-danger');
+		            var oTbodyFirst = document.getElementsByTagName('tbody')[0];
+		            var oDivP = document.getElementById('shade');
+		            var oDivC = document.getElementById('shade_table');
+		            var aBtnEdit = document.getElementsByClassName('btn-info');
+		            var oBtnSubmit = document.getElementById('btn_submit');
+		            for (var i = 0; i < aBtnDel.length; i++) {
+		                aBtnDel[i].onclick = function () {
+		                    var oTbody1 = this.parentElement.parentElement.parentElement;
+		                    oTbody1.removeChild(this.parentElement.parentElement)
+		                }
+		            }
+		            //添加功能
+		            var aBtnAdd = document.getElementsByClassName('btn-primary')[0];
+		            aBtnAdd.onclick = function () {
+		
+		                oDivP.classList.remove('hide');
+		                oDivC.classList.remove('hide');
+		                //模态框提交
+		                oBtnSubmit.onclick = function () {
+		
+		                    //获取姓名
+		                    var sName = document.getElementById('inputName').value;
+		                    //获取年龄
+		                    var sAge = document.getElementById('inputAge').value;
+		                    //获取性别
+		                    var sGender = document.getElementById('inputGender').value;
+		
+		                    //创建tr节点
+		                    var oTr = document.createElement('tr');
+		                    //获取父节点
+		                    oTbodyFirst.appendChild(oTr);
+		                    //创建td节点
+		                    var oTdName = document.createElement('td');
+		                    var oTdAge = document.createElement('td');
+		                    var oTdGender = document.createElement('td');
+		                    var oTdOperation = document.createElement('td');
+		                    //给td创建一个button节点
+		                    var oBtn = document.createElement('button');
+		                    var oBtnModify = document.createElement('button');
+		
+		                    //给创建的节点赋值
+		                    oTdName.innerHTML = sName;
+		                    oTdAge.innerHTML = sAge;
+		                    oTdGender.innerHTML = sGender;
+		
+		                    //给btn按钮赋值
+		                    oBtn.className = 'btn btn-danger';
+		                    oBtn.innerHTML = '删除';
+		
+		                    oBtnModify.className = 'btn btn-info';
+		                    oBtnModify.innerHTML = '修改';
+		
+		                    //将btn节点加到td节点中
+		                    oTdOperation.appendChild(oBtnModify);
+		                    //解决两个按钮挨着的问题
+		                    oTdOperation.innerHTML += '&nbsp;';
+		                    oTdOperation.appendChild(oBtn);
+		
+		                    //将所有的td节点加到tr中
+		                    oTr.appendChild(oTdName);
+		                    oTr.appendChild(oTdAge);
+		                    oTr.appendChild(oTdGender);
+		                    oTr.appendChild(oTdOperation);
+		                    //清空输入框
+		                    document.getElementById('inputName').value = '';
+		                    document.getElementById('inputAge').value = '';
+		                    document.getElementById('inputGender').value = '';
+		
+		                    //隐藏莫泰对话框
+		                    oDivP.classList.add('hide');
+		                    oDivC.classList.add('hide');
+		
+		                };
+		            };
+		            //点击删除事件委派
+		            oTbodyFirst.addEventListener('click', function (e) {
+		                if (e.target.innerHTML == '删除') {
+		                    oTbodyFirst.removeChild(e.target.parentElement.parentElement)
+		                }
+		            });
+		            //修改功能
+		            for (var j=0;j<aBtnEdit.length;j++){
+		                aBtnEdit[j].onclick = function () {
+		                    oDivP.classList.remove('hide');
+		                    oDivC.classList.remove('hide');
+		                    var preSibling = this.parentElement.previousElementSibling;
+		                    document.getElementById('inputGender').value = preSibling.innerHTML;
+		                    document.getElementById('inputAge').value = preSibling.previousElementSibling.innerHTML;
+		                    document.getElementById('inputName').value = preSibling.previousElementSibling.previousElementSibling.innerHTML;
+		                    //模态框提交数据
+		                    oBtnSubmit.onclick = function () {
+		                        //获取姓名
+		                        var sName = document.getElementById('inputName').value;
+		                        //获取年龄
+		                        var sAge = document.getElementById('inputAge').value;
+		                        //获取性别
+		                        var sGender = document.getElementById('inputGender').value;
+		                        //重新赋值
+		                        //姓名
+		                        preSibling.previousElementSibling.previousElementSibling.innerHTML = sName;
+		                        //年龄
+		                        preSibling.previousElementSibling.innerHTML = sAge;
+		                        //性别
+		                        preSibling.innerHTML = sGender;
+		
+		                        //隐藏模态对话框
+		                        oDivP.classList.add('hide');
+		                        oDivC.classList.add('hide');
+		
+		                    }
+		                }
+		            }
+		        }
+		    </script>
+	</head>
+	<body>
+		<!-- <div id="shade" class="hide">
+		    <div id="shade_table" class="hide">
+		        <p>姓名 <input type="text" name="uname" id="inputName"></p>
+		        <p>年龄 <input type="text" name="uage" id="inputAge"></p>
+		        <p>性别 <input type="text" name="ugender" id="inputGender"></p>
+		        <button id="btn_submit">提交</button>
+		    </div>
+		</div> -->
+		
+		<div class="container">
+		    <div class="row">
+		        <button class="btn btn-primary">添加</button>
+		        <table class="table table-bordered table-striped">
+		            <thead>
+		                <tr>
+		                    <th>姓名</th>
+		                    <th>年龄</th>
+		                    <th>性别</th>
+		                    <th>操作</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		            <tr>
+		                <td>张三</td>
+		                <td>18</td>
+		                <td>女</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>李四</td>
+		                <td>19</td>
+		                <td>男</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>王五</td>
+		                <td>20</td>
+		                <td>男</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>李二</td>
+		                <td>21</td>
+		                <td>男</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>egon</td>
+		                <td>73</td>
+		                <td>女</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>alex</td>
+		                <td>84</td>
+		                <td>女</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>alexSB</td>
+		                <td>84</td>
+		                <td>女</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>元日天sb</td>
+		                <td>84</td>
+		                <td>女</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>egonSB</td>
+		                <td>73</td>
+		                <td>女</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            <tr>
+		                <td>钻石</td>
+		                <td>18</td>
+		                <td>男</td>
+		                <td>
+		                    <button class="btn btn-info">修改</button>
+		                    <button class="btn btn-danger">删除</button>
+		                </td>
+		            </tr>
+		            </tbody>
+		        </table>
+		    </div>
+		</div>
+
+	</body>
+</html>

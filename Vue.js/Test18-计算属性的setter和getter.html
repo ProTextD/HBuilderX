@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算属性的setter和getter</title>
+	</head>
+	<body>
+		<div id="app">{{fullName}}</div>
+		<script src="./vue.js"></script>
+		<script>
+			new Vue({
+				el:"#app",
+				data:{
+					message : "hello Vuejs",
+					firstname : "zhang",
+					lastname : "san"
+				},
+				computed:{
+					/*
+					fullName:  {
+					计算属性中setter方法一般不写,只有当要改变fullName的值时才写。改变值的时候会调用该函数(setter不常用)
+					  set:function (newValue) {
+					    console.log("---",newValue)
+					    const name = newValue.split(" ");
+					    this.firstName = name[0];
+					    this.lastName = name[1];
+					  },
+					  //读取值的时候会调用该函数
+					  get:function () {
+					    console.log("---")
+					    return this.firstName + ' ' + this.lastName
+					  }
+					}
+					*/
+					//当set不写的时候，get就可以简写
+					fullName : function(){
+						return this.firstname + "" + this.lastname;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

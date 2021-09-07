@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<select id="select_table">						
+				<option value ="1">1</option>
+				<option value ="2">2</option>
+				<option value ="3">3</option>
+				<option value ="4">4</option>
+				<option value ="5">5</option>
+			</select>
+		</div>
+		<script src="jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#select_table").change(function(){
+					var typeCodePre =  $("#select_table").val();
+					console.log(typeCodePre)
+				})
+			})
+		</script>
+	</body>
+</html>

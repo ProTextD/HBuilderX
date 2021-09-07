@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>管理a部门</title>
+		<style type="text/css">
+			span {
+				color: red;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>XXX公司a部门</h1>
+		<hr >
+		<div>
+			<tr>
+				<td><button class="add" id="add">显示添加人员列表</button></td>
+				<td><button class="hide" id="hide">隐藏添加人员列表</button></td>
+			</tr>
+		</div>
+		<div>
+		<table id="tab">
+			<tr>
+				<th id="th0">员工编号</th>
+				<th id="th1">员工姓名</th>
+				<th id="th2">员工年龄</th>
+				<th id="th3">直属上司</th>
+				<th id="th4">员工部门</th>
+			</tr>
+			<tr>
+				<td name="td0">001</td>
+				<td name="td1">aaa</td>
+				<td name="td2">18</td>
+				<td name="td3">XXX</td>
+				<td name="td4">a</td>
+				<td><a href="aaaPersonalProfile.html">查看</a></td>
+				<td><button class="remove" onclick="remove()">删除</button></td>
+			</tr>
+			<tr>
+				<td name="td0">002</td>
+				<td name="td1">bbb</td>
+				<td name="td2">19</td>
+				<td name="td3">XXX</td>
+				<td name="td4">a</td>
+				<td><a href="">查看</a></td>
+				<td><button class="remove" onclick="remove()">删除</button></td>
+			</tr>
+			<tr>
+				<td name="td0">003</td>
+				<td name="td1">ccc</td>
+				<td name="td2">20</td>
+				<td name="td3">XXX</td>
+				<td name="td4">a</td>
+				<td><a href="">查看</a></td>
+				<td><button class="remove" onclick="remove()">删除</button></td>
+			</tr>
+			<tbody id="emptbody">
+				
+			</tbody>
+		</table>
+		<div id="Btn">
+			<input type="button" value="返回主页" onclick="window.history.back()" />
+		</div>
+		</div>
+		<div id="addInfo" hidden="hidden">
+			<form>
+			员工编号<label>
+				<input type="text" id="enumber"><span id="enumberError"></span>
+			</label><br>
+			员工姓名<label>
+				<input type="text" id="ename"><span id="enameError"></span>
+			</label><br>
+			员工年龄<label>
+				<input type="text" id="eage"><span id="eageError"></span>
+			</label><br>
+			直属上司<label>
+				<input type="text" id="manager"><span id="managerError"></span>
+			</label><br>
+			员工部门<label>
+				<input type="text" id="deptno" value="a" />
+			</label>
+			<input type="button" value="添加" id="submitt"/>
+			</form>
+		</div>
+		<script src="./jquery-3.6.0.js"></script>
+		<script src="./vue.js"></script>
+		<script type="text/javascript">
+			var removeElt = document.getElementsByClassName("remove")
+			function remove(){
+					// alert("delete data...");
+				for(var i = 0 ; i < removeElt.length ; i++){
+					removeElt[i].onclick = function () {
+						if(window.confirm("确认删除数据嘛?")){	
+							var removeThis = this.parentElement.parentElement.parentElement;
+							removeThis.removeChild(this.parentElement.parentElement)
+						}
+					}
+				}
+			}
+			
+			window.onload = function(){
+				//验证添加人员的数据
+				var enumberElt = document.getElementById("enumber")
+				var enumberErrorSpan = document.getElementById("enumberError")
+								
+				var enameElt = document.getElementById("ename")
+				var enameErrorSpan = document.getElementById("enameError")
+								
+				var eageElt = document.getElementById("eage")
+				var eageErrorSpan = document.getElementById("eageError")
+				
+				
+				//员工编号的验证
+				enumberElt.onblur = function(){
+					var enumber = enumberElt.value
+					// console.log(enumber)
+					if(enumber == ""){
+						//员工编号为空
+						enumberErrorSpan.innerText = "员工编号不能为空"
+					}
+				}
+				enumberElt.onclick = function(){
+					if(enumberErrorSpan.innerText != ""){
+						enumberErrorSpan.innerText = ""
+					}
+				}
+				
+				//员工姓名的验证
+				enameElt.onblur = function(){
+					var ename = enameElt.value
+					if(ename == ""){
+						//员工姓名为空
+						enameErrorSpan.innerText = "员工姓名不能为空"
+					}
+				}
+				enameElt.onfocus = function(){
+					if(enameErrorSpan.innerText != ""){
+						enameErrorSpan.innerText = ""
+					}
+				}
+				
+				//员工年龄验证
+				eageElt.onblur = function(){
+					var eage = eageElt.value
+					if(eage == ""){
+						//员工年龄为空
+						eageErrorSpan.innerText = "员工年龄不能为空"
+					}else{
+						if(eage < 16 || eage > 99){
+						eageErrorSpan.innerText = "员工年龄不合理"
+						}
+					} 
+				}
+				eageElt.onfocus = function(){
+					if(eageErrorSpan.innerText != ""){
+						eageElt.value =""
+						eageErrorSpan.innerText = ""
+					}
+				}
+				
+				var managerElt = document.getElementById("manager")
+				var deptnoElt = document.getElementById("deptno")
+				//添加人员
+				$('#submitt').click(function(){
+					enumberElt.focus()
+					enumberElt.blur()
+					
+					enameElt.focus()
+					enameElt.blur()
+					
+					eageElt.focus()
+					eageElt.blur()
+					
+					if(enumberErrorSpan.innerText == "" && enameErrorSpan.innerText == "" && eageErrorSpan.innerText == ""){
+						var html = ""
+						html += "<tr>"
+						html += '<td name="td0">'+enumberElt.value+'</td>'
+						html += '<td name="td1">'+enameElt.value+'</td>'
+						html += '<td name="td2">'+eageElt.value+'</td>'
+						html += '<td name="td3">'+managerElt.value+'</td>'
+						html += '<td name="td4">'+deptnoElt.value+'</td>'
+						html += '<td>'+ '<a href="http://www.baidu.com">查看</a>'+'</td>'
+						html += '<td>'+'<button class="remove" onclick="remove()">删除</button>'+'</td>'
+						html += "</tr>"
+						$("#tab").append(html);
+						$('#addInfo').fadeOut(600)
+						// alert(html)
+						sortTable(this)
+					}else{
+						alert("输入格式不正确，请重新输入!")
+					}
+					
+				})
+				// document.getElementById("emptbody").innerHTML = html;
+				
+				//显示列表
+				$('#add').click(function(){
+					$('#addInfo').fadeIn(600)
+					enumberElt.value = ""
+					enameElt.value = ""
+					eageElt.value = ""
+					managerElt.value = ""
+				})
+				//隐藏列表
+				$("#hide").click(function(){
+					$('#addInfo').fadeOut(600)
+				})
+			}
+			
+			function sortTable(obj){
+				//获取值
+				var td0s = document.getElementsByName("td0")
+				var td1s = document.getElementsByName("td1")
+				var td2s = document.getElementsByName("td2")
+				var td3s = document.getElementsByName("td3")
+				var td4s = document.getElementsByName("td4")
+				//创建数组存放值
+				var tdArray0 = []
+				var tdArray1 = []
+				var tdArray2 = []
+				var tdArray3 = []
+				var tdArray4 = []
+				//把值放进数组中
+				for(var i = 0 ; i < td0s.length ; i++){
+					tdArray0.push(td0s[i].innerHTML);
+				}
+				// console.log(tdArray0)
+				for(var i = 0 ; i < td1s.length ; i++){
+					tdArray1.push(td1s[i].innerHTML);
+				}
+				for(var i = 0 ; i < td2s.length ; i++){
+					tdArray2.push(td2s[i].innerHTML);
+				}
+				for(var i = 0 ; i < td3s.length ; i++){
+					tdArray3.push(td3s[i].innerHTML);
+				}
+				for(var i = 0 ; i < td4s.length ; i++){
+					tdArray4.push(td4s[i].innerHTML);
+				}
+				// console.log(tdArray0 , tdArray1 , tdArray2 , tdArray3 , tdArray4)
+				//获取员工编号的name
+				var tds = document.getElementsByName("td0")
+				// console.log(tds)
+				// tdArray0.sort();
+				var columnArray=[];
+				for(var i = 0 ; i < tds.length ; i++){
+					columnArray.push(tds[i].innerHTML)
+				}
+				// console.log(columnArray)
+				var orginArray = [];
+				for(var i = 0 ; i < columnArray.length ; i++){
+					orginArray.push(columnArray[i])
+				}
+				columnArray.sort()
+				// console.log(orginArray)
+				for(var i = 0 ; i < columnArray.length ; i++){
+					for(var j = 0 ; j < orginArray.length ; j++){
+						if(orginArray[j]==columnArray[i]){
+							document.getElementsByName("td0")[i].innerHTML=tdArray0[j];
+							document.getElementsByName("td1")[i].innerHTML=tdArray1[j];
+							document.getElementsByName("td2")[i].innerHTML=tdArray2[j];
+							document.getElementsByName("td3")[i].innerHTML=tdArray3[j];
+							document.getElementsByName("td4")[i].innerHTML=tdArray4[j];
+							orginArray[j]=null;
+							break;
+						}
+					}
+				}
+				
+				
+			}
+		</script>
+	</body>
+</html>

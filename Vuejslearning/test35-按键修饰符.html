@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 只有在 `key` 是 `Enter` 时调用 `vm.submit()` -->
+        <input type="text" v-on:keyup.enter="showThis">
+
+        <input type="text" v-on:keyup.page-down="onPageDown">
+
+        <!-- Alt + C -->
+        <input v-on:keyup.alt.67="clear" id="data">
+
+        <!-- .exact 修饰符 -->
+        <!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+        <button v-on:click.ctrl="onClick">A</button>
+
+        <!-- 有且只有 Ctrl 被按下的时候才触发 -->
+        <button v-on:click.ctrl.exact="onCtrlClick">A</button>
+
+        <!-- 没有任何系统修饰符被按下的时候才触发 -->
+        <button v-on:click.exact="onClick2">A</button>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data :{
+                message : "hello Vuejs"
+            },
+            methods:{
+                showThis(){
+                    alert("success")
+                },
+                onPageDown(){
+                    alert("pageDown")
+                },
+                clear(){
+                    document.getElementById("data").value = ""
+                },
+                onClick(){
+                    alert("触发事件")
+                },
+                onCtrlClick(){
+                    alert("ddd")
+                },
+                onClick2(){
+                    alert('fff')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

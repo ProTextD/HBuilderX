@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css?v=4.1.0" rel="stylesheet">
+		<style type="text/css">
+			span {
+				color: red;
+				font-size: 12px;
+			}
+			
+			.table2{
+			        border:#C8C8C8 solid;   
+			        border-width:1px 0px 0px 1px; 
+			        background: #F3F0F0;
+			        margin-top:25px;
+			    }
+			    
+			    .td0{
+			        border:#C8C8C8 solid;  
+			        border-width:0 0 1px 0;
+			    }
+			    
+			    .td2{
+			        border:#C8C8C8 solid;   
+			        border-width:0 1px 1px 0 ;
+			    }
+			    
+			    .barcon {
+			        width: 1000px;
+			        margin: 0 auto;
+			        text-align: center;
+			     }
+			 
+			    .barcon1 {
+			        font-size: 17px;
+			        float: left;
+			        margin-top: 20px;
+			    }
+			 
+			    .barcon2 {
+			        float: right;
+			    }
+			 
+			    .barcon2 ul {
+			        margin: 20px 0;
+			        padding-left: 0;
+			        list-style: none;
+			        text-align: center;
+			    }
+			 
+			    .barcon2 li {
+			        display: inline;
+			    }
+			 
+			    .barcon2 a {
+			        font-size: 16px;
+			        font-weight: normal;
+			        display: inline-block;
+			        padding: 5px;
+			        padding-top: 0;
+			        color: black;
+			        border: 1px solid #ddd;
+			        background-color: #fff;
+			    }
+			 
+			    .barcon2 a:hover{
+			        background-color: #eee;
+			    }
+			 
+			    .ban {
+			        opacity: .4;
+			    }
+		</style>
+	</head>
+	<body>
+		<div>
+			<tr>
+				<td><button class="add" id="add">显示添加人员列表</button></td>
+				<td><button id="hide">隐藏添加人员列表</button></td>
+				<td><button class="update" id="update">显示修改人员列表</button></td>
+				<td><button id="updateOut">隐藏修改人员列表</button></td>
+				<td><input type="text" id="delId" placeholder="请通过user_id字段删除"/><input type="button" onclick="del()" value="删除"></td>
+				<td><input type="text" id="info" placeholder="请通过account字段查询"/><input type="button" onclick="serach()" value="搜索"></td>
+				<td><input type="button" value="选中删除" onclick="delRow();" /></td>
+			</tr>
+		</div>
+		<div>
+			<table id="tab" class="table">
+				<thead>
+					<tr>
+						<th id="th0">id</th>
+						<th id="th1">name</th>
+						<th id="th2">sex</th>
+						<th id="th3">age</th>
+						<th id="th4">email</th>
+						<th id="th5">user_id</th>
+						<th><label>全选</label>
+							<input type="checkbox" name="item" onclick="checkAll(this);" />
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td name="td0"></td>
+						<td name="td1"></td>
+						<td name="td2"></td>
+						<td name="td3"></td>
+						<td name="td4"></td>
+						<td name="td5"></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="Btn">
+				<input type="button" value="返回主页" onclick="window.history.back()" />
+			</div>
+		</div>
+		
+		<!--分页查询-->
+		<div id="barcon" class="barcon" >
+		    <div id="barcon1" class="barcon1"></div>
+		        <div id="barcon2" class="barcon2">
+		            <ul>
+		                <li><button id="firstPage">首页</button></li>
+		                <li><button id="prePage">上一页</button></li>
+		                <li><button id="nextPage">下一页</button></li>
+		                <li><button id="lastPage">尾页</button></li>
+		                <li><select id="jumpWhere">
+							<!-- <option value ="1">1</option>
+							<option value ="2">2</option>
+							<option value ="3">3</option>
+							<option value ="4">4</option>
+							<option value ="5">5</option> -->
+		                </select></li>
+						<!-- <li><input type="text" width = "1px" id="jumpWhere"></li> -->
+		                <!-- <li><button id="jumpPage">跳转</button></li> -->
+		            </ul>
+		        </div>
+		</div>
+		<script src="jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				//数据表更新
+				dataInfo()
+			}
+			
+			//数据表更新连带分页查询
+			function dataInfo(){
+				var pageSize = $("#pageSize").val()
+				var pageNum = $("#pageNum").val()
+				
+				var userInfo={
+					"pageSize":5,
+					"pageNum":1
+				}
+				$.ajax({
+					url:"http://192.168.3.239:8008/getInfoByLimit",
+					type:"POST",
+					data:JSON.stringify(userInfo),
+					dataType:'json',
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+						console.log(result.data)
+						for(var i = 0 ; i < result.data.pageSize ; i++){
+							var html = ""
+							html += "<tr>"
+							html += '<td name="td0">'+result.data.list[i].id+'</td>'
+							html += '<td name="td1">'+result.data.list[i].name+'</td>'
+							html += '<td name="td2">'+result.data.list[i].sex+'</td>'
+							html += '<td name="td3">'+result.data.list[i].age+'</td>'
+							html += '<td name="td4">'+result.data.list[i].email+'</td>'
+							html += '<td name="td5">'+result.data.list[i].userId+'</td>'
+							html += '<td>'+'<input type="checkbox" name="item"/>'+'</td>'
+							html += "</tr>"
+							$("#tab").append(html);
+							$('#addInfo').fadeOut(600)
+						}
+						//上一页
+						$("#prePage").click(function(){
+							if(result.data.pageNum > 1){
+								result.data.pageNum --;
+								console.log(result.data.pageNum)
+								clearAll()
+								getInfoByLimit(result.data.pageNum)
+							}else{
+								alert("当前是第一页")
+							}
+						})
+						//下一页
+						$("#nextPage").click(function(){
+							if(result.data.pageNum <= result.data.pages){
+								result.data.pageNum ++;
+								console.log(result.data.pageNum)
+								// $("#jumpWhere").val() = result.data.pageNum
+								clearAll()
+								getInfoByLimit(result.data.pageNum)
+								// console.log($("#jumpWhere").val())
+							}else{
+								alert("当前是最后一页")
+							}
+						})
+						//尾页
+						$("#lastPage").click(function(){
+							result.data.pageNum = result.data.pages
+							clearAll()
+							getInfoByLimit(result.data.pageNum)
+						})
+						
+						//遍历下拉列表
+						for(var i = 1 ; i <= result.data.pages ; i++){
+							var html = ""
+							html += "<option name = " + i + ">" + i + "</optiion>"
+							$("#jumpWhere").append(html);
+							// console.log(html)
+						}
+						//跳转
+						/* $("#jumpPage").click(function(){
+							console.log(document.getElementById("jumpWhere"))
+							if($("#jumpWhere").val() <= result.data.pages && $("#jumpWhere").val() > 0){
+								clearAll()
+								getInfoByLimit($("#jumpWhere").val())
+								result.data.pageNum = $("#jumpWhere").val()
+							}else{
+								alert("输入不合法，当前页面最多仅" + result.data.pages + "页")
+							}
+						}) */
+						$("#jumpWhere").change(function(){
+							var jumpWhere = $("#jumpWhere").val()
+							clearAll()
+							getInfoByLimit(jumpWhere)
+							result.data.pageNum = jumpWhere
+						})
+					},
+					error: function(result){
+						alert(result.msg);
+					}
+				})
+			}
+		
+			//清空表格数据
+			function clearAll(){
+				$("#tab tr:not(:first)").html("");
+			}
+			
+			//封装Ajax方法
+			function getInfoByLimit(pageNum){
+				var pageSize = $("#pageSize").val()
+				// console.log(pageNum)
+				var userInfo={
+					"pageSize":5,
+					"pageNum":pageNum
+				}
+				$.ajax({
+					url:"http://192.168.3.239:8008/getInfoByLimit",
+					type:"POST",
+					data:JSON.stringify(userInfo),
+					dataType:'json',
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+						console.log(result.data)
+						if(pageNum <= result.data.pages){
+							for(var i = 0 ; i < result.data.pageSize ; i++){
+								var html = ""
+								html += "<tr>"
+								html += '<td name="td0">'+result.data.list[i].id+'</td>'
+								html += '<td name="td1">'+result.data.list[i].name+'</td>'
+								html += '<td name="td2">'+result.data.list[i].sex+'</td>'
+								html += '<td name="td3">'+result.data.list[i].age+'</td>'
+								html += '<td name="td4">'+result.data.list[i].email+'</td>'
+								html += '<td name="td5">'+result.data.list[i].userId+'</td>'
+								html += '<td>'+'<input type="checkbox" name="item"/>'+'</td>'
+								html += "</tr>"
+								$("#tab").append(html);
+							}
+						}else{
+							alert("已经是最后一页了")
+						}
+					},
+					error: function(result){
+						alert(result.msg);
+					}
+				})
+			}
+			
+			//首页
+			$("#firstPage").click(function(){
+				location.href = "分页查询Test3.html"
+			})
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>slot插槽的基本使用</title>
+	</head>
+	<body>
+		<!--
+			组件的插槽：
+				组件的插槽是为了让我们封装的组件更加具有扩展性
+				让使用者可以决定组件内部的一些内容到底展示什么
+			如何封装这类组件：
+				最好的封装方式就是将共性抽取到组件中，将不同暴露为插槽
+				一旦我们预留了插槽，就可以让使用者根据自己的需求，决定插槽中插入什么内容
+				是搜索框，还是文字，还是菜单由调用者自己来决定
+		-->
+		<div id="app">
+			<cpn><button>按钮</button></cpn>
+			<cpn><h3>插槽使用</h3></cpn>
+		</div>
+		<template id="cpn">
+			<div>
+				<h2>这是标题</h2>
+				<p>这是组件</p>
+				<!--在组件中，slot标签定义插槽，在使用组件时，自行决定往插槽中加入的内容-->
+				<slot></slot>
+			</div>
+		</template>
+		<script src="./vue.js"></script>
+		<script>
+			const cpn = {
+				template : "#cpn"
+			}
+			const app = new Vue({
+				el : "#app",
+				data:{
+					message : "hello Vuejs"
+				},
+				components:{
+					cpn
+				}
+			})
+		</script>
+	</body>
+</html>

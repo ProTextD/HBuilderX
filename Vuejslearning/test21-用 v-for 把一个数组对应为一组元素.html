@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="example-1">
+        <li v-for="item in items" :key="item.message">
+            {{item.message}}
+        </li>
+    </ul>
+    <div id="app">
+        <ul id="example-2">
+            <!-- <li v-for="(item,index) in items" :key="item.message"> -->
+            <li v-for="(item,index) of items" :key="item.message">
+                {{parentMessage}}--{{index}}--{{item.message}}
+                <input type="text" >
+            </li>
+        </ul>
+        <button @click="addData">添加</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el : "#example-1",
+            data:{
+                items:[
+                    {message : 'Foo'},
+                    {message : 'Bar'}
+                ]
+            }
+        })
+        var app = new Vue({
+            el : "#app",
+            data: {
+                parentMessage : 'Parent',
+                items:[
+                    {message : "Foo"},
+                    {message : "Bar"}
+                ]
+            },
+            methods:{
+                addData(){
+                    // app.items.push({message : "Far"})
+                    this.items.unshift({message : "Far"})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

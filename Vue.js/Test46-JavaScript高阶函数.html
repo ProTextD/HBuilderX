@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JavaScript高阶函数的使用</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			const num = [10,20,30,50,500]
+			//普通js函数
+			//1.需求：取出所有小于100的数字
+			let newnum = []
+			for (let n of newnum){
+			  if(n<100){
+			    newnum.push(n);
+			  }
+			}
+			//2.需求：将所有小于100的数进行转化：全部*2
+			let newnum2 = []
+			for(let n of newnum){
+				newnum2.push(n * 2);
+			}
+			//3.需求：将*2的数全部相加，得到最终结果
+			let total = 0;
+			for(let n of newnum2){
+				total += n;
+			}
+			console.log(total);
+			
+			//2.高阶函数
+			//filter、map、reduce
+			/*
+			  filter中的回调函数有一个要求：必须返回一个Boolean值，
+			  true时，函数内部自动将这次回调的n加入到新的数组中，
+			  false时，函数内部会过滤掉这次的n
+			
+			  map可以使数组中所有的数都变化
+			
+			  reduce对数组的所有内容进行汇总
+			*/
+			let total = num.filter(function(n){
+				return n < 100;
+			}).map(function(n){
+				return n * 2;
+			}).reduce(function(preValue,n){
+				return preValue + n;
+			},0)
+			console.log(total);
+			//3.箭头函数写法
+			let total1 = num.filter(n => n < 100).map(n => n * 2).reduce((preValue,n) => preValue + n)
+			console.log(total1);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>管理人员管理页面</title>
+		<style>
+			#bumenguanli{
+				font-size: 20px;
+			}
+			
+			/* #app{
+				white-space:nowrap
+			} */
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h1>欢迎来到XXX公司</h1>
+			<div class="box">
+				<input type="text" value="请输入文字" id="serach"/>
+				<button id="btn">搜索</button>
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="注册页面.html">注册</a>
+			<a href="登录页面Test.html">登录</a>
+			<hr>
+			<h2>部门总览</h2>
+			<div id="bumenguanli">
+			<a href="a部门.html">a部门</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="管理a部门.html">管理</a><br>
+			<a href="b部门.html">b部门</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="管理b部门.html">管理</a><br>
+			<a href="">c部门</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">管理</a><br>
+			<a href="">d部门</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">管理</a><br>
+			<a href="">e部门</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">管理</a><br>
+			<a href="">f部门</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">管理</a>
+			</div>
+			<hr>
+		</div>
+		<script src="./jquery-3.6.0.js"></script>
+		<script src="./vue.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("input").focus(function(){
+					var value = $("input").val();
+					if(value == "请输入文字"){
+						$("input").val("").css("color","black");
+					}
+				}).blur(function(){
+					if($("input").val() == ""){
+						$("input").val("请输入文字").css("color","black");
+					}
+				});
+				
+				
+				var btnElt = document.getElementById("btn")
+				var serachElt = document.getElementById("serach")
+				var serach = serachElt.value
+				// alert(serach);
+				btnElt.onclick = function(event){
+					if(serach == 'a部门'){
+						window.location.href = 'a部门.html'
+					}
+					if(serach == 'b部门'){
+						window.location.href = 'b部门.html'
+					}
+					if(serach == 'c部门'){
+						window.location.href = 'c部门.html'
+					}
+					if(serach == 'd部门'){
+						window.location.href = 'd部门.html'
+					}if(serach == 'e部门'){
+						window.location.href = 'e部门.html'
+					}
+					if(serach == 'f部门'){
+						window.location.href = 'f部门.html'
+					}
+				}
+				serachElt.onkeydown = function(event){
+					if(event.keyCode === 13){
+						if(serach == 'a部门'){
+							window.location.href = 'a部门.html'
+						}
+						if(serach == 'b部门'){
+							window.location.href = 'b部门.html'
+						}
+						if(serach == 'c部门'){
+							window.location.href = 'c部门.html'
+						}
+						if(serach == 'd部门'){
+							window.location.href = 'd部门.html'
+						}if(serach == 'e部门'){
+							window.location.href = 'e部门.html'
+						}
+						if(serach == 'f部门'){
+							window.location.href = 'f部门.html'
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

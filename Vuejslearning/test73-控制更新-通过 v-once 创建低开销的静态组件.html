@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <terms-of-service>hahah</terms-of-service>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        Vue.component('terms-of-service' , {
+            template:`
+                <div v-once>
+                    <h1>Terms Of Service</h1>    
+                    ... a lot of static content ...
+                </div>
+            `
+        })
+        var app = new Vue({
+            el : "#app",
+            data:{
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			编译作用域
+				父组件模板的所有东西都会在父级作用域内编译，子组件模板的所有东西都会在子级作用域内编译
+			作用域插槽的目的
+				父组件替换插槽的标签、但是内容由子组件来提供。
+			有一个需求帮助理解：
+				子组件中包括一组数据，比如: pLanguages: [‘JavaScript’ , ‘Python’, ‘Swift’ , ‘Go’,‘C++’]，需要在多个界面进行展示:
+				某些界面是以水平方向——展示的，某些界面是以列表形式展示的，某些界面直接展示一个数组
+				内容在子组件，希望父组件告诉我们如何展示，怎么办呢?
+				利用slot作用域插槽就可以了
+		-->
+		<div id="app">
+			<!--直接使用组件可以获得默认展示效果-->
+			<h2>默认展示</h2>
+			<cpn></cpn>
+			<h2>自定义展示</h2>
+			<!--
+				想要在父模板中使用子组件的数据是做不到的，因为存在编译作用域。
+				此时要借助<template slot-scope="slot"></template>才能获得由子组件
+				传递过来的数据，同时在子组件的插槽中需要定义一个 :data 属性来接受子组件中
+				的数据，然后在父模板中就能调用其数据，其中，slot属于自定义名称， :data 也
+				属于自定义名称
+			-->
+			<cpn>
+				<template slot-scope="slot">
+					<span>{{slot.data.join('-----')}}</span>
+				</template>
+			</cpn>
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<!--此时pLanguages的编译作用域是子组件-->
+				<slot :data = "pLanguages">
+					<ul>
+						<li v-for="item of pLanguages">{{item}}</li>
+					</ul>
+				</slot>
+			</div>
+		</template>
+		
+		<script src="./vue.js"></script>
+		<script>
+			const cpn = {
+				template : "#cpn",
+				data(){
+					return{
+						pLanguages:['JavaScript' , 'Python', 'Swift' , 'Go','C++']
+					}
+				}
+			}
+			const app = new Vue({
+				el :"#app",
+				data:{
+					message : "hello Vuejs"
+				},
+				components:{
+					cpn
+				}
+			})
+		</script>
+	</body>
+</html>

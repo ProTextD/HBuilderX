@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        同时生效的进入和离开的过渡不能满足所有要求，所以 Vue 提供了过渡模式
+        in-out：新元素先进行过渡，完成之后当前元素过渡离开。
+        out-in：当前元素先进行过渡，完成之后新元素过渡进入。
+     -->
+    <div id="app">
+        <transition name="fade" mode="out-in">
+            <button v-if="isEditing" @click="isEditing = !isEditing">save</button>
+            <button v-else @click="isEditing = !isEditing">Edit</button>
+        </transition>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var app = new Vue({
+            el : "#app",
+            data:{
+                isEditing : true
+            }
+        })
+    </script>
+</body>
+</html>

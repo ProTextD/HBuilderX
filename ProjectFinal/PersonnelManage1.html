@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+			
+		<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css?v=4.1.0" rel="stylesheet">
+		<title>人员信息管理</title>
+		<style type="text/css">
+			span {
+				color: red;
+				font-size: 12px;
+			}
+			
+			.table2{
+			        border:#C8C8C8 solid;   
+			        border-width:1px 0px 0px 1px; 
+			        background: #F3F0F0;
+			        margin-top:25px;
+			    }
+			    
+			    .td0{
+			        border:#C8C8C8 solid;  
+			        border-width:0 0 1px 0;
+			    }
+			    
+			    .td2{
+			        border:#C8C8C8 solid;   
+			        border-width:0 1px 1px 0 ;
+			    }
+			    
+			    .barcon {
+			        width: 1000px;
+			        margin: 0 auto;
+			        text-align: center;
+			     }
+			 
+			    .barcon1 {
+			        font-size: 17px;
+			        float: left;
+			        margin-top: 20px;
+			    }
+			 
+			    .barcon2 {
+			        float: right;
+			    }
+			 
+			    .barcon2 ul {
+			        margin: 20px 0;
+			        padding-left: 0;
+			        list-style: none;
+			        text-align: center;
+			    }
+			 
+			    .barcon2 li {
+			        display: inline;
+			    }
+			 
+			    .barcon2 a {
+			        font-size: 16px;
+			        font-weight: normal;
+			        display: inline-block;
+			        padding: 5px;
+			        padding-top: 0;
+			        color: black;
+			        border: 1px solid #ddd;
+			        background-color: #fff;
+			    }
+			 
+			    .barcon2 a:hover{
+			        background-color: #eee;
+			    }
+			 
+			    .ban {
+			        opacity: .4;
+			    }
+		</style>
+	</head>
+	<body>
+		<div>
+			<tr>
+				<td><button class="add" id="add">显示添加人员列表</button></td>
+				<td><button id="hide">隐藏添加人员列表</button></td>
+				<td><button class="update" id="update">显示修改人员列表</button></td>
+				<td><button id="updateOut">隐藏修改人员列表</button></td>
+				<td><input type="text" id="delId" placeholder="请通过user_id字段删除"/><input type="button" onclick="del()" value="删除"></td>
+				<td><input type="text" id="info" placeholder="请通过account字段查询"/><input type="button" onclick="serach()" value="搜索"></td>
+			</tr>	
+		</div>
+		<div>
+			<table id="tab" class="table">
+				<thead>
+					<tr>
+						<th id="th0">id</th>
+						<th id="th1">name</th>
+						<th id="th2">sex</th>
+						<th id="th3">age</th>
+						<th id="th4">email</th>
+						<th id="th5">user_id</th>
+						<th id="th6">选中</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="6" align="center">
+							<input type="button" value="选中删除" onclick="delRow();" />
+						</td>
+						<td>
+							<label>全选</label>
+							<input type="checkbox" name="item" onclick="checkAll(this);" />
+						</td>
+					</tr>
+					<tr>
+						<td name="td0"></td>
+						<td name="td1"></td>
+						<td name="td2"></td>
+						<td name="td3"></td>
+						<td name="td4"></td>
+						<td name="td5"></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="Btn">
+				<input type="button" value="返回主页" onclick="window.history.back()" />
+			</div>
+		</div>
+		<!-- 添加人员列表 -->
+		<div id="addInfo" hidden="hidden">
+			<!-- <form> -->
+				<tr>
+					<td>
+						account<label>
+							<input type="text" id="account"><span id="accountError"></span>
+						</label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						password<label>
+							<input type="password" id="password"><span id="passwordError"></span>
+						</label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						name<label>
+							<input type="text" id="name"><span id="nameError"></span>
+						</label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						age<label>
+							<input type="text" id="age"><span id="ageError"></span>
+						</label><br>							
+					</td>
+				</tr>
+				<tr>
+					<td>
+						sex<label>
+							<input type="text" id="sex"/><span id="sexError"></span>
+						</label><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						email<label>
+							<input type="text" id="email"/><span id="emailError"></span>
+						</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" value="添加" id="submitt"/>
+					</td>
+				</tr>
+			<!-- </form> -->
+		</div>
+		
+		<!--修改人员列表-->
+		<div id="updateInfo" hidden="hidden">
+			<tr>
+				<td>
+					user_id<label>
+						<input type="text" id="idUpdate"><span id="idUpdateError"></span>
+					</label><br>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					name<label>
+						<input type="text" id="nameUpdate"><span id="nameUpdateError"></span>
+					</label><br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					age<label>
+						<input type="text" id="ageUpdate"><span id="ageUpdateError"></span>
+					</label><br>							
+				</td>
+			</tr>
+			<tr>
+				<td>
+					sex<label>
+						<input type="text" id="sexUpdate"/><span id="sexUpdateError"></span>
+					</label><br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					email<label>
+						<input type="text" id="emailUpdate"/><span id="emailUpdateError"></span>
+					</label>
+				</td>
+			</tr>
+			<td><input type="button" onclick="update()" value="修改"></td>
+		</div>
+		
+		<!--分页查询-->
+		<div id="barcon" class="barcon" >
+		    <div id="barcon1" class="barcon1"></div>
+		        <div id="barcon2" class="barcon2">
+		            <ul>
+		                <li><button id="firstPage">首页</button></li>
+		                <li><button id="prePage">上一页</button></li>
+		                <li><button id="nextPage">下一页</button></li>
+		                <li><button id="lastPage">尾页</button></li>
+		                <li><select id="jumpWhere">
+		                </select></li>
+						<!-- <li><input type="text" width = "1px" id="jumpWhere"></li>
+		                <li><button id="jumpPage">跳转</button></li> -->
+		            </ul>
+		        </div>
+		</div>
+		<script src="jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				//数据表更新连带分页查询
+				dataInfo()
+				
+				//验证添加人员信息的数据
+				//account的验证
+				var accountElt = document.getElementById("account")
+				var accountErrorSpan = document.getElementById("accountError")
+				accountElt.onblur = function(){
+					var account = accountElt.value
+					if(account == ""){
+						//account为空
+						accountErrorSpan.innerText = "account不能为空"
+					}
+				}
+				accountElt.onfocus = function(){
+					if(accountErrorSpan.innerText != ""){
+						accountErrorSpan.innerText = ""
+					}
+				}
+				
+				//password的验证
+				var passwordElt = document.getElementById("password")
+				var passwordErrorSpan = document.getElementById("passwordError")
+				passwordElt.onblur = function(){
+					var password = passwordElt.value
+					if(password == ""){
+						passwordErrorSpan.innerText = "password不能为空"
+					}
+				}
+				passwordElt.onfocus = function(){
+					if(passwordErrorSpan.innerText != ""){
+						passwordErrorSpan.innerText = ""
+					}
+				}
+				
+				//name的验证	
+				var nameElt = document.getElementById("name")
+				var nameErrorSpan = document.getElementById("nameError")
+				nameElt.onblur = function(){
+					var name = nameElt.value
+					if(name == ""){
+						//name为空
+						nameErrorSpan.innerText = "name不能为空"
+					}
+				}
+				nameElt.onfocus = function(){
+					if(nameErrorSpan.innerText != ""){
+						nameErrorSpan.innerText = ""
+					}
+				}
+				
+				//age的验证
+				var ageElt = document.getElementById("age")
+				var ageErrorSpan = document.getElementById("ageError")
+				ageElt.onblur = function(){
+					var age = ageElt.value
+					if(age == ""){
+						ageErrorSpan.innerText = "age不能为空"
+					}else if(age < 0 || age > 100){
+						ageErrorSpan.innerText = "age不合理,请重新输入"
+					}
+				}
+				ageElt.onfocus = function(){
+					if(ageErrorSpan.innerText != ""){
+						ageElt.value = ""
+						ageErrorSpan.innerText = ""
+					}
+				}
+				
+				//sex的验证	
+				var sexElt = document.getElementById("sex")
+				var sexErrorSpan = document.getElementById("sexError")
+				sexElt.onblur = function(){
+					var sex = sexElt.value
+					if(sex == ""){
+						//sex为空
+						sexErrorSpan.innerText = "sex不能为空"
+					}
+				}
+				sexElt.onfocus = function(){
+					if(sexErrorSpan.innerText != ""){
+						sexElt.value = ""
+						sexErrorSpan.innerText = ""
+					}
+				}
+				
+				//email的验证	
+				//获取email的span
+				var emailSpan = document.getElementById("emailError");
+				//给email绑定blur事件
+				var emailElt = document.getElementById("email");
+				emailElt.onblur = function(){
+					//获取email
+					var email = emailElt.value;
+					//编写email的正则
+					var emailRegExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+					var ok = emailRegExp.test(email);
+					if(ok){
+						//合法
+					}else{
+						//不合法
+						emailSpan.innerText = "邮箱地址不合法";
+					}
+				}
+				//给emailElt绑定focus
+				emailElt.onfocus = function(){
+					if(emailSpan.innerText != ""){
+						emailElt.value = "";
+					}
+					emailSpan.innerText = "";
+				}
+				
+				
+				
+				//显示添加人员列表
+				$('#add').click(function(){
+					$('#addInfo').fadeIn(600)
+						accountElt.value = ""
+						passwordElt.value = ""
+						nameElt.value = ""
+						ageElt.value = ""
+						sexElt.value = ""
+						emailElt.value = ""
+				})
+				
+				//隐藏添加人员列表
+				$("#hide").click(function(){
+					$('#addInfo').fadeOut(600)
+				})
+				
+				//显示修改人员列表
+				var idUpdateElt = document.getElementById("idUpdate")
+				var nameUpdateElt = document.getElementById("nameUpdate")
+				var ageUpdateElt = document.getElementById("ageUpdate")
+				var sexUpdateElt = document.getElementById("sexUpdate")
+				var emailUpdateElt = document.getElementById("emailUpdate")
+				$("#update").click(function(){
+					$("#updateInfo").fadeIn(600)
+						idUpdateElt.value = ""
+						nameUpdateElt.value = ""
+						ageUpdateElt.value = ""
+						sexUpdateElt.value = ""
+						emailUpdateElt.value = ""
+				})
+				
+				//隐藏修改人员列表
+				$("#updateOut").click(function(){
+					$("#updateInfo").fadeOut(600)
+				})
+				
+				//全选
+				checkAll=function (obj){
+					var checked=obj.checked;
+					var item=document.getElementsByName("item");
+					for(var i=0;i<item.length;i++){
+						if(item[i].checked){
+							item[i].checked=null;
+						}else{
+							item[i].checked=checked;
+						}
+						item[i].checked=checked;	
+					}
+				}
+				
+				//删除选中
+				delRow=function(){
+					if(window.confirm("确认删除数据嘛?")){
+						var items=document.getElementsByName("item");
+						for(var i=1;i<items.length;i++){
+							if(items[i].checked){
+								var parentNode=items[i].parentNode.parentNode;
+								var tables=parentNode.parentNode;
+								
+								//删除接口
+								var id = parentNode.innerText.slice(-3)
+								var userInfo={
+									"id": id
+								}
+								$.ajax({
+									url:"http://192.168.3.239:8008/deleteUser",
+									type:"GET",
+									data:userInfo,
+									dataType:'json',
+									contentType:"application/json;charset=UTF-8",
+									success: function(result){
+										alert(result.msg);
+										//页面刷新
+										location.href = "PersonnelManage.html"
+									},
+									error: function(result){
+										alert(result.msg)
+									}
+								})
+									
+								tables.removeChild(parentNode);
+								i--;
+							}
+						}
+					}
+				}
+				
+			}
+			
+			function sortTable(obj){
+					//获取值
+					var td0s = document.getElementsByName("td0")
+					var td1s = document.getElementsByName("td1")
+					var td2s = document.getElementsByName("td2")
+					var td3s = document.getElementsByName("td3")
+					var td4s = document.getElementsByName("td4")
+					var td5s = document.getElementsByName("td5")
+					//创建数组存放值
+					var tdArray0 = []
+					var tdArray1 = []
+					var tdArray2 = []
+					var tdArray3 = []
+					var tdArray4 = []
+					var tdArray5 = []
+					//把值放进数组中
+					for(var i = 0 ; i < td0s.length ; i++){
+						tdArray0.push(td0s[i].innerHTML);
+					}
+					// console.log(tdArray0)
+					for(var i = 0 ; i < td1s.length ; i++){
+						tdArray1.push(td1s[i].innerHTML);
+					}
+					for(var i = 0 ; i < td2s.length ; i++){
+						tdArray2.push(td2s[i].innerHTML);
+					}
+					for(var i = 0 ; i < td3s.length ; i++){
+						tdArray3.push(td3s[i].innerHTML);
+					}
+					for(var i = 0 ; i < td4s.length ; i++){
+						tdArray4.push(td4s[i].innerHTML);
+					}
+					for(var i = 0 ; i < td5s.length ; i++){
+						tdArray5.push(td4s[i].innerHTML);
+					}
+					// console.log(tdArray0 , tdArray1 , tdArray2 , tdArray3 , tdArray4)
+					//获取员工编号的name
+					var tds = document.getElementsByName("td0")
+					// console.log(tds)
+					// tdArray0.sort();
+					var columnArray=[];
+					for(var i = 0 ; i < tds.length ; i++){
+						columnArray.push(tds[i].innerHTML)
+					}
+					// console.log(columnArray)
+					var orginArray = [];
+					for(var i = 0 ; i < columnArray.length ; i++){
+						orginArray.push(columnArray[i])
+					}
+					columnArray.sort()
+					// console.log(orginArray)
+					for(var i = 0 ; i < columnArray.length ; i++){
+						for(var j = 0 ; j < orginArray.length ; j++){
+							if(orginArray[j]==columnArray[i]){
+								document.getElementsByName("td0")[i].innerHTML=tdArray0[j];
+								document.getElementsByName("td1")[i].innerHTML=tdArray1[j];
+								document.getElementsByName("td2")[i].innerHTML=tdArray2[j];
+								document.getElementsByName("td3")[i].innerHTML=tdArray3[j];
+								document.getElementsByName("td4")[i].innerHTML=tdArray4[j];
+								orginArray[j]=null;
+								break;
+							}
+						}
+					}
+				}
+			
+			//查询接口
+			function serach(){
+				var account = $("#info").val()
+				var userInfo={
+					account:$("#info").val()
+				}
+				$.ajax({
+					url:"http://192.168.3.239:8008/queryUserInfo",
+					type:"GET",
+					data:userInfo,
+					dataType:'json',
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+						// alert(result.msg);
+						if(result.msg == "成功"){
+							clearAll()
+							console.log(result.data)
+						// alert("id=" + result.data.id + "," + "name=" + result.data.name + "," +  "age=" + result.data.age + "," + "sex=" + result.data.sex + "," + "email=" + result.data.email + "," + "userId=" + result.data.userId)
+						
+						var html = ""
+						html += "<tr>"
+						html += '<td name="td0">'+result.data.id+'</td>'
+						html += '<td name="td1">'+result.data.name+'</td>'
+						html += '<td name="td2">'+result.data.sex+'</td>'
+						html += '<td name="td3">'+result.data.age+'</td>'
+						html += '<td name="td4">'+result.data.email+'</td>'
+						html += '<td name="td5">'+result.data.userId+'</td>'
+						html += '<td>'+'<input type="checkbox" name="item"/>'+'</td>'
+						html += "</tr>"
+						$("#tab").append(html);
+						// alert(html)
+						sortTable(this)
+						//页面刷新
+						/* location.href = "PersonnelManage.html" */
+						}else{
+							alert("账号不存在，查询失败")
+							location.href = "PersonnelManage.html"
+						}
+						
+					},
+					error: function(result){
+						alert(result.msg);
+					}
+				})
+			}
+			
+			//添加人员接口ok
+			$('#submitt').click(function(){
+				var accountElt = document.getElementById("account")
+				var passwordElt = document.getElementById("password")
+				var nameElt = document.getElementById("name")
+				var ageElt = document.getElementById("age")
+				var sexElt = document.getElementById("sex")
+				var emailElt = document.getElementById("email");
+				
+				var accountErrorSpan = document.getElementById("accountError")
+				var passwordErrorSpan = document.getElementById("passwordError")
+				var nameErrorSpan = document.getElementById("nameError")
+				var ageErrorSpan = document.getElementById("ageError")
+				var sexErrorSpan = document.getElementById("sexError")
+				var emailSpan = document.getElementById("emailError");
+				accountElt.focus()
+				accountElt.blur()
+				passwordElt.focus()
+				passwordElt.blur()
+				nameElt.focus()
+				nameElt.blur()
+				ageElt.focus()
+				ageElt.blur()
+				sexElt.focus()
+				sexElt.blur()
+				emailElt.focus()
+				emailElt.blur()
+					
+				if(accountErrorSpan.innerText == "" && passwordErrorSpan.innerText == "" && nameErrorSpan.innerText == "" && ageErrorSpan.innerText == "" && sexErrorSpan.innerText == "" && emailSpan.innerText == ""){
+					var account = $("#account").val()
+					var password = $("#password").val()
+					var name = $("#name").val()
+					var age = $("#age").val()
+					var sex = $("#sex").val()
+					var email = $("#email").val()
+					var userInfo={
+						"account":$("#account").val(),
+						"password":$("#password").val(),
+						"name":$("#name").val(),
+						"age":$("#age").val(),
+						"sex":$("#sex").val(),
+						"email":$("#email").val()
+					}
+					$.ajax({
+						url:"http://192.168.3.239:8008/addUser",
+						type:"POST",
+						data:JSON.stringify(userInfo),
+						dataType:'json',
+						contentType:"application/json;charset=UTF-8",
+						success: function(result){
+							alert(result.msg);
+							//页面刷新
+							location.href = "PersonnelManage.html"
+						},
+						error: function(result){
+							alert(result.msg)
+						}
+						
+					})
+					
+					var html = ""
+					html += "<tr>"
+					html += '<td name="td0">'+ +'</td>'
+					html += '<td name="td1">'+nameElt.value+'</td>'
+					html += '<td name="td2">'+sexElt.value+'</td>'
+					html += '<td name="td3">'+ageElt.value+'</td>'
+					html += '<td name="td4">'+emailElt.value+'</td>'
+					html += '<td name="td5">'+ +'</td>'
+					html += '<td>'+'<input type="checkbox" name="item"/>'+'</td>'
+					html += "</tr>"
+					$("#tab").append(html);
+					$('#addInfo').fadeOut(600)
+					// alert(html)
+					sortTable(this)
+				}else{
+					alert("输入格式不正确，请重新输入!")
+				}
+				
+			})
+			
+			//删除信息
+			var removeElt = document.getElementsByClassName("remove")
+			function remove(){
+					// alert("delete data...");
+				for(var i = 0 ; i < removeElt.length ; i++){
+					removeElt[i].onclick = function () {
+						if(window.confirm("确认删除数据嘛?")){	
+							var removeThis = this.parentElement.parentElement.parentElement;
+							removeThis.removeChild(this.parentElement.parentElement)
+							/* alert(document.getElementsByName("td0").value) */
+						}
+					}
+				}
+				
+				
+			}
+			
+			//删除接口
+			function del(){
+				var id = $("#delId").val()
+				var userInfo={
+					"id":$("#delId").val()
+				}
+				$.ajax({
+					url:"http://192.168.3.239:8008/deleteUser",
+					type:"GET",
+					data:userInfo,
+					dataType:'json',
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+						alert(result.msg);
+						//页面刷新
+						location.href = "PersonnelManage.html"
+					},
+					error: function(result){
+						alert(result.msg)
+					}
+				})
+			}
+			
+			//修改接口ok
+			function update(){
+				var id = $("#idUpdate").val()
+				var name = $("#nameUpdate").val()
+				var age = $("#ageUpdate").val()
+				var sex = $("#sexUpdate").val()
+				var email = $("#emailUpdate").val()
+				var userInfo={
+					"id":$("#idUpdate").val(),
+					"name":$("#nameUpdate").val(),
+					"age":$("#ageUpdate").val(),
+					"sex":$("#sexUpdate").val(),
+					"email":$("#emailUpdate").val()
+				}
+				$.ajax({
+					url:"http://192.168.3.239:8008/updateUser1",
+					type:"POST",
+					data:JSON.stringify(userInfo),
+					dataType:'json',
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+						alert(result.msg);
+						//页面刷新
+						location.href = "PersonnelManage.html"
+					},
+					error: function(result){
+						alert(result.msg)
+					}
+					
+				})
+			}
+			
+			//数据表更新连带分页查询
+			function dataInfo(){
+				var pageSize = $("#pageSize").val()
+				var pageNum = $("#pageNum").val()
+				
+				var userInfo={
+					"pageSize":5,
+					"pageNum":1
+				}
+				$.ajax({
+					url:"http://192.168.3.239:8008/getInfoByLimit",
+					type:"POST",
+					data:JSON.stringify(userInfo),
+					dataType:'json',
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+						console.log(result.data)
+						for(var i = 0 ; i < result.data.pageSize ; i++){
+							var html = ""
+							html += "<tr>"
+							html += '<td name="td0">'+result.data.list[i].id+'</td>'
+							html += '<td name="td1">'+result.data.list[i].name+'</td>'
+							html += '<td name="td2">'+result.data.list[i].sex+'</td>'
+							html += '<td name="td3">'+result.data.list[i].age+'</td>'
+							html += '<td name="td4">'+result.data.list[i].email+'</td>'
+							html += '<td name="td5">'+result.data.list[i].userId+'</td>'
+							html += '<td>'+'<input type="checkbox" name="item"/>'+'</td>'
+							html += "</tr>"
+							$("#tab").append(html);
+							$('#addInfo').fadeOut(600)
+						}
+						//上一页
+						$("#prePage").click(function(){
+							if(result.data.pageNum > 1){
+								result.data.pageNum --;
+								console.log(result.data.pageNum)
+								clearAll()
+								getInfoByLimit(result.data.pageNum)
+							}else{
+								alert("当前是第一页")
+							}
+						})
+						//下一页
+						$("#nextPage").click(function(){
+							if(result.data.pageNum <= result.data.pages){
+								result.data.pageNum ++;
+								console.log(result.data.pageNum)
+								clearAll()
+								getInfoByLimit(result.data.pageNum)
+							}else{
+								alert("当前是最后一页")
+							}
+						})
+						//尾页
+						$("#lastPage").click(function(){
+							result.data.pageNum = result.data.pages
+							clearAll()
+							getInfoByLimit(result.data.pageNum)
+						})
+						
+						//遍历下拉列表
+						for(var i = 1 ; i <= result.data.pages ; i++){
+							var html = ""
+							html += "<option name = " + i + ">" + i + "</optiion>"
+							$("#jumpWhere").append(html);
+							// console.log(html)
+						}
+						//跳转
+						/* $("#jumpPage").click(function(){
+							if($("#jumpWhere").val() <= result.data.pages && $("#jumpWhere").val() > 0){
+								clearAll()
+								getInfoByLimit($("#jumpWhere").val())
+								result.data.pageNum = $("#jumpWhere").val()
+							}else{
+								alert("输入不合法，当前页面最多仅" + result.data.pages + "页")
+							}
+						}) */
+						$("#jumpWhere").change(function(){
+							var jumpWhere = $("#jumpWhere").val()
+							clearAll()
+							getInfoByLimit(jumpWhere)
+							result.data.pageNum = jumpWhere
+						})
+					},
+					error: function(result){
+						alert(result.msg);
+					}
+				})
+			}
+		
+			//清空表格数据
+			function clearAll(){
+				$("#tab tr:not(:first)").html("");
+			}
+		
+			//封装Ajax方法
+			function getInfoByLimit(pageNum){
+				var pageSize = $("#pageSize").val()
+				// console.log(pageNum)
+				var userInfo={
+					"pageSize":5,
+					"pageNum":pageNum
+				}
+				$.ajax({
+					url:"http://192.168.3.239:8008/getInfoByLimit",
+					type:"POST",
+					data:JSON.stringify(userInfo),
+					dataType:'json',
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+						console.log(result.data)
+						if(pageNum <= result.data.pages){
+							for(var i = 0 ; i < result.data.pageSize ; i++){
+								var html = ""
+								html += "<tr>"
+								html += '<td name="td0">'+result.data.list[i].id+'</td>'
+								html += '<td name="td1">'+result.data.list[i].name+'</td>'
+								html += '<td name="td2">'+result.data.list[i].sex+'</td>'
+								html += '<td name="td3">'+result.data.list[i].age+'</td>'
+								html += '<td name="td4">'+result.data.list[i].email+'</td>'
+								html += '<td name="td5">'+result.data.list[i].userId+'</td>'
+								html += '<td>'+'<input type="checkbox" name="item"/>'+'</td>'
+								html += "</tr>"
+								$("#tab").append(html);
+							}
+						}else{
+							alert("已经是最后一页了")
+						}
+					},
+					error: function(result){
+						alert(result.msg);
+					}
+				})
+			}
+		
+			//首页
+			$("#firstPage").click(function(){
+				location.href = "PersonnelManage.html"
+			})
+		</script>
+	</body>
+</html>

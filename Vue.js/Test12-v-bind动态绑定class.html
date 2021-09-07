@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-bind动态绑定class</title>
+	</head>
+	<body>
+		<!--
+			通过v-bind来决定在元素中动态添加或删除class属性
+			对象语法（class后面跟的是一个对象）
+		-->
+		<!--用法一：直接通过{}绑定一个类-->
+		<h2 class="{active : isActive}">{{message}}</h2>
+		<!--用法二：也可以通过判断传入多个值-->
+		<h2 class="{active : isActive , line : isLine}">{{message}}</h2>
+		<!--
+			用法三：和普通类同时存在，并不冲突
+			注：如果isActive和isLine同时为true，那么会有title、active、line三个类
+		-->
+		<h2 class="title" : class="{active : isActive , line : isLine}">{{message}}</h2>
+		<!--
+			用法四：如果过于复杂，可以放在一个methods或computed中
+			注：classes是一个计算属性
+		-->
+		<h2 class="title" :class="classes">{{message}}</h2>
+		
+		<!--数组语法（class后面接的是一个数组）-->
+		<!--用法一：直接通过[ ]绑定一个类-->
+		<h2 class="['active']">{{message}}</h2>
+		<!--用法二：也可以传入多个值-->
+		<h2 class="['active' , 'line']">{{message}}</h2>
+		<!--
+			用法三：和普通类同时存在，并不冲突
+			注：会有title、active、line三个类
+		-->
+		<h2 class="title" : class="['active' , 'line']">{{message}}</h2>
+		<!--
+			用法四：如果过于复杂，可以放在一个methods或computed中
+			注：classes是一个计算属性
+		-->
+		<h2 class="title" : class="classes">{{message}}</h2>
+		
+		<script src="./vue.js"></script>
+		<script>
+			/*
+				通过v-bind来决定在元素中动态添加或删除class属性
+				对象语法（class后面跟的是一个对象）
+			*/
+			
+			
+			
+		</script>
+	</body>
+</html>

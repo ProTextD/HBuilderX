@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-model结合checkbox使用</title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 单选框-->
+			<label for="agree">
+				<input type="checkbox" id="agree" v-model="isAgree" />同意协议
+			</label>
+			<h2>你的选择是:{{isAgree}}</h2>
+			<button :disabled="!isAgree" @click="go">下一步</button>
+			<hr />
+			<!-- 复选框-->
+			<input type="checkbox" value="篮球" v-model="hobbies" />篮球<br />
+			<input type="checkbox" value="足球" v-model="hobbies" />足球<br />
+			<input type="checkbox" value="羽毛球" v-model="hobbies" />羽毛球<br />
+			<input type="checkbox" value="乒乓球" v-model="hobbies" />乒乓球<br />
+			<h2>{{hobbies}}</h2>
+		</div>
+		<script src="./vue.js"></script>
+		<script>
+			const app = new Vue({
+				el:"#app",
+				data:{
+					message : "hello Vuejs",
+					isAgree : false,
+					hobbies : []
+				},
+				methods:{
+					go(){
+						alert('你已同意协议!');
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

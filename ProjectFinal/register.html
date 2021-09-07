@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> - 注册</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">H+</h1>
+
+            </div>
+            <h3>欢迎注册 H+</h3>
+            <p>创建一个H+新账户</p>
+            <!-- <form class="m-t" role="form"> -->
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入账号" required="" id="username" name="account"><span id="usernameError"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请输入密码" required="" id="password" name="password"><span id="pwdError"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请再次输入密码" required="" id="password2"><span id="pwd2Error"></span>
+                </div>
+                <!-- <div class="form-group text-left">
+                    <div class="checkbox i-checks">
+                        <label class="no-padding">
+                            <input type="checkbox"><i></i> 我同意注册协议</label>
+                    </div>
+                </div> -->
+                <button type="submit" class="btn btn-primary block full-width m-b" id="submit" onclick="zhuce()">注 册</button>
+
+                <p class="text-muted text-center"><small>已经有账户了？</small><a href="login.html">点此登录</a>
+                </p>
+
+            <!-- </form> -->
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- iCheck -->
+    <!-- <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script> -->
+	<script src="jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+		var submittElt = document.getElementById("submitt")
+		function zhuce(){
+			var usernameElt = document.getElementById("username")
+			var username = usernameElt.value
+			
+			var passwordElt = document.getElementById("password")
+			var password = passwordElt.value
+			
+			var password2Elt = document.getElementById("password2")
+			var password2 = password2Elt.value
+			
+			
+				
+			var name = $("#username").val()
+			var password = $("#password").val()
+			var password2 = $("#password2").val()
+			var userInfo={
+				"account":$("#username").val(),
+				"password":$("#password").val()
+			}
+			
+			//用户名长度合法
+			//继续判断是否含有特殊符号
+			var regExp = /^[A-Za-z0-9]+$/;
+			var ok = regExp.test(name);
+			if(name == ""){
+				document.getElementById("usernameError").innerText = "用户名不能为空"
+				return false
+			}else if(name.length < 6 || name.length > 14){
+					
+					//用户名长度非法
+					document.getElementById("usernameError").innerText = "用户名长度必须在[6-14]之间";
+					return false
+			}
+			else if(!ok){
+				//用户名中含有特殊符号
+				document.getElementById("usernameError").innerText = "用户名只能由数字和字母组成";
+				return false
+			}else if(ok){
+					//用户名最终合法
+			}
+			
+			if(password == ""){
+				document.getElementById("pwdError").innerText = "密码不能为空"
+				return false
+			}else if(password != password2){
+				document.getElementById("pwd2Error").innerText = "密码不一致"
+			}
+			
+			if(document.getElementById("usernameError").innerText == "" && document.getElementById("pwdError").innerText == "" &&document.getElementById("pwd2Error").innerText == ""){
+				
+				$.ajax({
+					url:"http://192.168.3.239:8008/insertUser",
+					type:"post",
+					data:JSON.stringify(userInfo),
+					dataType:'json',//json 返回值类型
+					contentType:"application/json;charset=UTF-8",
+					success: function(result){
+					alert(result.msg);
+					if(result.msg == "注册成功"){
+						location.href = "login.html"
+					}else{
+						return false
+					}					
+				},
+					error:function(result){
+					alert(result.msg);
+				}
+				})
+				// alert("111")
+			}
+		}
+		
+		window.onload = function(){
+			//获取username的span标签
+			var usernameErrorSpan = document.getElementById("usernameError");
+			//给用户名文本框绑定blur事件
+			var usernameElt = document.getElementById("username");
+			
+			//给username文本框绑定获得焦点事件
+			usernameElt.onfocus = function(){
+				
+				//清空非法的value
+				if(usernameErrorSpan.innerText != ""){
+					usernameElt.value = "";
+				}
+				//清空span
+				usernameErrorSpan.innerText = "";
+			}
+			
+			//获取密码错误提示的span标签
+			var pwd2ErrorSpan = document.getElementById("pwd2Error");
+			//获取确认密码框对象
+			var userpwdElt = document.getElementById("password")
+			var userpwd2Elt = document.getElementById("password2");
+			var pwdErrorSpan = document.getElementById("pwdError")
+			
+			//绑定focus事件
+			userpwd2Elt.onfocus = function(){
+				
+				if(pwd2ErrorSpan.innerText != ""){
+					userpwd2Elt.value = "";
+				}
+				pwd2ErrorSpan.innerText = "";
+			}
+			
+			userpwdElt.onfocus = function(){
+				if(pwdErrorSpan.innerText != ""){
+					pwdErrorSpan.innerText = "";
+				}
+			}
+		}
+	</script>
+    
+    
+
+</body>
+
+</html>
