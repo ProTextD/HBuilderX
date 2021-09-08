@@ -16,8 +16,10 @@
 				new Promise((resolve,reject)=>{
 						resolve({name : "lisi" , age : "19"})
 				},1000)
-			]).then(result =>{
-				console.log(result);
+			]).then(results =>{
+				console.log(results[0])
+				console.log(results[1])
+				console.log(results);
 			})	
 			
 		</script>
