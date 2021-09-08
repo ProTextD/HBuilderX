@@ -53,6 +53,7 @@
     <div style="margin-top: 30px;">
       <el-button type="primary" @click="goNextPage">跳转页面</el-button>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -146,7 +147,7 @@ export default {
     },
     //跳转下一页面
     goNextPage() {
-      this.$router.push({ name: 'echartTest' })
+      this.$router.push('/echartTest')
     }
   }
 

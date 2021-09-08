@@ -7,6 +7,7 @@ const Cart = () => import('../pages/cart/Cart.vue')
 const My = () => import('../pages/my/My.vue')
 // const Special = () => import('../pages/special/Special.vue')
 const showOne = () => import('../pages/category/category-component/show1-1.vue')
+const mainTabBar = () => import('../components/mainTabBar.vue')
 
 Vue.use(Router)
 
@@ -42,6 +43,10 @@ export default new Router({
       path : '/my',
       component : My
     },
+    {
+      path : '/mainTabBar',
+      component : mainTabBar
+    }
     // {
     //   path : '/special',
     //   component : Special
