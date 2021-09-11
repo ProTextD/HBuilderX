@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <h2>-------App内容:查看info的内容是否是响应式的</h2>
+    <h2>{{$store.state.info}}</h2>
+    <button @click="updateInfo">修改信息</button>
+
     <h2>-------App内容--------</h2>
     <h2>{{$store.state.counter}}</h2>
     <button @click="addtion">+</button>
@@ -25,6 +29,9 @@
 
 <script>
 import helloVuex from './components/hellovuex.vue'
+import {
+  INCREMENT
+} from './store/mutation-types'
 export default {
   name: 'App',
   components:{
@@ -39,8 +46,11 @@ export default {
   //   }
   // },
   methods:{
+    // addtion(){
+    //   this.$store.commit('increment')
+    // },
     addtion(){
-      this.$store.commit('increment')
+      this.$store.commit(INCREMENT)
     },
     subtraction(){
       this.$store.commit('decrement')
@@ -57,6 +67,13 @@ export default {
     addStudent(){
       const stu = {id : 114 , name : 'alen' , age : 35}
       this.$store.commit('addStudent' , stu)
+    },
+    // updateInfo(){
+    //   const name = 'codewhy'
+    //   this.$store.commit('updateInfo' , name)
+    // },
+    updateInfo(){
+      this.$store.commit('updateInfo')
     }
   }
 }

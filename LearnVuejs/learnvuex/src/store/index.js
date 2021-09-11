@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import {
+    INCREMENT
+} from '../store/mutation-types'
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -11,10 +13,18 @@ const store = new Vuex.Store({
             {id : 111 , name : 'kobe' , age : 24},
             {id : 112 , name : 'james' , age : 30},
             {id : 113 , name : 'curry' , age : 10},
-        ]
+        ],
+        info:{
+            name : 'kobe',
+            age : 40,
+            height : 1.98
+        }
     },
     mutations:{
-        increment(state){
+        // increment(state){
+        //     state.counter++
+        // },
+        [INCREMENT](state){
             state.counter++
         },
         decrement(state){
@@ -30,7 +40,19 @@ const store = new Vuex.Store({
         },
         addStudent(state , stu){
             state.students.push(stu)
+        },
+        updateInfo(state){
+            // state.info.name = 'codewhy'
+            // state.info['address'] = '洛杉矶' //可以传进info数组中，但不是响应式的
+            // Vue.set(state.info, 'address', '洛杉矶');
+
+            // delete state.info.age //该方式做不到响应式
+            Vue.delete(state.info, 'age');
+
         }
+        // updateInfo(state , name){
+        //     state.info.name = name
+        // }
     },
     actions:{
 
