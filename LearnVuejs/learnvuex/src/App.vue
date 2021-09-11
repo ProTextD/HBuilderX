@@ -1,5 +1,13 @@
 <template>
   <div id="app">
+    <h2>-------App内容:modules中的内容</h2>
+    <h2>{{$store.state.a.name}}</h2>
+    <button @click="updateName">修改名字</button>
+    <h2>{{$store.getters.fullname}}</h2>
+    <h2>{{$store.getters.fullname2}}</h2>
+    <h2>{{$store.getters.fullname3}}</h2>
+    <button @click="asyncUpdateName">异步修改名字</button>
+
     <h2>-------App内容:查看info的内容是否是响应式的</h2>
     <h2>{{$store.state.info}}</h2>
     <button @click="updateInfo">修改信息</button>
@@ -73,7 +81,24 @@ export default {
     //   this.$store.commit('updateInfo' , name)
     // },
     updateInfo(){
-      this.$store.commit('updateInfo')
+      // this.$store.commit('updateInfo')
+      // this.$store.dispatch('aUpdateInfo' , {
+      //   message : '我是携带的信息',
+      //   success : ()=>{
+      //     console.log('操作已经完成了')
+      //   }
+      // })
+
+      this.$store.dispatch('aUpdateInfo' , '我是携带的信息').then(res =>{
+        console.log('操作已经完成了')
+        console.log(res)
+      })
+    },
+    updateName(){
+      this.$store.commit('updateName' , 'wangwu')
+    },
+    asyncUpdateName(){
+      this.$store.dispatch('aUpdateName')
     }
   }
 }

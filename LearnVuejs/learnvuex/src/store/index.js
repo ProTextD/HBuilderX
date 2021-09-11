@@ -5,6 +5,37 @@ import {
 } from '../store/mutation-types'
 Vue.use(Vuex);
 
+const moduleA = {
+    state:{
+        name : 'zhangsan'
+    },
+    mutations:{
+        updateName(state , payload){
+            state.name = payload
+        }
+    },
+    getters:{
+        fullname(state){
+            return state.name + '111'
+        },
+        fullname2(state , getters){
+            return getters.fullname + '222'
+        },
+        fullname3(state , getters , rootState){
+            return getters.fullname2 + rootState.counter
+        }
+    },
+    actions:{
+        aUpdateName(context){
+            console.log(context)
+            setTimeout(() => {
+                context.commit('updateName' , 'zhaoliu') //这里的context只会匹配到模块本身的mutations
+            }, 1000);
+        }
+    }
+    
+}
+
 const store = new Vuex.Store({
     state:{
         counter : 1000,
@@ -42,7 +73,12 @@ const store = new Vuex.Store({
             state.students.push(stu)
         },
         updateInfo(state){
-            // state.info.name = 'codewhy'
+            state.info.name = 'codewhy'
+
+            // setTimeout(() => {
+            //     state.info.name = 'codewhy' //因为是在mutation中进行异步操作 所以可以更新信息，但是devtools追踪不到属性的更改
+            // }, 1000);
+
             // state.info['address'] = '洛杉矶' //可以传进info数组中，但不是响应式的
             // Vue.set(state.info, 'address', '洛杉矶');
 
@@ -55,6 +91,23 @@ const store = new Vuex.Store({
         // }
     },
     actions:{
+        //context 上下文
+        // aUpdateInfo(context , payload){
+        //     setTimeout(() => {
+        //         context.commit('updateInfo')
+        //         console.log(payload.message)
+        //         payload.success()
+        //     }, 1000);
+        // },
+        aUpdateInfo(context , payload){
+            return new Promise((resolve , reject)=>{
+                setTimeout(() => {
+                    context.commit('updateInfo')
+                    console.log(payload)
+                    resolve('11111')
+                }, 1000);
+            })
+        }
 
     },
     getters:{
@@ -77,7 +130,7 @@ const store = new Vuex.Store({
         }
     },
     modules:{
-
+        a : moduleA //a被放入store的state中
     }
 })
 
