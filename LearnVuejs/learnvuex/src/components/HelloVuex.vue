@@ -1,17 +1,7 @@
 <template>
-  <div>
-    <h2>{{$store.state.counter}}</h2>
-    <button @click="$store.state.counter++">+</button>
-    <button @click="$store.state.counter--">-</button>
-  </div>
+    <div id="app">
+        <h2>{{$store.state.counter}}</h2>
+        <h2>{{$store.getters.powerCounter}}</h2>
+        <h2>{{$store.getters.more20stu}}</h2>
+    </div>
 </template>
-
-<script>
-  export default {
-    name: "HelloVuex"
-  }
-</script>
-
-<style scoped>
-
-</style>

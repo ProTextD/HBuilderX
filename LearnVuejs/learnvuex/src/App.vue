@@ -1,63 +1,63 @@
 <template>
   <div id="app">
-    <h2>{{message}}</h2>
+    <h2>-------App内容--------</h2>
     <h2>{{$store.state.counter}}</h2>
-    <!-- <button @click="$store.state.counter++">+</button>
-    <button @click="$store.state.counter--">-</button> -->
-    <button @click="add">+</button>
-    <button @click="sub">-</button>
-    <hello-vuex></hello-vuex>
-    <h2>-----getters-----</h2>
-    <h2>{{$store.getters.mul}}</h2>
-    <h2>{{$store.getters.getAge}}</h2>
-    <h2>{{$store.getters.getAgeLength}}</h2>
-    <h2>{{$store.getters.getAgeInput(10)}}</h2>
-    <p>我的个人信息:{{info}}</p>
-    <button @click="updateInfo">更新信息</button>
+    <button @click="addtion">+</button>
+    <button @click="subtraction">-</button>
     <button @click="addCount(5)">+5</button>
     <button @click="addCount(10)">+10</button>
+    <button @click="addStudent">添加学生</button>
+
+    <h2>-------App内容: getters相关信息---------------</h2>
+    <h2>{{$store.getters.powerCounter}}</h2>
+    <h5>所有学生</h5>
+    <h2>{{$store.state.students}}</h2>
+    <h5>年龄大于20的学生</h5>
+    <h2>{{$store.getters.more20stu}}</h2>
+    <h2>{{$store.getters.more20stuLength}}</h2>
+    <h5>获取指定年龄的学生</h5>
+    <h2>{{$store.getters.moreAgeStu(12)}}</h2>
+
+    <h2>-------Hello Vuex 内容----------</h2>
+    <hello-vuex></hello-vuex>
   </div>
 </template>
 
 <script>
-  import HelloVuex from "./components/HelloVuex";
-  import {UPDATE_INFO} from './store/mutation-types'
+import helloVuex from './components/hellovuex.vue'
 export default {
   name: 'App',
-  data(){
-    return {
-      message:'我是App组件',
-      // counter:0,
-    }
-  },
-  computed:{
-    info(){
-      return this.$store.state.info
-    }
-  },
   components:{
-    HelloVuex
+    helloVuex
   },
+  // computed:{
+  //   more20stu(){
+  //     // return this.$store.state.students.filter(s => {
+  //     //   return s.age > 20
+  //     // })
+  //     return this.$store.state.students.filter(s => s.age > 20)
+  //   }
+  // },
   methods:{
-    add(){
+    addtion(){
       this.$store.commit('increment')
     },
-    sub(){
+    subtraction(){
       this.$store.commit('decrement')
     },
     addCount(count){
-      this.$store.commit('incrementCount' , count)
+      //普通的提交风格
+      // this.$store.commit('incrementCount' , count)
+      //特殊的提交风格
+      this.$store.commit({
+        type : 'incrementCount',
+        count
+      })
     },
-    updateInfo(){
-      // this.$store.commit('updateInfo' , {height : 1.88})
-      this.$store.commit(UPDATE_INFO , {height : 1.88})
-    },
-    // increment(){
-    //   this.$store.dispatch('increment')
-    // }
-    // increment(){
-    //   this.$store.dispatch('increment' , {cCount: 5})
-    // }
+    addStudent(){
+      const stu = {id : 114 , name : 'alen' , age : 35}
+      this.$store.commit('addStudent' , stu)
+    }
   }
 }
 </script>
