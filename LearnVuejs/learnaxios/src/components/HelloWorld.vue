@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import { request } from '../networks/request'
 export default {
     name : 'HelloWorld',
     data(){
@@ -12,8 +13,13 @@ export default {
         }
     },
     created(){
-        axios({
-            url : 'http://123.207.32.32:8000/category',
+        // axios({
+        //     url : 'http://123.207.32.32:8000/category',
+        // }).then(res =>{
+        //     this.categories = res
+        // })
+        request({
+            url : '/category',
         }).then(res =>{
             this.categories = res
         })

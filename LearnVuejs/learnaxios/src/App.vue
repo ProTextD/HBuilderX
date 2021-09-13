@@ -8,7 +8,8 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import axios from 'axios'
+// import axios from 'axios'
+import {request} from './networks/request'
 export default {
   name: 'App',
   data(){
@@ -20,8 +21,13 @@ export default {
     HelloWorld
   },
   created(){
-    axios({
-      url : 'http://123.207.32.32:8000/home/multidata',
+    // axios({
+    //   url : 'http://123.207.32.32:8000/home/multidata',
+    // }).then(res =>{
+    //   this.message = res
+    // })
+    request({
+      url : '/home/multidata',
     }).then(res =>{
       this.message = res
     })
